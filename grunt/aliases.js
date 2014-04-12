@@ -11,5 +11,5 @@ module.exports = {
 
   'build': ['concurrent:build'],
 
-  'default': ['symlink:hooks', 'build', 'watch']
+  'default': ['build', 'open', 'watch']
 };

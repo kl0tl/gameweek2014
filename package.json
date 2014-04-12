@@ -4,7 +4,8 @@
   "description": "Such rogue. Much like.",
   "main": "src/game.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "grunt symlink:hooks"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "grunt-newer": "~0.7.0",
     "grunt-contrib-watch": "~0.6.1",
     "jshint-stylish": "~0.1.5",
-    "time-grunt": "~0.3.1"
+    "time-grunt": "~0.3.1",
+    "grunt-open": "~0.2.3"
   }
 }
