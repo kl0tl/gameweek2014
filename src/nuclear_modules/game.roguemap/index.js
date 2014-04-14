@@ -29,7 +29,7 @@ roguemap.component('map', function(entity, config){
 
 roguemap.component('rooms_manager', function(entity, data){
   return data;
-});
+}); 
 
 roguemap.component('room', function(entity, data){
   var room = {};
