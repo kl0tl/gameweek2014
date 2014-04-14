@@ -22,6 +22,6 @@
     "module": false,
     "exports": false,
     "require": false,
-    "__dirname": false
+    "nuclear": false
   }
 }
