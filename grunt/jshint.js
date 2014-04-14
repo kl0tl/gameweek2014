@@ -6,6 +6,6 @@ module.exports = {
     reporter: require('jshint-stylish')
   },
 
-  scripts: ['src/**/*.js'],
+  scripts: ['src/**/*.js', '!src/nuclear_modules/**/lib/*.js'],
   config: ['Gruntfile.js', 'grunt/*.js']
 };
