@@ -2,6 +2,6 @@
 
 module.exports = {
   dist: {
-    path: 'index.html'
+    path: 'http://localhost:<%= connect.dist.options.port %>'
   }
 };
