@@ -1,176 +1,123 @@
 'use strict';
-var roguemap, ROT, nuclear, console;
+var roguemap, ROT, nuclear, console, Template, config;
 
 console = window.console;
 nuclear = window.nuclear;
 
 require('./lib/rot');
 ROT = window.ROT;
-
-var canvas = document.createElement('canvas');
-var context = canvas.getContext('2d');
-document.body.appendChild(canvas);
-
-canvas.width = 800;
-canvas.height = 800;
+Template = require('./template');
+config = require('./config');
 
 roguemap = nuclear.module('roguemap', []);
 
-var digger = new ROT.Map.Digger(200, 200, {
-  roomHeight : [3, 20],
-  roomWidth : [3, 20],
+roguemap.component('map', function(entity, config){
+  config.progress = config.progress || function(){};
+  var data = [],
+      digger = new ROT.Map.Digger(config.width, config.height, {
+        roomHeight : config.roomHeight,
+        roomWidth : config.roomWidth,
+      });
+
+  digger.create(function mapProgress(x, y, value){
+    data.push(value);
+    config.progress(x, y, value);
+  });
+
+  return {
+    data : data,
+    map : digger
+  };
 });
 
-var templates = {
-  'one' : {
-    name : 'one',
-    slots : [
-      {
-        type : 'crate',
-        position : {
-          x : 30,
-          y : 20
-        }
-      },
-      {
-        type : 'crate',
-        position : {
-          x : 40,
-          y : 20
-        }
-      },
-      {
-        type : 'torch',
-        position : {
-          x : 100,
-          y : 10
-        }
-      }
-    ],
-    light : 'red',
-    bundle : 'stone'
-  },
-  'two' : {
-    name : 'two',
-    slots : [
-      {
-        type : 'crate',
-        position : {
-          x : 30,
-          y : 20
-        }
-      },
-      {
-        type : 'crate',
-        position : {
-          x : 40,
-          y : 20
-        }
-      },
-      {
-        type : 'torch',
-        position : {
-          x : 100,
-          y : 10
-        }
-      }
-    ],
-    light : 'red',
-    bundle : 'stone'
-  },
-  'three' : {
-    name : 'three',
-    slots : [
-      {
-        type : 'crate',
-        position : {
-          x : 30,
-          y : 20
-        }
-      },
-      {
-        type : 'crate',
-        position : {
-          x : 40,
-          y : 20
-        }
-      },
-      {
-        type : 'torch',
-        position : {
-          x : 100,
-          y : 10
-        }
-      }
-    ],
-    light : 'red',
-    bundle : 'stone'
-  },
-  'four' : {
-    name : 'four',
-    slots : [
-      {
-        type : 'crate',
-        position : {
-          x : 30,
-          y : 20
-        }
-      },
-      {
-        type : 'crate',
-        position : {
-          x : 40,
-          y : 20
-        }
-      },
-      {
-        type : 'torch',
-        position : {
-          x : 100,
-          y : 10
-        }
-      }
-    ],
-    light : 'red',
-    bundle : 'stone'
-  }
-};
-var ranges = {
-  'one' : [9, 14],
-  'two' : [15, 25],
-  'three' : [26, 40],
-  'four' : [41, 200],
-};
-digger.create(function(x, y, value){
-  context.fillStyle = (value) ? 'black' : 'blue';
-  context.fillRect(x*4, y*4, 4, 4);
+roguemap.component('rooms_manager', function(entity, data){
+  return data;
 });
 
-for(var i = 0; i < digger._rooms.length; i++){
-  var room = digger._rooms[i];
-  var width = room._x2-room._x1;
-  var height = room._y2-room._y1;
-  var size = width*height;
+roguemap.component('room', function(entity, data){
+  var room = {};
+
+  room.position = {
+    x : data._x1,
+    y : data._y1
+  };
+
+  room.width = data._x2-data._x1;
+  room.height = data._y2-data._y1;
+  room.size = room.width*room.height;
+
+  return room;
+});
+
+roguemap.component('template', function(entity, data){
+  var template = new Template(entity, data.position, data.width, data.height, data.config);
+
+  return template;
+});
+
+roguemap.entity('room', function(entity, data){
+  var room   = nuclear.component('room').add(entity, data),
+      ranges = roguemap.config('ranges'),
+      templates = roguemap.config('templates'),
+      range, valid, u, template;
   for(var x in ranges){
-    var range = ranges[x],
-        valid = false;
-    for(var u = range[0]; u < range[1]; u++){
-      if(size === u){
+    range = ranges[x];
+    valid = false;
+    for(u = range[0]; u < range[1]; u++){
+      if(room.size === u){
         valid = true;
-        var template = templates[x];
-        console.log('info', width, height, x);
-        var indexX = Math.round(width*template.slots[2].position.x/100);
-        var indexY = Math.round(height*template.slots[2].position.y/100);
-        console.log(indexX, indexY);
+        template = templates[x];
+        nuclear.component('template').add(entity, {
+          config : template,
+          width : room.width,
+          height : room.height,
+          position : room.position
+        });
       }
     }
     if(valid){
       break;
     }
   }
-  console.log();
-}
+});
 
-console.log(digger);
+roguemap.entity('map', function(entity, data){
+  var digger = nuclear.component('map from roguemap').add(entity, data.mapData).map;
+  var rooms = [];
+  for(var i = 0; i < digger._rooms.length; i++){
+    var room = digger._rooms[i];
+    rooms.push(roguemap.entity('room').create(room));
+  }
+
+  nuclear.component('rooms_manager from roguemap').add(entity, rooms);
+});
+
+roguemap.component('slot', function(entity, data){
+  return data;
+});
+
+roguemap.entity('slot', function(entity, data){
+  var slots = roguemap.config('slots'),
+      slot  = slots[data.type];
+
+  if(slot){
+    slot = {
+      components : slot,
+      position : data.position,
+      bundle : data.bundle,
+      template : data.template
+    };
+
+    nuclear.component('slot').add(entity, slot);
+  }
+});
+
+roguemap.config(config || {
+  templates : {},
+  ranges : {},
+  slots : {}
+});
 
 nuclear.import([roguemap]);
+
+module.exports = roguemap;

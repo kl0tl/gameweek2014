@@ -9,6 +9,7 @@ require('./nuclear_modules/game.roguemap/');
 
 nuclear.module('inputs').config('gamepad').FACE_1 = 'FIRE';
 var entity = nuclear.entity.create();
+
 nuclear.component('inputs').add(entity, {
   FIRE : function(entity, input){
     if(input !== 0){
@@ -22,6 +23,14 @@ nuclear.component('inputs').add(entity, {
   }
 });
 
+console.log(nuclear.entity('map').create({
+  mapData : {
+    width : 200,
+    height : 200,
+    roomWidth : [3, 20],
+    roomHeight : [3, 20]
+  }
+}));
 function loop(){
   nuclear.system.run();
   window.requestAnimationFrame(loop);
