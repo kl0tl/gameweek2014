@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function animateSystem(e, components, context, dt) {
-  var atlas, sprite, animations, currentAnimation, frame;
+  var atlas, sprite, animations, currentAnimation, frame, width, height;
 
   atlas = components.atlas;
   sprite = components.sprite;
@@ -9,22 +9,27 @@ module.exports = function animateSystem(e, components, context, dt) {
 
   currentAnimation = animations.animations[animations.currentAnimation];
 
-  animations.timeElapsedSinceLastFrame += dt;
+  animations.timeElapsedSinceLastFrame += dt * nuclear.system('animate')._scheduler.lag;
 
   if (animations.timeElapsedSinceLastFrame > currentAnimation.interval) {
     animations.currentFrame += 1;
     animations.timeElapsedSinceLastFrame -= currentAnimation.interval;
 
-    if (animations.currentFrame > currentAnimation.frames.length) {
+    if (animations.currentFrame > currentAnimation.frames.length - 1) {
       animations.currentFrame = 0;
 
       if (!animations.loop) {
-        animations.currentAnimation = currentAnimation = animations.defaultAnimation;
+        animations.currentAnimation = animations.defaultAnimation;
+        currentAnimation = animations.animations[animations.currentAnimation];
       }
     }
 
-    frame = atlas.sprites[currentAnimation.frames[animations.currentFrame]].frame;
+    frame = atlas.sprites.frames[currentAnimation.frames[animations.currentFrame]].frame;
 
-    sprite.context.drawImage(atlas.source, frame.x, frame.y, frame.w, frame.h, 0, 0, sprite.width(), sprite.height());
+    width = sprite.width();
+    height = sprite.height();
+
+    sprite.context.clearRect(0, 0, width, height);
+    sprite.context.drawImage(atlas.source, frame.x, frame.y, frame.w, frame.h, 0, 0, width, height);
   }
 };

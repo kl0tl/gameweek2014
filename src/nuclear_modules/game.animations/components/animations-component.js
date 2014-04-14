@@ -14,7 +14,7 @@ function AnimationsComponent(options) {
 
   for (i = 0; i < length; i += 1) {
     key = options.animations[i];
-    data = loader.get(path.join('/assets', 'animations', options.target, options.target + '@' + key + '.json'));
+    data = loader.get(path.join('animations', options.target, options.target + '@' + key + '.json'));
 
     this.animations[key] = data;
   }

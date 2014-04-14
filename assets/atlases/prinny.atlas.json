@@ -2,16 +2,16 @@
 
 {
 	"filename": "prinny@dancing/00.png",
-	"frame": {"x":250,"y":2,"w":74,"h":121},
-	"rotated": true,
+	"frame": {"x":248,"y":248,"w":74,"h":121},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":8,"y":0,"w":74,"h":121},
 	"sourceSize": {"w":92,"h":121}
 },
 {
 	"filename": "prinny@dancing/01.png",
-	"frame": {"x":373,"y":74,"w":70,"h":121},
-	"rotated": true,
+	"frame": {"x":320,"y":371,"w":70,"h":121},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":11,"y":0,"w":70,"h":121},
 	"sourceSize": {"w":92,"h":121}
@@ -66,8 +66,8 @@
 },
 {
 	"filename": "prinny@dancing/08.png",
-	"frame": {"x":250,"y":78,"w":70,"h":119},
-	"rotated": true,
+	"frame": {"x":392,"y":2,"w":70,"h":119},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":11,"y":1,"w":70,"h":119},
 	"sourceSize": {"w":92,"h":121}
@@ -122,8 +122,8 @@
 },
 {
 	"filename": "prinny@dancing/15.png",
-	"frame": {"x":373,"y":2,"w":70,"h":121},
-	"rotated": true,
+	"frame": {"x":248,"y":371,"w":70,"h":121},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":11,"y":0,"w":70,"h":121},
 	"sourceSize": {"w":92,"h":121}
@@ -135,6 +135,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:06325b39b30492d85a6c03fe9640208f:7dce8dbf1ae2df6daa514b966b25c250:e9ee202797a0521ad9751cb76c539376$"
+	"smartupdate": "$TexturePacker:SmartUpdate:09e07eed86aba223bd0697285c29726e:7dce8dbf1ae2df6daa514b966b25c250:e9ee202797a0521ad9751cb76c539376$"
 }
 }
