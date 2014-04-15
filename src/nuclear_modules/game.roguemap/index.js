@@ -91,8 +91,15 @@ roguemap.entity('tile', function(entity, data){
     y = frame.y || 0;
 
     nuclear.component('position from game.transform').add(entity, data.x*resolution+x, data.y*resolution+y);
-    sprite = nuclear.component('sprite from game.rendering').add(entity, resolution*w, resolution*h, false, frame.dest);
-    sprite.fromAtlas(bundleName, index, resolution*w, resolution*h);
+    nuclear.component('atlas from game.rendering').add(entity, bundleName);
+    sprite = nuclear.component('sprite from game.rendering').add(entity, {
+        dest : frame.dest,
+        anchorX : 0,
+        anchorY : 0,
+        width : resolution*w,
+        height : resolution*h,
+        frame : index
+    });
     nuclear.system('renderer from game.rendering').once(entity);
     nuclear.component('sprite').remove(entity);
     if(data.type !== 'ground'){

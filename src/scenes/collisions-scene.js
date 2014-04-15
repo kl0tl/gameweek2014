@@ -8,13 +8,17 @@ prinny = nuclear.entity.create();
 
 nuclear.component('position').add(prinny, 250, 250);
 
-nuclear.component('sprite').add(prinny, 50, 50, true, 1).fromAtlas('prinny', 0);
 nuclear.component('atlas').add(prinny, 'prinny');
-nuclear.component('animations').add(prinny, {
-  target: 'prinny',
-  animations: ['dancing'],
-  defaultAnimation: 'dancing'
+nuclear.component('sprite').add(prinny, {
+    dest : 1,
+    width : 50,
+    height : 50
 });
+// nuclear.component('animations').add(prinny, {
+//   target: 'prinny',
+//   animations: ['dancing'],
+//   defaultAnimation: 'dancing'
+// });
 
 nuclear.component('velocity').add(prinny);
 
