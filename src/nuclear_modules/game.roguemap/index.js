@@ -1,33 +1,21 @@
 'use strict';
+<<<<<<< Updated upstream
 var roguemap, ROT, nuclear, console, Template, config;
 
 console = window.console;
 nuclear = window.nuclear;
+=======
+var roguemap, Template, config, Map;
+>>>>>>> Stashed changes
 
-require('./lib/rot');
-ROT = window.ROT;
 Template = require('./template');
+Map = require('./map');
 config = require('./config');
 
 roguemap = nuclear.module('roguemap', []);
 
 roguemap.component('map', function(entity, config){
-  config.progress = config.progress || function(){};
-  var data = [],
-      digger = new ROT.Map.Digger(config.width, config.height, {
-        roomHeight : config.roomHeight,
-        roomWidth : config.roomWidth,
-      });
-
-  digger.create(function mapProgress(x, y, value){
-    data.push(value);
-    config.progress(x, y, value);
-  });
-
-  return {
-    data : data,
-    map : digger
-  };
+  return new Map(config);
 });
 
 roguemap.component('rooms_manager', function(entity, data){
@@ -92,32 +80,54 @@ roguemap.entity('map', function(entity, data){
   nuclear.component('rooms_manager from roguemap').add(entity, rooms);
 });
 
+roguemap.entity('tile', function(entity, data){
+  var resolution = roguemap.config('resolution');
+
+  nuclear.component('sprite from game.rendering').add(entity, resolution, resolution);
+  nuclear.component('position from game.transform').add(entity, data.x*resolution, data.y*resolution);
+});
+
 roguemap.component('slot', function(entity, data){
+  var i, component, configs;
+  for(i = 0; i < data.components.length; i++){
+    component = data.components[i];
+    configs = data.data[component];
+
+    component = nuclear.component(component);
+    configs[0] = entity;
+    component.add.apply(component, configs);
+  }
   return data;
 });
 
 roguemap.entity('slot', function(entity, data){
   var slots = roguemap.config('slots'),
-      slot  = slots[data.type];
+      slot  = slots[data.type],
+      resolution = roguemap.config('resolution');
 
-  if(slot){
-    slot = {
-      components : slot,
-      position : data.position,
-      bundle : data.bundle,
-      template : data.template
-    };
+  slot = {
+    components : slot.components,
+    data : slot.data,
+    position : data.position,
+    bundle : data.bundle,
+    template : data.template
+  };
 
-    nuclear.component('slot').add(entity, slot);
-  }
+  nuclear.component('slot').add(entity, slot);
+  nuclear.component('position').add(entity, data.position.x*resolution, data.position.y*resolution);
 });
 
 roguemap.config(config || {
   templates : {},
   ranges : {},
-  slots : {}
+  slots : {},
+  resolution : 20
 });
 
 nuclear.import([roguemap]);
+<<<<<<< Updated upstream
 
 module.exports = roguemap;
+=======
+module.exports = roguemap;
+>>>>>>> Stashed changes
