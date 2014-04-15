@@ -19,5 +19,5 @@ module.exports = function rendererSystem(e, components, context) {
   width = sprite.width();
   height = sprite.height();
 
-  dest.drawImage(sprite.buffer, position.x - width * 0.5, position.y - height * 0.5, width, height);
+  dest.drawImage(sprite.buffer, position.x - width * 0.5, position.y - height * 0.5);
 };
