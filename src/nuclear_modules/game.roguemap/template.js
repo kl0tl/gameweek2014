@@ -1,10 +1,5 @@
 'use strict';
 
-var console, nuclear;
-
-console = window.console;
-nuclear = window.nuclear;
-
 function Template(id, position, width, height, config){
   this.config = config;
   this.position = position;

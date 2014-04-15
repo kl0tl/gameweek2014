@@ -1,12 +1,5 @@
 'use strict';
-<<<<<<< Updated upstream
-var roguemap, ROT, nuclear, console, Template, config;
-
-console = window.console;
-nuclear = window.nuclear;
-=======
 var roguemap, Template, config, Map;
->>>>>>> Stashed changes
 
 Template = require('./template');
 Map = require('./map');
@@ -81,10 +74,11 @@ roguemap.entity('map', function(entity, data){
 });
 
 roguemap.entity('tile', function(entity, data){
-  var resolution = roguemap.config('resolution');
+  var resolution = roguemap.config('resolution'),
+      position = nuclear.component('position from game.transform').add(entity, data.x*resolution, data.y*resolution),
+      sprite = nuclear.component('sprite from game.rendering').add(entity, resolution, resolution);
 
-  nuclear.component('sprite from game.rendering').add(entity, resolution, resolution);
-  nuclear.component('position from game.transform').add(entity, data.x*resolution, data.y*resolution);
+  sprite.
 });
 
 roguemap.component('slot', function(entity, data){
@@ -125,9 +119,4 @@ roguemap.config(config || {
 });
 
 nuclear.import([roguemap]);
-<<<<<<< Updated upstream
-
 module.exports = roguemap;
-=======
-module.exports = roguemap;
->>>>>>> Stashed changes

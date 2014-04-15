@@ -10,6 +10,7 @@
   "unused": true,
   "trailing": true,
 
+  "devel": true,
   "eqnull": true,
   "evil": true,
   "globalstrict": true,
@@ -20,6 +21,7 @@
   "globals": {
     "module": false,
     "exports": false,
-    "require": false
+    "require": false,
+    "nuclear": false
   }
 }

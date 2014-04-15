@@ -36,6 +36,10 @@ game.loader.load([
   ])
   .done(function () {
     var context;
+    'animations/prinny/prinny@dancing.json'
+  ])
+  .done(function () {
+    var prinny, context;
 
     nuclear.import([transform, rendering, animations]);
 
