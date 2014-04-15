@@ -2309,7 +2309,7 @@ ROT.Map.Digger = function(width, height, options) {
 	this._options = {
 		roomWidth: [3, 9], /* room minimum and maximum width */
 		roomHeight: [3, 5], /* room minimum and maximum height */
-		corridorLength: [3, 10], /* corridor minimum and maximum length */
+		corridorLength: [5, 10], /* corridor minimum and maximum length */
 		dugPercentage: 0.2, /* we stop after this percentage of level area has been dug out */
 		timeLimit: 1000 /* we stop after this much time has passed (msec) */
 	}

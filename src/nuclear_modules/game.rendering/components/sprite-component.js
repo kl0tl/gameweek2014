@@ -5,29 +5,31 @@ var loader, path;
 loader = require('game').loader;
 path = require('path');
 
-function SpriteComponent(width, height, dest) {
+function SpriteComponent(width, height, center, dest) {
   this.buffer = document.createElement('canvas');
   this.context = this.buffer.getContext('2d');
 
   this.dest = dest || 0;
-
+  if(center === undefined) center = true;
+  this.center = center;
   this.buffer.width = width;
   this.buffer.height = height;
+  this.context.imageSmoothingEnabled = false;
 }
 
-SpriteComponent.prototype.fromAtlas = function (atlas, frame) {
-  var source, sprite, width, height;
+SpriteComponent.prototype.fromAtlas = function (atlas, frame, width, height) {
+  var source, sprite;
 
   source = loader.get(path.join('atlases', atlas + '.atlas.png'));
-  sprite = loader.get(path.join('atlases', atlas + '.atlas.json'))[frame];
+  sprite = loader.get(path.join('atlases', atlas + '.atlas.json')).frames[frame];
 
-  width = sprite.frame.w;
-  height = sprite.frame.h;
+  if(!width) width = sprite.frame.w;
+  if(!height) height = sprite.frame.h;
 
   this.width(width);
   this.height(height);
 
-  this.context.drawImage(source, sprite.frame.x, sprite.frame.y, width, height, 0, 0, width, height);
+  this.context.drawImage(source, sprite.frame.x, sprite.frame.y, sprite.frame.w, sprite.frame.h, 0, 0, width, height);
 };
 
 SpriteComponent.prototype.width = function spriteWidth(value) {
@@ -36,7 +38,7 @@ SpriteComponent.prototype.width = function spriteWidth(value) {
   }
 
   this.buffer.width = value;
-
+  this.context.imageSmoothingEnabled = false;
   return this;
 };
 
@@ -46,7 +48,7 @@ SpriteComponent.prototype.height = function spriteHeight(value) {
   }
 
   this.buffer.height = value;
-
+  this.context.imageSmoothingEnabled = false;
   return this;
 };
 

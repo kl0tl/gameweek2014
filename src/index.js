@@ -25,38 +25,39 @@ nuclear.component('inputs').add(entity, {
     }
   }
 });
+var context = nuclear.system.context();
 
+context.dests = [
+  document.getElementById('bottom-buffer').getContext('2d'),
+  document.getElementById('dynamic-buffer').getContext('2d'),
+  document.getElementById('top-buffer').getContext('2d'),
+  document.getElementById('main').getContext('2d'),
+];
+
+context.WIDTH = context.dests[2].canvas.width;
+context.HEIGHT = context.dests[2].canvas.height;
 game.loader.load([
     'atlases/prinny.atlas.png',
     'atlases/prinny.atlas.json',
     'animations/prinny/prinny@dancing.json',
     
-    'atlases/ground1.atlas.png',
-    'atlases/ground1.atlas.json'
+    'atlases/stone.atlas.png',
+    'atlases/stone.atlas.json'
   ])
+  .error(function(error){
+    throw error;
+  })
   .done(function () {
-    var context;
-
     nuclear.import([transform, rendering, animations]);
-
     console.log('modules loaded!');
-    // var map = nuclear.entity('map').create({
-    //   mapData : {
-    //     width : 200,
-    //     height : 200,
-    //     roomWidth : [3, 20],
-    //     roomHeight : [3, 20]
-    //   }
-    // });
-
-    context = nuclear.system.context();
-
-    context.dests = [
-      document.getElementById('screen').getContext('2d')
-    ];
-
-    context.WIDTH = context.dests[0].canvas.width;
-    context.HEIGHT = context.dests[0].canvas.height;
+    nuclear.entity('map').create({
+      mapData : {
+        width : 40,
+        height : 40,
+        roomWidth : [3, 20],
+        roomHeight : [3, 20]
+      }
+    });
 
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);
