@@ -1,6 +1,6 @@
 'use strict';
 
-var loader, transform, rendering, animations, collisions, inputs, roguemap, camera;
+var loader, transform, rendering, animations, collisions, inputs, roguemap, camera, hero;
 
 loader = require('./assets-loader');
 
@@ -11,6 +11,7 @@ collisions = require('./nuclear_modules/game.collisions');
 inputs = require('./nuclear_modules/game.inputs');
 roguemap = require('./nuclear_modules/game.roguemap');
 camera = require('./nuclear_modules/game.camera');
+hero = require('./nuclear_modules/game.hero');
 
 loader.load([
     'atlases/prinny.atlas.png',
@@ -33,15 +34,15 @@ loader.load([
   ])
   .error(function (oO) { throw oO; })
   .done(function () {
-    nuclear.import([transform, rendering, animations, collisions, inputs, roguemap, camera]);
+    nuclear.import([transform, rendering, animations, collisions, inputs, roguemap, camera, hero]);
 
     console.log('modules loaded!');
 
     require('./systems-context');
 
-    require('./scenes/collisions-scene');
+    //require('./scenes/collisions-scene');
     require('./scenes/hero-scene');
-    require('./scenes/roguemap-scene');
+    //require('./scenes/roguemap-scene');
 
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);

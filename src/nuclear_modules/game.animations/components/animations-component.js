@@ -23,10 +23,47 @@ function AnimationsComponent(e, defaultAnimation, animations) {
 
   this.defaultAnimation = defaultAnimation || 'idle';
 
-  this.currentAnimation = this.defaultAnimation;
+  this.currentAnimation = '';
   this.currentFrame = 0;
 
   this.timeElapsedSinceLastFrame = 0;
+
+  this._queue = [];
+
+  this.play(this.defaultAnimation);
 }
+
+AnimationsComponent.prototype.play = function animationComponentPlay(key) {
+  var animation;
+
+  if (!(key in this.animations)) {
+    throw new Error('Unknown animation "' + key + '"');
+  }
+
+  if (this.currentAnimation !== key) {
+    animation = this.animations[key];
+
+    this.currentAnimation = key;
+    this.currentFrame = 0;
+
+    this.timeElapsedSinceLastFrame = animation.interval;
+
+    if (animation.next) {
+      this._queue.push.apply(this._queue, animation.next);
+    }
+  }
+
+  return this;
+};
+
+AnimationsComponent.prototype.defer = function animationComponentDefer(key) {
+  this._queue.push(key);
+
+  return this;
+};
+
+AnimationsComponent.prototype.next = function animationComponentNext() {
+  return this.play(this._queue.shift());
+};
 
 module.exports = AnimationsComponent;

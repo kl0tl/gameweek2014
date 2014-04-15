@@ -11,8 +11,8 @@ context.dests = [
   document.getElementById('main').getContext('2d'),
 ];
 
-context.WIDTH = context.dests[2].canvas.width;
-context.HEIGHT = context.dests[2].canvas.height;
+context.WIDTH = 500;
+context.HEIGHT = 500;
 
 context.colliders = nuclear.query([
   'collider from game.collisions',

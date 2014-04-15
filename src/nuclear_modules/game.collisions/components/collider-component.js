@@ -1,6 +1,8 @@
 'use strict';
 
-function ColliderComponent(options) {
+function ColliderComponent(e, options) {
+  this.entity = e;
+
   this.offsetX = options.offsetX || 0;
   this.offsetY = options.offsetY || 0;
 
@@ -29,29 +31,29 @@ ColliderComponent.prototype.onCollisionExit = function (callback) {
   return this;
 };
 
-ColliderComponent.prototype.triggerCollisionEnter = function colliderComponentTriggerCollisionEnter(e, collider) {
-  if (e in this._currentCollisions) {
-    this.triggerCollisionStay();
+ColliderComponent.prototype.triggerCollisionEnter = function colliderComponentTriggerCollisionEnter(other, collider) {
+  if (other in this._currentCollisions) {
+    this.triggerCollisionStay(other);
   } else {
-    this._currentCollisions[e] = collider;
-    this._triggerCollisionListeners(this._onCollisionEnterListeners, e);
+    this._currentCollisions[other] = collider;
+    this._triggerCollisionListeners(this._onCollisionEnterListeners, other);
   }
 };
 
-ColliderComponent.prototype.triggerCollisionStay = function colliderComponentTriggerCollisionStay() {
-  this._triggerCollisionListeners(this._onCollisionStayListeners);
+ColliderComponent.prototype.triggerCollisionStay = function colliderComponentTriggerCollisionStay(other) {
+  this._triggerCollisionListeners(this._onCollisionStayListeners, other);
 };
 
-ColliderComponent.prototype.triggerCollisionExit = function colliderComponentTriggerCollisionExit(e) {
-  delete this._currentCollisions[e];
-  this._triggerCollisionListeners(this._onCollisionExitListeners, e);
+ColliderComponent.prototype.triggerCollisionExit = function colliderComponentTriggerCollisionExit(other) {
+  delete this._currentCollisions[other];
+  this._triggerCollisionListeners(this._onCollisionExitListeners, other);
 };
 
-ColliderComponent.prototype._triggerCollisionListeners = function _colliderComponentTriggerCollisionListeners(listeners, collider) {
+ColliderComponent.prototype._triggerCollisionListeners = function _colliderComponentTriggerCollisionListeners(listeners, other) {
   var i, listener;
   
   for (i = 0; (listener = listeners[i]); i += 1) {
-    listener(collider);
+    listener(other, this.entity);
   }
 };
 
