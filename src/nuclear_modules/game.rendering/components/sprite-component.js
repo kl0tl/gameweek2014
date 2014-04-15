@@ -16,6 +16,12 @@ function SpriteComponent(e, options) {
   this.dest = options.dest || 0;
   this.scale = options.scale || 1;
 
+  if ('anchorX' in options) this.anchorX = options.anchorX;
+  else this.anchorX = 0.5;
+
+  if ('anchorY') this.anchorY = options.anchorY;
+  else this.anchorY = 0.5;
+
   this.buffer.width = options.width;
   this.buffer.height = options.height;
 
