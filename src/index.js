@@ -1,15 +1,15 @@
 'use strict';
 
-var loader, transform, rendering, animations, lighting, collisions, inputs;
+var loader, transform, rendering, animations, collisions, inputs, roguemap;
 
 loader = require('./assets-loader');
 
 transform = require('./nuclear_modules/game.transform');
 rendering = require('./nuclear_modules/game.rendering');
 animations = require('./nuclear_modules/game.animations');
-lighting = require('./nuclear_modules/game.lighting');
 collisions = require('./nuclear_modules/game.collisions');
 inputs = require('./nuclear_modules/game.inputs');
+roguemap = require('./nuclear_modules/game.roguemap');
 
 loader.load([
     'atlases/prinny.atlas.png',
@@ -25,18 +25,22 @@ loader.load([
     'animations/hero/hero@walkback.json',
     'animations/hero/hero@walkface.json',
     'animations/hero/hero@walkleft.json',
-    'animations/hero/hero@walkright.json'
+    'animations/hero/hero@walkright.json',
+
+    'atlases/stone.atlas.png',
+    'atlases/stone.atlas.json'
   ])
   .error(function (oO) { throw oO; })
   .done(function () {
-    nuclear.import([transform, rendering, animations, lighting, collisions, inputs]);
+    nuclear.import([transform, rendering, animations, collisions, inputs, roguemap]);
 
     console.log('modules loaded!');
 
     require('./systems-context');
 
-    //require('./scenes/collisions-scene');
+    require('./scenes/collisions-scene');
     require('./scenes/hero-scene');
+    require('./scenes/roguemap-scene');
 
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);

@@ -37,9 +37,7 @@ SpriteComponent.prototype.width = function spriteWidth(value) {
   }
 
   this.buffer.width = value;
-
   this.context.imageSmoothingEnabled = false;
-
   return this;
 };
 
@@ -49,9 +47,7 @@ SpriteComponent.prototype.height = function spriteHeight(value) {
   }
 
   this.buffer.height = value;
-
   this.context.imageSmoothingEnabled = false;
-
   return this;
 };
 

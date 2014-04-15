@@ -5,7 +5,7 @@ nuclear.events.on('system:before:renderer from game.rendering', function () {
 
   context = nuclear.system.context();
 
-  context.dests[0].clearRect(0, 0, context.WIDTH, context.HEIGHT);
+  context.dests[1].clearRect(0, 0, context.WIDTH, context.HEIGHT);
 });
 
 module.exports = function rendererSystem(e, components, context) {

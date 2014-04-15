@@ -64,6 +64,7 @@ roguemap.entity('room', function(entity, data){
 
 roguemap.entity('map', function(entity, data){
   var digger = nuclear.component('map from roguemap').add(entity, data.mapData).map;
+  console.log(digger);
   var rooms = [];
   for(var i = 0; i < digger._rooms.length; i++){
     var room = digger._rooms[i];
@@ -73,12 +74,38 @@ roguemap.entity('map', function(entity, data){
   nuclear.component('rooms_manager from roguemap').add(entity, rooms);
 });
 
-roguemap.entity('tile', function(/*entity, data*/){
-  // var resolution = roguemap.config('resolution'),
-  //     position = nuclear.component('position from game.transform').add(entity, data.x*resolution, data.y*resolution),
-  //     sprite = nuclear.component('sprite from game.rendering').add(entity, resolution, resolution);
+roguemap.entity('tile', function(entity, data){
+  var resolution = roguemap.config('resolution'),
+      bundles = roguemap.config('bundles'),
+      bundleName = roguemap.config('currentBundle'),
+      currentBundle = bundles[bundleName];
 
-  // sprite.
+  if(currentBundle && currentBundle[data.type]){
+    var w, h, x, y, sprite;
+
+    var frame = currentBundle[data.type][Math.round(Math.random()*(currentBundle[data.type].length-1))];
+    var index = frame.index;
+    w = frame.w || 1;
+    h = frame.h || 1;
+    x = frame.x || 0;
+    y = frame.y || 0;
+
+    nuclear.component('position from game.transform').add(entity, data.x*resolution+x, data.y*resolution+y);
+    sprite = nuclear.component('sprite from game.rendering').add(entity, resolution*w, resolution*h, false, frame.dest);
+    sprite.fromAtlas(bundleName, index, resolution*w, resolution*h);
+    nuclear.system('renderer from game.rendering').once(entity);
+    nuclear.component('sprite').remove(entity);
+    if(data.type !== 'ground'){
+      nuclear.component('velocity').add(entity);
+      nuclear.component('rigidbody').add(entity, {
+        mass : Infinity
+      });
+      nuclear.component('collider').add(entity, {
+        width : resolution*w,
+        height : resolution*h
+      });
+    }
+  }
 });
 
 roguemap.component('slot', function(entity, data){
@@ -115,8 +142,9 @@ roguemap.config(config || {
   templates : {},
   ranges : {},
   slots : {},
-  resolution : 20
+  resolution : 20,
+  bundles : {},
+  currentBundle : 'stone'
 });
 
-nuclear.import([roguemap]);
 module.exports = roguemap;
