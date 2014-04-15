@@ -17,12 +17,21 @@ loader.load([
     'atlases/prinny.atlas.json',
     'animations/prinny/prinny@dancing.json',
 
+    'atlases/hero.atlas.png',
+    'atlases/hero.atlas.json',
+    'animations/hero/hero@idleback.json',
+    'animations/hero/hero@idleface.json',
+    'animations/hero/hero@idleleft.json',
+    'animations/hero/hero@idleright.json',
+    'animations/hero/hero@walkback.json',
+    'animations/hero/hero@walkface.json',
+    'animations/hero/hero@walkleft.json',
+    'animations/hero/hero@walkright.json',
+
     'atlases/stone.atlas.png',
     'atlases/stone.atlas.json'
   ])
-  .error(function(error){
-    throw error;
-  })
+  .error(function (oO) { throw oO; })
   .done(function () {
     nuclear.import([transform, rendering, animations, collisions, inputs, roguemap, camera]);
 
@@ -31,6 +40,7 @@ loader.load([
     require('./systems-context');
 
     require('./scenes/collisions-scene');
+    require('./scenes/hero-scene');
     require('./scenes/roguemap-scene');
 
     window.requestAnimationFrame(function loop() {

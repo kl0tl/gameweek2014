@@ -5,33 +5,37 @@ var path, loader;
 path = require('path');
 loader = require('assets-loader');
 
-function SpriteComponent(width, height, center, dest) {
+function SpriteComponent(e, options) {
+  var atlas, source, scaledWidth, scaledHeight;
+
+  atlas = nuclear.component('atlas').of(e);
+
   this.buffer = document.createElement('canvas');
   this.context = this.buffer.getContext('2d');
 
-  this.dest = dest || 0;
-  if(center === undefined) center = true;
-  this.center = center;
-  this.buffer.width = width;
-  this.buffer.height = height;
+  this.dest = options.dest || 0;
+  this.scale = options.scale || 1;
+
+  if ('anchorX' in options) this.anchorX = options.anchorX;
+  else this.anchorX = 0.5;
+
+  if ('anchorY') this.anchorY = options.anchorY;
+  else this.anchorY = 0.5;
+
+  this.buffer.width = options.width;
+  this.buffer.height = options.height;
 
   this.context.imageSmoothingEnabled = false;
+
+  if (atlas) {
+    source = loader.get(path.join('atlases', atlas.name + '.atlas.json')).frames[options.frame || 0];
+
+    scaledWidth = source.frame.w * this.scale;
+    scaledHeight = source.frame.h * this.scale;
+
+    this.context.drawImage(atlas.source, source.frame.x, source.frame.y, source.frame.w, source.frame.h, 0.5 * (options.width - scaledWidth), 0.5 * (options.height - scaledHeight), scaledWidth, scaledHeight);
+  }
 }
-
-SpriteComponent.prototype.fromAtlas = function (atlas, frame, width, height) {
-  var source, sprite;
-
-  source = loader.get(path.join('atlases', atlas + '.atlas.png'));
-  sprite = loader.get(path.join('atlases', atlas + '.atlas.json')).frames[frame];
-
-  if(!width) width = sprite.frame.w;
-  if(!height) height = sprite.frame.h;
-
-  this.width(width);
-  this.height(height);
-
-  this.context.drawImage(source, sprite.frame.x, sprite.frame.y, sprite.frame.w, sprite.frame.h, 0, 0, width, height);
-};
 
 SpriteComponent.prototype.width = function spriteWidth(value) {
   if (arguments.length === 0) {

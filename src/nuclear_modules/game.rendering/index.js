@@ -9,8 +9,8 @@ module.exports = nuclear.module('game.rendering', ['game.transform'])
   .component('atlas', function (e, key) {
     return new AtlasComponent(key);
   })
-  .component('sprite', function (e, width, height, center, dest) {
-    return new SpriteComponent(width, height, center, dest);
+  .component('sprite', function (e, options) {
+    return new SpriteComponent(e, options);
   })
   .system('renderer', [
     'sprite from game.rendering',
