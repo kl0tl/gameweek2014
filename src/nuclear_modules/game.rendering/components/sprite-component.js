@@ -1,8 +1,9 @@
 'use strict';
 
-var loader;
+var loader, path;
 
 loader = require('game').loader;
+path = require('path');
 
 function SpriteComponent(width, height, dest) {
   this.buffer = document.createElement('canvas');

@@ -73,12 +73,12 @@ roguemap.entity('map', function(entity, data){
   nuclear.component('rooms_manager from roguemap').add(entity, rooms);
 });
 
-roguemap.entity('tile', function(entity, data){
-  var resolution = roguemap.config('resolution'),
-      position = nuclear.component('position from game.transform').add(entity, data.x*resolution, data.y*resolution),
-      sprite = nuclear.component('sprite from game.rendering').add(entity, resolution, resolution);
+roguemap.entity('tile', function(/*entity, data*/){
+  // var resolution = roguemap.config('resolution'),
+  //     position = nuclear.component('position from game.transform').add(entity, data.x*resolution, data.y*resolution),
+  //     sprite = nuclear.component('sprite from game.rendering').add(entity, resolution, resolution);
 
-  sprite.
+  // sprite.
 });
 
 roguemap.component('slot', function(entity, data){
