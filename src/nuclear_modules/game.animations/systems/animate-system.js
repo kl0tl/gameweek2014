@@ -19,7 +19,8 @@ module.exports = function animateSystem(e, components, context, dt) {
       animations.currentFrame = 0;
 
       if (!currentAnimation.loop) {
-        animations.currentAnimation = animations.defaultAnimation;
+        if (animations._queue.length) animations.currentAnimation = animations._queue.shift();
+        else animations.currentAnimation = animations.defaultAnimation;
         currentAnimation = animations.animations[animations.currentAnimation];
       }
     }

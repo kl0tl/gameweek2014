@@ -8,20 +8,25 @@ prinny = nuclear.entity.create();
 
 nuclear.component('position').add(prinny, 250, 250);
 
-nuclear.component('sprite').add(prinny, 50, 50, true, 1).fromAtlas('prinny', 0);
 nuclear.component('atlas').add(prinny, 'prinny');
-nuclear.component('animations').add(prinny, {
-  target: 'prinny',
-  animations: ['dancing'],
-  defaultAnimation: 'dancing'
+
+nuclear.component('sprite').add(prinny, {
+  width: 74,
+  height: 121
 });
+
+nuclear.component('animations').add(prinny, 'dancing', [
+  'dancing'
+]);
 
 nuclear.component('velocity').add(prinny);
 
 nuclear.component('collider').add(prinny, {
   width: 74,
   height: 121
-});
+})
+  .onCollisionEnter(console.log.bind(console, 'collision enter'))
+  .onCollisionExit(console.log.bind(console, 'collision exit'));
 
 nuclear.component('rigidbody').add(prinny, {
   mass: 1,

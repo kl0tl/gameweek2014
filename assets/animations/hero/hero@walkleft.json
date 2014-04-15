@@ -1,5 +1,6 @@
 {
   "frames": [16, 17, 18, 19, 20, 21],
   "interval": 125,
-  "loop": true
+  "loop": false,
+  "next": ["idleleft"]
 }

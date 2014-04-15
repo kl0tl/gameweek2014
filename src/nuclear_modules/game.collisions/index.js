@@ -6,7 +6,7 @@ ColliderComponent = require('./components/collider-component');
 
 module.exports = nuclear.module('game.collisions', ['game.transform'])
   .component('collider', function (e, options) {
-    return new ColliderComponent(options);
+    return new ColliderComponent(e, options);
   })
   .system('collisions', [
     'collider from game.collisions',

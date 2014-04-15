@@ -3,7 +3,7 @@
 module.exports = function debugCollidersSystem(e, components, context) {
   var dest, position, collider, x, y, w, h;
 
-  dest = context.dests[1];
+  dest = context.dests[0];
 
   position = components.position;
   collider = components.collider;
