@@ -9,7 +9,7 @@ module.exports = function animateSystem(e, components, context, dt) {
 
   currentAnimation = animations.animations[animations.currentAnimation];
 
-  animations.timeElapsedSinceLastFrame += dt * nuclear.system('animate')._scheduler.lag;
+  animations.timeElapsedSinceLastFrame += dt * 16;//nuclear.system('animate')._scheduler.lag;
 
   if (animations.timeElapsedSinceLastFrame > currentAnimation.interval) {
     animations.currentFrame += 1;
