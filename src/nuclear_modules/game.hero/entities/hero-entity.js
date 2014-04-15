@@ -38,43 +38,23 @@ module.exports = function heroEntity(hero, x, y) {
   nuclear.component('inputs').add(hero, {
     UP: function onUpHeroHandler(e, input) {
       velocity.y -= 5 * input;
-      if (input) {
-        if (animations.play('walkback')) {
-          animations.clearQueue();
-        }
-      } else if (animations.currentAnimation === 'walkback') {
-        animations.next();
-      }
+      if (input) animations.play('walkback');
+      else if (animations.currentAnimation === 'walkback') animations.play('idleback');
     },
     DOWN: function onDownHeroHandler(e, input) {
       velocity.y += 5 * input;
-      if (input) {
-        if (animations.play('walkface')) {
-          animations.clearQueue();
-        }
-      } else if (animations.currentAnimation === 'walkface') {
-        animations.next();
-      }
+      if (input) animations.play('walkface');
+      else if (animations.currentAnimation === 'walkface') animations.play('idleface');
     },
     LEFT: function onLeftHeroHandler(e, input) {
       velocity.x -= 5 * input;
-      if (input) {
-        if (animations.play('walkleft')) {
-          animations.clearQueue();
-        }
-      } else if (animations.currentAnimation === 'walkleft') {
-        animations.next();
-      }
+      if (input) animations.play('walkleft');
+      else if (animations.currentAnimation === 'walkleft') animations.play('idleleft');
     },
     RIGHT: function onRightHeroHandler(e, input) {
       velocity.x += 5 * input;
-      if (input) {
-        if (animations.play('walkright')) {
-          animations.clearQueue();
-        }
-      } else if (animations.currentAnimation === 'walkright') {
-        animations.next();
-      }
+      if (input) animations.play('walkright');
+      else if (animations.currentAnimation === 'walkright') animations.play('idleright');
     }
   });
 };
