@@ -95,6 +95,16 @@ roguemap.entity('tile', function(entity, data){
     sprite.fromAtlas(bundleName, index, resolution*w, resolution*h);
     nuclear.system('renderer from game.rendering').once(entity);
     nuclear.component('sprite').remove(entity);
+    if(data.type !== 'ground'){
+      nuclear.component('velocity').add(entity);
+      nuclear.component('rigidbody').add(entity, {
+        mass : Infinity
+      });
+      nuclear.component('collider').add(entity, {
+        width : resolution*w,
+        height : resolution*h
+      });
+    }
   }
 });
 
@@ -137,5 +147,4 @@ roguemap.config(config || {
   currentBundle : 'stone'
 });
 
-nuclear.import([roguemap]);
 module.exports = roguemap;

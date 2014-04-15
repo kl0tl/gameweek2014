@@ -1,9 +1,9 @@
 'use strict';
 
-var loader, path;
+var path, loader;
 
-loader = require('game').loader;
 path = require('path');
+loader = require('assets-loader');
 
 function SpriteComponent(width, height, center, dest) {
   this.buffer = document.createElement('canvas');
@@ -14,6 +14,7 @@ function SpriteComponent(width, height, center, dest) {
   this.center = center;
   this.buffer.width = width;
   this.buffer.height = height;
+
   this.context.imageSmoothingEnabled = false;
 }
 

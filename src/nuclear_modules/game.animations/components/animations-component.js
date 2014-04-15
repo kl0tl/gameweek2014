@@ -1,9 +1,9 @@
 'use strict';
 
-var loader, path;
+var path, loader;
 
-loader = require('game').loader;
 path = require('path');
+loader = require('assets-loader');
 
 function AnimationsComponent(options) {
   var i, length, key, data;

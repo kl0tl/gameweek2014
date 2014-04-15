@@ -3,7 +3,7 @@
 module.exports = {
   options: {
     alias: [
-      'src/game.js:game'
+      'src/assets-loader.js:assets-loader'
     ],
     bundleOptions: {
       debug: true
