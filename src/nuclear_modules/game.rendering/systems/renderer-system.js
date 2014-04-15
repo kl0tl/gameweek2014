@@ -22,5 +22,5 @@ module.exports = function rendererSystem(e, components, context) {
   offsetX = sprite.anchorX * width;
   offsetY = sprite.anchorY * height;
 
-  dest.drawImage(sprite.buffer, position.x - width * 0.5, position.y - height * 0.5);
+  dest.drawImage(sprite.buffer, position.x - offsetX, position.y - offsetY);
 };
