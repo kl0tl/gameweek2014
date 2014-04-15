@@ -1,6 +1,6 @@
 'use strict';
 
-var context, prinny, block, i;
+var context, prinny, block, i, camera;
 
 context = nuclear.system.context();
 
@@ -42,6 +42,20 @@ nuclear.component('inputs').add(prinny, {
     nuclear.component('velocity').of(e).x += 5 * input;
   }
 });
+
+camera = context.camera = nuclear.entity('camera').create({
+    target : prinny,
+    x : 0,
+    y : 0,
+    collider : {
+        width : 1200,
+        height : 800
+    }
+});
+
+context.cameraPosition = nuclear.component('position').of(camera);
+
+console.log(camera);
 
 for (i = 0; i < 10; i += 1) {
   block = nuclear.entity.create();

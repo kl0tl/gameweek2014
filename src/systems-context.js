@@ -16,6 +16,5 @@ context.HEIGHT = context.dests[2].canvas.height;
 
 context.colliders = nuclear.query([
   'collider from game.collisions',
-  'position from game.transform',
-  'rigidbody from game.transform'
+  'position from game.transform'
 ].join(' ')).entities;

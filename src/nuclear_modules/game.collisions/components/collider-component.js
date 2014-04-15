@@ -34,7 +34,7 @@ ColliderComponent.prototype.triggerCollisionEnter = function colliderComponentTr
     this.triggerCollisionStay();
   } else {
     this._currentCollisions[e] = collider;
-    this._triggerCollisionListeners(this._onCollisionEnterListeners);
+    this._triggerCollisionListeners(this._onCollisionEnterListeners, e);
   }
 };
 
@@ -44,14 +44,14 @@ ColliderComponent.prototype.triggerCollisionStay = function colliderComponentTri
 
 ColliderComponent.prototype.triggerCollisionExit = function colliderComponentTriggerCollisionExit(e) {
   delete this._currentCollisions[e];
-  this._triggerCollisionListeners(this._onCollisionExitListeners);
+  this._triggerCollisionListeners(this._onCollisionExitListeners, e);
 };
 
-ColliderComponent.prototype._triggerCollisionListeners = function _colliderComponentTriggerCollisionListeners(listeners) {
+ColliderComponent.prototype._triggerCollisionListeners = function _colliderComponentTriggerCollisionListeners(listeners, collider) {
   var i, listener;
-
+  
   for (i = 0; (listener = listeners[i]); i += 1) {
-    listener();
+    listener(collider);
   }
 };
 

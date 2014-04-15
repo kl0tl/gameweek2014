@@ -104,6 +104,7 @@ roguemap.entity('tile', function(entity, data){
         width : resolution*w,
         height : resolution*h
       });
+      //nuclear.component('camera-sensor').add(entity, ['collider', 'rigidbody', 'velocity']);
     }
   }
 });
