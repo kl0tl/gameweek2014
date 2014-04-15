@@ -1,8 +1,9 @@
 'use strict';
 
-var loader;
+var loader, path;
 
 loader = require('game').loader;
+path = require('path');
 
 function SpriteComponent(width, height, dest) {
   this.buffer = document.createElement('canvas');
@@ -18,7 +19,7 @@ SpriteComponent.prototype.fromAtlas = function (atlas, frame) {
   var source, sprite, width, height;
 
   source = loader.get(path.join('atlases', atlas + '.atlas.png'));
-  sprite = loader.get(path.join('atlases', atlas + '.atlas.json'))[frame];
+  sprite = loader.get(path.join('atlases', atlas + '.atlas.json')).frames[frame];
 
   width = sprite.frame.w;
   height = sprite.frame.h;
