@@ -40,30 +40,42 @@ AnimationsComponent.prototype.play = function animationComponentPlay(key) {
     throw new Error('Unknown animation "' + key + '"');
   }
 
-  if (this.currentAnimation !== key) {
-    animation = this.animations[key];
-
-    this.currentAnimation = key;
-    this.currentFrame = 0;
-
-    this.timeElapsedSinceLastFrame = animation.interval;
-
-    if (animation.next) {
-      this._queue.push.apply(this._queue, animation.next);
-    }
+  if (this.currentAnimation === key) {
+    return false;
   }
 
-  return this;
+  animation = this.animations[key];
+
+  this.currentAnimation = key;
+  this.currentFrame = 0;
+
+  this.timeElapsedSinceLastFrame = animation.interval;
+
+  if (animation.next) {
+    this._queue.push.apply(this._queue, animation.next);
+  }
+
+  return true;
 };
 
 AnimationsComponent.prototype.defer = function animationComponentDefer(key) {
   this._queue.push(key);
-
-  return this;
 };
 
 AnimationsComponent.prototype.next = function animationComponentNext() {
-  return this.play(this._queue.shift());
+  var nextAnimation;
+
+  nextAnimation = this._queue.shift();
+
+  if (!nextAnimation) return false;
+
+  this.play(nextAnimation);
+
+  return true;
+};
+
+AnimationsComponent.prototype.clearQueue = function animationComponentClearQueue() {
+  this._queue.length = 0;
 };
 
 module.exports = AnimationsComponent;

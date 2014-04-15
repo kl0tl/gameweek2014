@@ -5,27 +5,25 @@ nuclear.events.on('system:before:renderer from game.rendering', function () {
 
   context = nuclear.system.context();
 
-  context.dests[1].clearRect(0, 0, context.WIDTH, context.HEIGHT);
+  context.dests[0].clearRect(0, 0, context.WIDTH, context.HEIGHT);
 });
 
 module.exports = function rendererSystem(e, components, context) {
-  var sprite, position, dest, width, height, offsetX, offsetY, camera;
+  var sprite, position, dest, width, height, offsetX, offsetY, camera, camX, camY;
 
   sprite = components.sprite;
   position = components.position;
-  camera = context.cameraPosition;
+  camera = context.cameraPosition || {};
 
+  camX = camera.x || 0;
+  camY = camera.y || 0;
   dest = context.dests[sprite.dest];
 
   width = sprite.width();
   height = sprite.height();
-
   offsetX = sprite.anchorX * width;
   offsetY = sprite.anchorY * height;
 
-  if(camera){
-    dest.drawImage(sprite.buffer, position.x - width * 0.5 - camera.x, position.y - height * 0.5- camera.y);
-  }else{
-    dest.drawImage(sprite.buffer, position.x - width * 0.5, position.y - height * 0.5);
-  }
+  //console.log(position.x - camX, position.y - camY);
+  dest.drawImage(sprite.buffer, position.x - camX - offsetX, position.y - camY - offsetY);
 };

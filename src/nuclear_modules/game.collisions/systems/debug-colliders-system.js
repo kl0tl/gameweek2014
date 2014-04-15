@@ -17,16 +17,17 @@ module.exports = function debugCollidersSystem(e, components, context) {
 
   dest.strokeStyle = '#f0f';
 
-  dest.beginPath();
+  // dest.beginPath();
 
-  dest.moveTo(x - w, y - h);
-  dest.lineTo(x + w, y - h);
-  dest.lineTo(x + w, y + h);
-  dest.lineTo(x - w, y + h);
+  // dest.moveTo(x - w, y - h);
+  // dest.lineTo(x + w, y - h);
+  // dest.lineTo(x + w, y + h);
+  // dest.lineTo(x - w, y + h);
 
-  dest.closePath();
+  // dest.closePath();
+  dest.strokeRect(x-w-context.cameraPosition.x, y-h-context.cameraPosition.y, w*2, h*2);
 
-  dest.stroke();
+  //dest.stroke();
 
   dest.restore();
 };

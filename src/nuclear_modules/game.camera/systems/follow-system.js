@@ -6,7 +6,7 @@ module.exports = function cameraFollow(entity, components){
   center = components.camera.center();
   otherPosition = nuclear.component('position from game.transform').of(components.camera.target);
   if(otherPosition){
-    components.position.x = otherPosition.x;
-    components.position.y = otherPosition.y;
+    components.position.x = otherPosition.x - components.collider.halfWidth;
+    components.position.y = otherPosition.y - components.collider.halfHeight;
   }
 };

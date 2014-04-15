@@ -81,7 +81,7 @@ roguemap.entity('tile', function(entity, data){
       currentBundle = bundles[bundleName];
 
   if(currentBundle && currentBundle[data.type]){
-    var w, h, x, y, sprite;
+    var w, h, x, y, sprite, atlas;
 
     var frame = currentBundle[data.type][Math.round(Math.random()*(currentBundle[data.type].length-1))];
     var index = frame.index;
@@ -91,15 +91,17 @@ roguemap.entity('tile', function(entity, data){
     y = frame.y || 0;
 
     nuclear.component('position from game.transform').add(entity, data.x*resolution+x, data.y*resolution+y);
-    nuclear.component('atlas from game.rendering').add(entity, bundleName);
+    atlas = nuclear.component('atlas from game.rendering').add(entity, bundleName);
     sprite = nuclear.component('sprite from game.rendering').add(entity, {
         dest : frame.dest,
         anchorX : 0,
         anchorY : 0,
         width : resolution*w,
         height : resolution*h,
-        frame : index
+        frame : index,
+        stretch : true
     });
+    //sprite.redrawBuffer(atlas.source);
     nuclear.system('renderer from game.rendering').once(entity);
     nuclear.component('sprite').remove(entity);
     if(data.type !== 'ground'){

@@ -42,7 +42,7 @@ loader.load([
 
     //require('./scenes/collisions-scene');
     require('./scenes/hero-scene');
-    //require('./scenes/roguemap-scene');
+    require('./scenes/roguemap-scene');
 
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);

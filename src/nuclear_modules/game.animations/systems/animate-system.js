@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function animateSystem(e, components, context, dt) {
-  var atlas, sprite, animations, currentAnimation, frame, width, height, scaledWidth, scaledHeight;
+  var atlas, sprite, animations, currentAnimation, frame;
 
   atlas = components.atlas;
   sprite = components.sprite;
@@ -27,13 +27,6 @@ module.exports = function animateSystem(e, components, context, dt) {
 
     frame = atlas.sprites.frames[currentAnimation.frames[animations.currentFrame]].frame;
 
-    width = sprite.width();
-    height = sprite.height();
-
-    scaledWidth = frame.w * sprite.scale;
-    scaledHeight = frame.h * sprite.scale;
-
-    sprite.context.clearRect(0, 0, width, height);
-    sprite.context.drawImage(atlas.source, frame.x, frame.y, frame.w, frame.h, 0.5 * (width - scaledWidth), (height - scaledHeight), scaledWidth, scaledHeight);
+    sprite.redrawBuffer(atlas.source, frame.x, frame.y, frame.w, frame.h);
   }
 };

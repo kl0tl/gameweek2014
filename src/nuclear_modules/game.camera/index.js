@@ -17,4 +17,5 @@ module.exports = nuclear.module('game.camera', ['game.transform', 'game.collisio
   .system('follow', [
     'camera from game.camera',
     'position from game.transform',
+    'collider from game.collisions',
   ], require('./systems/follow-system'));
