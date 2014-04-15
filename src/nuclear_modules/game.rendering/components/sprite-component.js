@@ -1,9 +1,9 @@
 'use strict';
 
-var loader, path;
+var path, loader;
 
-loader = require('game').loader;
 path = require('path');
+loader = require('assets-loader');
 
 function SpriteComponent(width, height, dest) {
   this.buffer = document.createElement('canvas');
@@ -13,6 +13,8 @@ function SpriteComponent(width, height, dest) {
 
   this.buffer.width = width;
   this.buffer.height = height;
+
+  this.context.imageSmoothingEnabled = false;
 }
 
 SpriteComponent.prototype.fromAtlas = function (atlas, frame) {
@@ -37,6 +39,8 @@ SpriteComponent.prototype.width = function spriteWidth(value) {
 
   this.buffer.width = value;
 
+  this.context.imageSmoothingEnabled = false;
+
   return this;
 };
 
@@ -46,6 +50,8 @@ SpriteComponent.prototype.height = function spriteHeight(value) {
   }
 
   this.buffer.height = value;
+
+  this.context.imageSmoothingEnabled = false;
 
   return this;
 };

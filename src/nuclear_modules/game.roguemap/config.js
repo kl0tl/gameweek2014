@@ -6,21 +6,21 @@ module.exports = {
       name : 'one',
       slots : [
         {
-          type : 'crate',
+          type : 'prinny',
           position : {
             x : 30,
             y : 20
           }
         },
         {
-          type : 'crate',
+          type : 'prinny',
           position : {
             x : 40,
             y : 20
           }
         },
         {
-          type : 'torch',
+          type : 'prinny',
           position : {
             x : 100,
             y : 10
@@ -34,21 +34,21 @@ module.exports = {
       name : 'two',
       slots : [
         {
-          type : 'crate',
+          type : 'prinny',
           position : {
             x : 30,
             y : 20
           }
         },
         {
-          type : 'crate',
+          type : 'prinny',
           position : {
             x : 40,
             y : 20
           }
         },
         {
-          type : 'torch',
+          type : 'prinny',
           position : {
             x : 100,
             y : 10
@@ -62,21 +62,21 @@ module.exports = {
       name : 'three',
       slots : [
         {
-          type : 'crate',
+          type : 'prinny',
           position : {
             x : 30,
             y : 20
           }
         },
         {
-          type : 'crate',
+          type : 'prinny',
           position : {
             x : 40,
             y : 20
           }
         },
         {
-          type : 'torch',
+          type : 'prinny',
           position : {
             x : 100,
             y : 10
@@ -90,21 +90,21 @@ module.exports = {
       name : 'four',
       slots : [
         {
-          type : 'crate',
+          type : 'prinny',
           position : {
             x : 30,
             y : 20
           }
         },
         {
-          type : 'crate',
+          type : 'prinny',
           position : {
             x : 40,
             y : 20
           }
         },
         {
-          type : 'torch',
+          type : 'prinny',
           position : {
             x : 100,
             y : 10
@@ -122,16 +122,42 @@ module.exports = {
     'four' : [41, 200],
   },
   slots : {
-    crate : [
-      'destructible',
-      'collider',
-      'sprite',
-      'position'
-    ],
-    torch : [
-      'sprite',
-      'position',
-      'light'
-    ],
-  }
+    crate : {
+      components : [
+        'destructible',
+        'collider',
+        'sprite',
+        'scale'
+      ],
+      data : {
+
+      }
+    },
+    torch : {
+      components : [
+        'destructible',
+        'collider',
+        'sprite',
+        'scale'
+      ],
+      data : {
+
+      }
+    },
+    prinny : {
+      components : [
+        
+      ],
+      data : {
+        sprite : [0, 20, 20],
+        atlas : [0, 'prinny'],
+        animations : [0, {
+          target: 'prinny',
+          animations: ['dancing'],
+          defaultAnimation: 'dancing'
+        }]
+      }
+    }
+  },
+  resolution : 30
 };

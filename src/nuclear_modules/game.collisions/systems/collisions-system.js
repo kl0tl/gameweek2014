@@ -1,12 +1,14 @@
 'use strict';
 
 module.exports = function collisionsSystem(e, components, context) {
-  var position, velocity, collider, rigidbody, colliderX, colliderY, others, length, i, other, otherPosition, otherCollider, otherRigidbody, otherX, otherY, dx, dy, overlapX, overlapY, tx, ty, inverseMassSum, inverseMass;
+  var position, velocity, collider, rigidbody, sqrVelocityMagnitude, colliderX, colliderY, others, length, i, other, otherPosition, otherCollider, otherRigidbody, otherX, otherY, dx, dy, overlapX, overlapY, tx, ty, inverseMassSum, inverseMass;
 
   position = components.position;
   velocity = components.velocity;
   collider = components.collider;
   rigidbody = components.rigidbody;
+
+  sqrVelocityMagnitude = velocity.x * velocity.x + velocity.y * velocity.y;
 
   inverseMass = rigidbody.inverseMass;
 
@@ -34,13 +36,13 @@ module.exports = function collisionsSystem(e, components, context) {
     overlapX = Math.abs(dx) - (collider.halfWidth + otherCollider.halfWidth);
     overlapY = Math.abs(dy) - (collider.halfHeight + otherCollider.halfHeight);
 
-    if (overlapX < -1 && overlapY < -1) {
+    if (overlapX < -0.1 && overlapY < -0.1) {
       tx = Math.abs(velocity.x) / overlapX || 0;
       ty = Math.abs(velocity.y) / overlapY || 0;
 
       inverseMassSum = inverseMass + otherRigidbody.inverseMass;
 
-      if (tx < ty) {
+      if (tx < ty || (sqrVelocityMagnitude < 0.1 && overlapX > overlapY)) {
         if (dx < 0) {
           position.x -= overlapX / (inverseMassSum / inverseMass || 0);
           otherPosition.x += overlapX / (inverseMassSum / otherRigidbody.inverseMass || 0);
@@ -48,18 +50,29 @@ module.exports = function collisionsSystem(e, components, context) {
           position.x += overlapX / (inverseMassSum / inverseMass || 0);
           otherPosition.x -= overlapX / (inverseMassSum / otherRigidbody.inverseMass || 0);
         }
-      } else if (ty < tx) {
+      }
+
+      if (ty < tx || (sqrVelocityMagnitude < 0.1 && overlapY > overlapX)) {
         if (dy < 0) {
           position.y -= overlapY / (inverseMassSum / inverseMass || 0);
           otherPosition.y += overlapY  / (inverseMassSum / otherRigidbody.inverseMass || 0);
         } else if (dy > 0) {
-          position.y += overlapY  / (inverseMassSum / inverseMass || 0);
-          otherPosition.y -= overlapY  / (inverseMassSum / otherRigidbody.inverseMass || 0);
+          position.y += overlapY / (inverseMassSum / inverseMass || 0);
+          otherPosition.y -= overlapY / (inverseMassSum / otherRigidbody.inverseMass || 0);
         }
       }
 
       colliderX = position.x + collider.offsetX;
       colliderY = position.y + collider.offsetY;
+
+      if (other in collider._currentCollisions) {
+        collider.triggerCollisionStay(other);
+      } else {
+        collider.triggerCollisionEnter(other);
+      }
+    } else if (other in collider._currentCollisions) {
+      if (sqrVelocityMagnitude > 1) collider.triggerCollisionExit(other);
+      else collider.triggerCollisionStay(other);
     }
   }
 };

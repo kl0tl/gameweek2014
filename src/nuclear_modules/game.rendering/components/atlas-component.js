@@ -3,7 +3,7 @@
 var path, loader;
 
 path = require('path');
-loader = require('game').loader;
+loader = require('assets-loader');
 
 function AtlasComponent(key) {
   this.source = loader.get(path.join('atlases', key + '.atlas.png'));
