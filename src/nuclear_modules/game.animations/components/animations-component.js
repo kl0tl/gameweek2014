@@ -51,10 +51,6 @@ AnimationsComponent.prototype.play = function animationComponentPlay(key) {
 
   this.timeElapsedSinceLastFrame = animation.interval;
 
-  if (animation.next) {
-    this._queue.push.apply(this._queue, animation.next);
-  }
-
   return true;
 };
 
