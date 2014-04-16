@@ -8,11 +8,7 @@ context.buffers = [];
 context.dests = [
   document.getElementById('main').getContext('2d'),
 
-  document.getElementById('lights-buffer').getContext('2d'),
-
   document.getElementById('ambient-buffer').getContext('2d'),
-
-  document.getElementById('lights-buffer').getContext('2d'),
 
   document.getElementById('top-buffer').getContext('2d'),
   document.getElementById('dynamic-buffer').getContext('2d'),

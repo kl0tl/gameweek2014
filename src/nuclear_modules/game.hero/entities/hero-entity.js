@@ -11,7 +11,7 @@ module.exports = function heroEntity(hero, options) {
     scale: 4,
     width: 64,
     height: 120,
-    dest : 5,
+    dest : 3,
     dynamic : true
   });
 

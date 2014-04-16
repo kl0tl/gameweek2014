@@ -13,7 +13,8 @@ module.exports = function lightEntity(e, options) {
   sprite = nuclear.component('sprite').add(e, {
     width: options.radius * 2,
     height: options.radius * 2,
-    dest: 1
+    dest: 1,
+    blending: 'destination-out'
   });
 
   gradient = sprite.context.createRadialGradient(
@@ -25,10 +26,19 @@ module.exports = function lightEntity(e, options) {
     options.radius
   );
 
+  /*
   gradient.addColorStop(0, 'rgba(255, 255, 255, 0.5)');
   gradient.addColorStop(0.05, 'rgba(' + options.color.join(', ') + ', 0.5)');
   gradient.addColorStop(0.1, 'rgba(' + options.color.join(', ') + ', 0.33)');
   gradient.addColorStop(0.25, 'rgba(' + options.color.join(', ') + ', 0.2)');
+  gradient.addColorStop(0.5, 'rgba(' + options.color.join(', ') + ', 0.1)');
+  gradient.addColorStop(0.75, 'rgba(' + options.color.join(', ') + ', 0.05)');
+  gradient.addColorStop(0.9, 'rgba(' + options.color.join(', ') + ', 0)');*/
+
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 0.5)');
+  //gradient.addColorStop(0.05, 'rgba(' + options.color.join(', ') + ', 0.5)');
+  //gradient.addColorStop(0.1, 'rgba(' + options.color.join(', ') + ', 0.33)');
+  //gradient.addColorStop(0.25, 'rgba(' + options.color.join(', ') + ', 0.2)');
   gradient.addColorStop(0.5, 'rgba(' + options.color.join(', ') + ', 0.1)');
   gradient.addColorStop(0.75, 'rgba(' + options.color.join(', ') + ', 0.05)');
   gradient.addColorStop(0.9, 'rgba(' + options.color.join(', ') + ', 0)');

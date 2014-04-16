@@ -57,13 +57,11 @@ loader.load([
     require('./systems-context');
 
     //require('./scenes/collisions-scene');
-    require('./scenes/hero-scene');
-    //require('./scenes/roguemap-scene');
+    //require('./scenes/hero-scene');
+    require('./scenes/roguemap-scene');
     require('./scenes/lighting-scene');
 
-    nuclear.system('renderer').entities.sort(function(a, b){
-        return b - a;
-    });
+
 
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);

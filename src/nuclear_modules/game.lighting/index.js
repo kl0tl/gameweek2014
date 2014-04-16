@@ -10,7 +10,7 @@ module.exports = nuclear.module('game.lighting', [])
     return new OccluderComponent(shape);
   })
   .component('light', function (e, options) {
-    return new LightComponent(options);
+    return new LightComponent(e, options);
   })
   .entity('light', require('./entities/light-entity'))
   .system('shadowing', [
