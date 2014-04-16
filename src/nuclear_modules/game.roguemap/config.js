@@ -39,7 +39,7 @@ module.exports = {
       components : [
         'collider',
         'velocity',
-        'rigidbody'
+        'rigidbody',
       ],
       data : {
         sprite : {

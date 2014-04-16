@@ -25,7 +25,7 @@ module.exports = function debugCollidersSystem(e, components, context) {
   // dest.lineTo(x - w, y + h);
 
   // dest.closePath();
-  dest.strokeRect(x-w-context.cameraPosition.x, y-h-context.cameraPosition.y, w*2, h*2);
+  //dest.strokeRect(x-w-context.cameraPosition.x, y-h-context.cameraPosition.y, w*2, h*2);
 
   //dest.stroke();
 

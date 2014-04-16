@@ -144,6 +144,7 @@ roguemap.component('slot', function(entity, data){
     height : data.data.sprite.height,
     dynamic : data.data.sprite.dynamic,
   });
+  console.log(entity);
   for(i = 0; i < data.components.length; i++){
     component = data.components[i];
     configs = data.data[component];

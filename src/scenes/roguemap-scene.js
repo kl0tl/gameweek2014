@@ -21,6 +21,12 @@ var position = {
 
 hero = nuclear.entity('hero').create(position);
 console.log(hero);
+console.log(nuclear.component('states').add(hero-1, hero, {
+    idle : {
+                run : 'idle-run'
+            }
+}, 'idle'));
+
 camera = context.camera = nuclear.entity('camera').create({
     target : hero,
     x : 0,
