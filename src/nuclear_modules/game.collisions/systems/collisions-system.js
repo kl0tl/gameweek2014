@@ -27,6 +27,7 @@ module.exports = function collisionsSystem(e, components, context) {
     otherCollider = nuclear.component('collider').of(other);
     otherRigidbody = nuclear.component('rigidbody').of(other);
 
+    if(otherCollider.mask && otherCollider.mask === collider.mask) continue;
     otherX = otherPosition.x + otherCollider.offsetX;
     otherY = otherPosition.y + otherCollider.offsetY;
 

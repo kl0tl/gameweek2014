@@ -21,6 +21,8 @@ function SpriteComponent(e, options) {
 
   this.index = options.index || 0;
 
+  this.dynamic = Boolean(options.dynamic);
+
   this.relativeCamera = Boolean(options.relativeCamera);
 
   this.dest = options.dest || 0;

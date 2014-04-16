@@ -11,7 +11,8 @@ module.exports = function heroEntity(hero, options) {
     scale: 4,
     width: 64,
     height: 120,
-    dest : 4
+    dest : 5,
+    dynamic : true
   });
 
   console.log('new hero entity', hero);
@@ -29,7 +30,8 @@ module.exports = function heroEntity(hero, options) {
 
   nuclear.component('collider').add(hero, {
     width: 64,
-    height: 120
+    height: 60,
+    offsetY : 20
   });
 
   nuclear.component('rigidbody').add(hero, {

@@ -63,13 +63,24 @@ roguemap.entity('room', function(entity, data){
 });
 
 roguemap.entity('map', function(entity, data){
-  var digger = nuclear.component('map from roguemap').add(entity, data.mapData).map;
+  var map = nuclear.component('map from roguemap').add(entity, data.mapData);
+  var digger = map.map;
   console.log(digger);
   var rooms = [];
   for(var i = 0; i < digger._rooms.length; i++){
     var room = digger._rooms[i];
     rooms.push(roguemap.entity('room').create(room));
-    console.log(room);
+    if(i === 0){
+      map.start = {
+        x : room._x1+1,
+        y : room._y1+1
+      };
+    } else if(i === digger._rooms.length-1){
+      map.end = {
+        x : room._x1+1,
+        y : room._y1+1
+      };
+    }
   }
 
   nuclear.component('rooms_manager from roguemap').add(entity, rooms);
@@ -95,23 +106,27 @@ roguemap.entity('tile', function(entity, data){
     atlas = nuclear.component('atlas from game.rendering').add(entity, bundleName);
     sprite = nuclear.component('sprite from game.rendering').add(entity, {
         dest : frame.dest,
-        anchorX : 0,
-        anchorY : 0,
+        anchorX : frame.aX || 0,
+        anchorY : frame.aY || 0,
         frame : index,
-        stretch : true,
+        scale : 4,
         width : resolution*w,
-        height : resolution*h
+        height : resolution*h,
+        dynamic : true
     });
     nuclear.system('renderer from game.rendering').once(entity);
     nuclear.component('sprite').remove(entity);
-    if(data.type !== 'ground'){
+    if(frame.collider){
       nuclear.component('velocity').add(entity);
       nuclear.component('rigidbody').add(entity, {
         mass : Infinity
       });
       nuclear.component('collider').add(entity, {
-        width : resolution*w,
-        height : resolution*h
+        width : frame.collider.w,
+        height : frame.collider.h,
+        offsetX : frame.collider.x,
+        offsetY : frame.collider.y,
+        mask : 'wall'
       });
       nuclear.component('camera-sensor').add(entity, ['collider', 'rigidbody', 'velocity']);
     }
@@ -120,6 +135,15 @@ roguemap.entity('tile', function(entity, data){
 
 roguemap.component('slot', function(entity, data){
   var i, component, configs;
+  nuclear.component('atlas').add(entity, data.data.atlas);
+  nuclear.component('sprite').add(entity, {
+    dest : data.data.sprite.dest,
+    frame : data.data.sprite.frame[Math.round(Math.random()*(data.data.sprite.frame.length-1))],
+    scale : data.data.sprite.scale,
+    width : data.data.sprite.width,
+    height : data.data.sprite.height,
+    dynamic : data.data.sprite.dynamic,
+  });
   for(i = 0; i < data.components.length; i++){
     component = data.components[i];
     configs = data.data[component];
@@ -133,7 +157,7 @@ roguemap.component('slot', function(entity, data){
 
 roguemap.entity('slot', function(entity, data){
   var slots = roguemap.config('slots'),
-      slot  = slots[data.type],
+      slot  = slots[data.type[Math.round(Math.random()*(data.type.length-1))]],
       resolution = roguemap.config('resolution');
 
   slot = {

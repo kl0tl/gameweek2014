@@ -26,6 +26,13 @@ nuclear.events.on('system:before:renderer from game.rendering', function onBefor
   ambient2dContext.restore();
 
   dynamics2dContext.clearRect(0, 0, dynamics2dContext.canvas.width, dynamics2dContext.canvas.height);
+
+  nuclear.system('renderer').sort(function (a, b){
+    a = nuclear.component('sprite').of(a).index;
+    b = nuclear.component('sprite').of(b).index;
+
+    return a - b;
+  });
 });
 
 module.exports = function rendererSystem(e, components, context) {
@@ -33,6 +40,8 @@ module.exports = function rendererSystem(e, components, context) {
 
   sprite = components.sprite;
   position = components.position;
+
+  if(sprite.dynamic) sprite.index = position.y;
 
   if(sprite.relativeCamera){
     camera = context.cameraPosition || {};

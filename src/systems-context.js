@@ -19,7 +19,9 @@ context.dests = [
   document.getElementById('bottom-buffer').getContext('2d'),
 ];
 
-for(var i = 1; i < context.dests.length; i++) {
+for(var i = 1; i < context.dests.length; i++){
+  context.dests[i].imageSmoothingEnabled = false;
+
   var entity = nuclear.entity.create();
 
   nuclear.component('position').add(entity, 0, 0);
@@ -28,7 +30,7 @@ for(var i = 1; i < context.dests.length; i++) {
     buffer : context.dests[i].canvas,
     anchorX: 0,
     anchorY: 0,
-    index : i,
+    index : 100000-i,
     relativeCamera : true
   });
 

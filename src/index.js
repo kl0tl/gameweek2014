@@ -31,7 +31,10 @@ loader.load([
     'animations/hero/hero@walkright.json',
 
     'atlases/stone.atlas.png',
-    'atlases/stone.atlas.json'
+    'atlases/stone.atlas.json',
+
+    'atlases/props.atlas.png',
+    'atlases/props.atlas.json'
   ])
   .error(function (oO) { throw oO; })
   .done(function () {

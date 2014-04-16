@@ -5,7 +5,6 @@ require('./lib/rot');
 ROT = window.ROT;
 
 function Map(config){
-  console.log('NEW MAP');
   config.progress = config.progress || function(){};
   var data = [],
       height = config.height,
