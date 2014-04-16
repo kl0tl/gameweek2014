@@ -1,6 +1,6 @@
 'use strict';
 
-nuclear.events.on('system:before:shadowing from game.lighting', function () {
+nuclear.events.on('system:before:shadowing from game.lighting', function () {/*
   var lightComponent, context, i, e;
 
   lightComponent = nuclear.component('light');
@@ -9,9 +9,9 @@ nuclear.events.on('system:before:shadowing from game.lighting', function () {
   for (i = 0; (e = context.lights[i]); i += 1) {
     lightComponent.of(e).shape.length = 0;
   }
-});
+*/});
 
-module.exports = function shadowingSystem(e, components, context) {
+module.exports = function shadowingSystem(/*e, components, context*/) {/*
   var lightComponent, positionComponent, dest, lights, position, shape, i, lightEntity, lightPosition, light, j, length;
   var t1, t2, rpx, rpy, rdx, rdy, spx, spy, sdx, sdy, im;
 

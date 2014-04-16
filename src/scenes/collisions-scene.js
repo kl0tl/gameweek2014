@@ -14,11 +14,6 @@ nuclear.component('sprite').add(prinny, {
   width: 74,
   height: 121
 });
-nuclear.component('animations').add(prinny, {
-  target: 'prinny',
-  animations: ['dancing'],
-  defaultAnimation: 'dancing'
-});
 
 nuclear.component('animations').add(prinny, 'dancing', [
   'dancing'

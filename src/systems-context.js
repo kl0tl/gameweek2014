@@ -7,12 +7,19 @@ context.buffers = [];
 
 context.dests = [
   document.getElementById('main').getContext('2d'),
+
+  document.getElementById('lights-buffer').getContext('2d'),
+
+  document.getElementById('ambient-buffer').getContext('2d'),
+
+  document.getElementById('lights-buffer').getContext('2d'),
+
   document.getElementById('top-buffer').getContext('2d'),
   document.getElementById('dynamic-buffer').getContext('2d'),
   document.getElementById('bottom-buffer').getContext('2d'),
 ];
 
-for(var i = 1; i < context.dests.length; i++){
+for(var i = 1; i < context.dests.length; i++) {
   var entity = nuclear.entity.create();
 
   nuclear.component('position').add(entity, 0, 0);
