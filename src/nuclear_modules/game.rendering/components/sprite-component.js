@@ -17,10 +17,13 @@ function SpriteComponent(e, options) {
     this.buffer.width = options.width;
     this.buffer.height = options.height;
   }
-  this.index = options.index || 0;
-  this.dynamic = Boolean(options.dynamic);
-  this.relativeCamera = Boolean(options.relativeCamera);
   this.context = this.buffer.getContext('2d');
+
+  this.index = options.index || 0;
+
+  this.dynamic = Boolean(options.dynamic);
+
+  this.relativeCamera = Boolean(options.relativeCamera);
 
   this.dest = options.dest || 0;
 
@@ -34,6 +37,11 @@ function SpriteComponent(e, options) {
   if ('anchorY' in options) this.anchorY = options.anchorY;
   else this.anchorY = 0.5;
 
+  if ('alpha' in options) this.alpha = options.alpha;
+  else this.alpha = 1;
+
+  this.blending = options.blending || '';
+
   this.context.imageSmoothingEnabled = false;
 
   if (atlas) {
@@ -43,7 +51,6 @@ function SpriteComponent(e, options) {
     scaledHeight = source.frame.h * this.scale;
 
     this.redrawBuffer(atlas.source, source.frame.x, source.frame.y, source.frame.w, source.frame.h);
-    //this.context.drawImage(atlas.source, source.frame.x, source.frame.y, source.frame.w, source.frame.h, 0.5 * (options.width - scaledWidth), 0.5 * (options.height - scaledHeight), scaledWidth, scaledHeight);
   }
 }
 

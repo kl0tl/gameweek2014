@@ -10,14 +10,15 @@ module.exports = nuclear.module('game.lighting', [])
     return new OccluderComponent(shape);
   })
   .component('light', function (e, options) {
-    return new LightComponent(options);
+    return new LightComponent(e, options);
   })
+  .entity('light', require('./entities/light-entity'))
   .system('shadowing', [
     'occluder from game.lighting'
   ], require('./systems/shadowing-system'))
   .system('lighting', [
     'light from game.lighting',
-    'position from game.transform'
+    'sprite from game.rendering'
   ], require('./systems/lighting-system'))
   .system('debug-occluders', [
     'occluder from game.lighting',

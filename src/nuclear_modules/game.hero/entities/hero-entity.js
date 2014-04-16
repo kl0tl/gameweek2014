@@ -1,10 +1,9 @@
 'use strict';
 
-module.exports = function heroEntity(hero, data) {
-    console.log(data);
+module.exports = function heroEntity(hero, options) {
   var animations, velocity;
 
-  nuclear.component('position').add(hero, data.x, data.y);
+  nuclear.component('position').add(hero, options.x, options.y);
 
   nuclear.component('atlas').add(hero, 'hero');
 
@@ -12,9 +11,11 @@ module.exports = function heroEntity(hero, data) {
     scale: 4,
     width: 64,
     height: 120,
-    dest : 2,
+    dest : 3,
     dynamic : true
   });
+
+  console.log('new hero entity', hero);
 
   animations = nuclear.component('animations').add(hero, 'idleface', [
     'idleback',

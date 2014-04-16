@@ -4,7 +4,7 @@ function RigidbodyComponent(options) {
   this._mass = options.mass || 1;
 
   this.inverseMass = 1 / this._mass;
-  this.friction = options.friction || 0;
+  this.friction = options.friction || 0;
 }
 
 RigidbodyComponent.prototype.mass = function rigidbodyComponentMass(value) {

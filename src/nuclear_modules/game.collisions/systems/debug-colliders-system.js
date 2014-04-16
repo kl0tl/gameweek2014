@@ -13,21 +13,16 @@ module.exports = function debugCollidersSystem(e, components, context) {
   w = collider.halfWidth;
   h = collider.halfHeight;
 
+  if (context.cameraPosition) {
+    x -= context.cameraPosition.x;
+    y -= context.cameraPosition.y;
+  }
+
   dest.save();
 
   dest.strokeStyle = '#f0f';
 
-  // dest.beginPath();
-
-  // dest.moveTo(x - w, y - h);
-  // dest.lineTo(x + w, y - h);
-  // dest.lineTo(x + w, y + h);
-  // dest.lineTo(x - w, y + h);
-
-  // dest.closePath();
-  //dest.strokeRect(x-w-context.cameraPosition.x, y-h-context.cameraPosition.y, w*2, h*2);
-
-  //dest.stroke();
+  dest.strokeRect(x - w, y - h, w * 2, h * 2);
 
   dest.restore();
 };

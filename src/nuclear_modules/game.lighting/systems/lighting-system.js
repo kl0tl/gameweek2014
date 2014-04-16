@@ -1,5 +1,5 @@
-'use strict';
+  'use strict';
 
-module.exports = function lightingSystem(/*e, components, context*/) {/*
-
-*/};
+module.exports = function lightingSystem(e, components) {
+  components.sprite.alpha = components.light.intensity;
+};
