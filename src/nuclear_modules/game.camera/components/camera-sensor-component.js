@@ -1,40 +1,59 @@
 'use strict';
+var toAdd, toDelete;
+
+toAdd = [];
+toDelete = [];
+// nuclear.events.on('system:after_running', function () {
+//   var i, u, component, list, name;
+
+//   for(i = 0; i < toAdd.length; i++){
+//     component = toAdd[i];
+//     list = component.list;
+
+//     for(u = 0; u < list.length; u++){
+//       name = list[u];
+
+//       nuclear.component(name).enable(component.entity);
+//     }
+//   }
+
+//   for(i = 0; i < toDelete.length; i++){
+//     component = toDelete[i];
+//     list = component.list;
+
+//     for(u = 0; u < list.length; u++){
+//       name = list[u];
+
+//       nuclear.component(name).disable(component.entity);
+//     }
+//   }
+
+//   toAdd.length = 0;
+//   toDelete.length = 0;
+// });
 
 function CameraSensorComponent(entity, list) {
   this.list = list;
   this.entity = entity;
   var collider = nuclear.component('collider').of(entity);
   if(collider){
-    collider.onCollisionEnter(disableComponents.bind(this));
-    collider.onCollisionExit(enableComponents.bind(this));
+    collider.onCollisionEnter(enableComponents.bind(this));
+    collider.onCollisionExit(disableComponents.bind(this));
   }
 }
 
 
 function enableComponents(other){
-  console.log(other);
-  var i, component;
-
+  /*jshint validthis:true*/
   if(nuclear.component('camera').in(other)){
-    /*jshint validthis:true*/
-    for(i = 0; i < this.list.length; i++){
-      component = this.list[i];
-
-      nuclear.component(component).enable(this.entity);
-    }
+    toAdd.push(this);
   }
 }
 
 function disableComponents(other){
-  var i, component;
-
+  /*jshint validthis:true*/
   if(nuclear.component('camera').in(other)){
-    /*jshint validthis:true*/
-    for(i = 0; i < this.list.length; i++){
-      component = this.list[i];
-
-      nuclear.component(component).disable(this.entity);
-    }
+    toDelete.push(this);
   }
 }
 

@@ -69,6 +69,7 @@ roguemap.entity('map', function(entity, data){
   for(var i = 0; i < digger._rooms.length; i++){
     var room = digger._rooms[i];
     rooms.push(roguemap.entity('room').create(room));
+    console.log(room);
   }
 
   nuclear.component('rooms_manager from roguemap').add(entity, rooms);
@@ -96,12 +97,11 @@ roguemap.entity('tile', function(entity, data){
         dest : frame.dest,
         anchorX : 0,
         anchorY : 0,
-        width : resolution*w,
-        height : resolution*h,
         frame : index,
-        stretch : true
+        stretch : true,
+        width : resolution*w,
+        height : resolution*h
     });
-    //sprite.redrawBuffer(atlas.source);
     nuclear.system('renderer from game.rendering').once(entity);
     nuclear.component('sprite').remove(entity);
     if(data.type !== 'ground'){
@@ -113,7 +113,7 @@ roguemap.entity('tile', function(entity, data){
         width : resolution*w,
         height : resolution*h
       });
-      //nuclear.component('camera-sensor').add(entity, ['collider', 'rigidbody', 'velocity']);
+      nuclear.component('camera-sensor').add(entity, ['collider', 'rigidbody', 'velocity']);
     }
   }
 });

@@ -73,7 +73,7 @@ module.exports = function collisionsSystem(e, components, context) {
         collider.triggerCollisionEnter(other);
       }
     } else if (other in collider._currentCollisions) {
-      if (sqrVelocityMagnitude > 1) collider.triggerCollisionExit(other);
+      if (sqrVelocityMagnitude > 1 || !otherRigidbody) collider.triggerCollisionExit(other);
       else collider.triggerCollisionStay(other);
     }
   }

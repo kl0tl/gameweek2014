@@ -13,10 +13,12 @@ camera = context.camera = nuclear.entity('camera').create({
     y : 0,
     collider : {
         width : 500,
-        height : 500
+        height : 500,
+        offsetX : 250,
+        offsetY : 250
     }
 });
-
+console.log(hero);
 context.cameraPosition = nuclear.component('position').of(camera);
 
 nuclear.system.priority('kinematic', -3);

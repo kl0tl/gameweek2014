@@ -9,4 +9,8 @@ var map = nuclear.component('map').of(nuclear.entity('map').create({
   }
 }));
 
+for(var i = 0; i < nuclear.system.context('buffers').length; i++){
+    var buffer = nuclear.system.context('buffers')[i];
+    nuclear.component('sprite').of(buffer).redrawBuffer(nuclear.system.context('dests')[i+1].canvas);
+}
 console.log(map);

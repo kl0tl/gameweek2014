@@ -44,6 +44,10 @@ loader.load([
     require('./scenes/hero-scene');
     require('./scenes/roguemap-scene');
 
+    nuclear.system('renderer').entities.sort(function(a, b){
+        console.log('sort', a, b);
+        return b - a;
+    });
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);
       nuclear.system.run();

@@ -10,7 +10,8 @@ module.exports = function heroEntity(hero, x, y) {
   nuclear.component('sprite').add(hero, {
     scale: 4,
     width: 64,
-    height: 120
+    height: 120,
+    dest : 2
   });
 
   animations = nuclear.component('animations').add(hero, 'idleface', [
