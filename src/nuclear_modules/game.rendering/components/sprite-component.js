@@ -18,6 +18,7 @@ function SpriteComponent(e, options) {
     this.buffer.height = options.height;
   }
   this.index = options.index || 0;
+  this.dynamic = Boolean(options.dynamic);
   this.relativeCamera = Boolean(options.relativeCamera);
   this.context = this.buffer.getContext('2d');
 

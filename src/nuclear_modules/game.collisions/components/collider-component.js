@@ -5,7 +5,7 @@ function ColliderComponent(e, options) {
 
   this.offsetX = options.offsetX || 0;
   this.offsetY = options.offsetY || 0;
-
+  this.mask = options.mask;
   this.halfWidth = options.width * 0.5;
   this.halfHeight = options.height * 0.5;
 

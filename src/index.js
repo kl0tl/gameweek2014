@@ -30,7 +30,10 @@ loader.load([
     'animations/hero/hero@walkright.json',
 
     'atlases/stone.atlas.png',
-    'atlases/stone.atlas.json'
+    'atlases/stone.atlas.json',
+
+    'atlases/props.atlas.png',
+    'atlases/props.atlas.json'
   ])
   .error(function (oO) { throw oO; })
   .done(function () {
@@ -41,13 +44,9 @@ loader.load([
     require('./systems-context');
 
     //require('./scenes/collisions-scene');
-    require('./scenes/hero-scene');
     require('./scenes/roguemap-scene');
+    //require('./scenes/hero-scene');
 
-    nuclear.system('renderer').entities.sort(function(a, b){
-        console.log('sort', a, b);
-        return b - a;
-    });
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);
       nuclear.system.run();
