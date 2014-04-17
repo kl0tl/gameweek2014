@@ -9,7 +9,6 @@ module.exports = function lightEntity(e, options) {
     nuclear.component('position-constraint').add(e, options);
   }
 
-  light = nuclear.component('light').add(e, options);
   sprite = nuclear.component('sprite').add(e, {
     width: options.radius * 2,
     height: options.radius * 2,
@@ -50,4 +49,11 @@ module.exports = function lightEntity(e, options) {
   sprite.context.closePath();
 
   sprite.context.fill();
+
+  if (options.dynamic) {
+    light = nuclear.component('dynamic-light').add(e, options);
+    nuclear.component('sprite').disable(e);
+  } else {
+    light = nuclear.component('light').add(e, options);
+  }
 };

@@ -1,0 +1,203 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body><script type="text/javascript">
+'use strict';
+
+var mainBuffer, mainBufferContext, mouse, occluders, i, x, y;
+
+mainBuffer = document.createElement('canvas');
+mainBufferContext = mainBuffer.getContext('2d');
+
+mainBuffer.width = 500;
+mainBuffer.height = 500;
+
+mouse = {x: 0, y: 0};
+
+mainBuffer.addEventListener('mousemove', function (e) {
+  mouse.x = e.clientX - mainBuffer.offsetLeft;
+  mouse.y = e.clientY - mainBuffer.offsetTop;
+});
+
+document.body.appendChild(mainBuffer);
+
+occluders = [{
+  x: 0,
+  y: 0,
+  vertices: [
+    0, 0,
+    mainBuffer.width, 0,
+    mainBuffer.width, mainBuffer.height,
+    -mainBuffer.width, mainBuffer.height
+  ]
+}];
+
+for (i = 0; i < 10; i += 1) {
+  x = Math.random() * mainBuffer.width;
+  y = Math.random() * mainBuffer.height;
+
+  occluders.push({
+    x: x,
+    y: y,
+    vertices: [
+      -45,//(Math.random() * 50 + 25),
+      -22.5,//(Math.random() * 50 + 25),
+      +45,//(Math.random() * 50 + 25),
+      -22.5,//(Math.random() * 50 + 25),
+      +45,//(Math.random() * 50 + 25),
+      +22.5,//(Math.random() * 50 + 25),
+      -45,//(Math.random() * 50 + 25),
+      +22.5//(Math.random() * 50 + 25)
+    ]
+  });
+}
+
+requestAnimationFrame(function loop() {
+  var canvas, ctx, angle, angles, polygon, radius, sqrRadius, i, occluder, vertices, j, mouseInsideOccluder, vertex, rsx, rsy, rdx, rdy, k, other, l, vsx, vsy, vdx, vdy, t2, t1, closestT1, closestX, closestY, closestRsx, closestRsy, vx, vy, ix, iy, rim, rnx, rny, dx, dy, sqrm, im;
+
+  requestAnimationFrame(loop);
+
+  canvas = mainBuffer;
+  ctx = mainBufferContext;
+
+  angles = [];
+  polygon = [];
+
+  radius = 2500;
+  sqrRadius = radius * radius;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.strokeStyle = 'black';
+  ctx.fillStyle = 'red';
+
+  for (i = 0; (occluder = occluders[i]); i += 1) {
+    vertices = occluder.vertices;
+
+    mouseInsideOccluder = true;
+
+    rsx = occluder.x - mouse.x;
+    rsy = occluder.y - mouse.y;
+
+    ctx.beginPath();
+
+    ctx.moveTo(occluder.x + vertices[0], occluder.y + vertices[1]);
+
+    for (j = 0; j < vertices.length; j += 2) {
+      ctx.lineTo(occluder.x + vertices[j], occluder.y + vertices[j + 1]);
+
+      if (0 > (vertices[(j + 2) % vertices.length] - vertices[j]) * (rsy - vertices[j + 1]) -
+        (vertices[(j + 3) % vertices.length] - vertices[j + 1]) * (rsx - vertices[j])) {
+        mouseInsideOccluder = false;
+      }
+    }
+
+    ctx.closePath();
+
+    ctx.stroke();
+
+    if (i > 0 && mouseInsideOccluder) {
+      ctx.fill();
+    }
+  }
+
+  ctx.beginPath();
+  ctx.arc(mouse.x, mouse.y, 5, 0, Math.PI * 2);
+  ctx.closePath();
+
+  ctx.fill();
+
+  rsx = mouse.x;
+  rsy = mouse.y;
+
+  for (i = 0; (occluder = occluders[i]); i += 1) {
+    vertices = occluder.vertices;
+
+    for (j = 0; j < vertices.length; j += 2) {
+      angle = Math.atan2(occluder.y + vertices[j + 1] - rsy, occluder.x + vertices[j] - rsx);
+      angles.push(angle - 0.00001, angle, angle + 0.00001);
+    }
+  }
+
+  for (i = 0; i < angles.length; i += 1) {
+    angle = angles[i];
+
+    rdx = Math.cos(angle) * radius;
+    rdy = Math.sin(angle) * radius;
+
+    closestT1 = Infinity;
+
+    for (k = 0; (occluder = occluders[k]); k += 1) {
+      vertices = occluder.vertices;
+
+      for (l = 0; l < vertices.length; l += 2) {
+        vsx = occluder.x + vertices[l];
+        vsy = occluder.y + vertices[(l + 1) % vertices.length];
+
+        vdx = occluder.x + vertices[(l + 2) % vertices.length] - vsx;
+        vdy = occluder.y + vertices[(l + 3) % vertices.length] - vsy;
+
+        t2 = (rdx * (vsy - rsy) + rdy * (rsx - vsx)) / (vdx * rdy - vdy * rdx);
+        t1 = (vsx + vdx * t2 - rsx) / rdx;
+
+        if (t1 < 0) continue;
+        if (t2 < 0 || t2 > 1) continue;
+
+        if (t1 > closestT1) continue;
+
+        closestT1 = t1;
+
+        closestX = vsx + vdx * t2;
+        closestY = vsy + vdy * t2;
+      }
+    }
+
+    dx = closestX - rsx;
+    dy = closestY - rsy;
+
+    sqrm = dx * dx + dy * dy;
+
+    if (sqrm > sqrRadius) {
+      closestX = rsx + rdx;
+      closestY = rsy + rdy;
+    }
+
+    polygon.push({x: closestX, y: closestY, angle: angle});
+
+    //*
+    ctx.strokeStyle = 'red';
+    ctx.beginPath();
+    ctx.moveTo(rsx, rsy);
+    ctx.lineTo(closestX, closestY);
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.strokeStyle = 'green';
+    ctx.beginPath();
+    ctx.moveTo(rsx + (closestX - rsx) * 0.5, rsy + (closestY - rsy) * 0.5);
+    ctx.lineTo(rsx + (closestX - rsx) * 0.5 + rnx * 15, rsy + (closestY - rsy) * 0.5 + rny * 15);
+    ctx.closePath();
+    ctx.stroke();//*/
+  }//*/
+
+  //*
+  polygon.sort(function (a, b) {
+    return a.angle - b.angle;
+  });
+
+  ctx.globalAlpha = 0.5;
+
+  ctx.beginPath();
+  for (i = 0; i < polygon.length; i += 1) {
+    ctx.lineTo(polygon[i].x, polygon[i].y);
+  }
+  ctx.closePath();
+
+  ctx.fill();
+
+  ctx.globalAlpha = 1;
+});
+
+</script></body>
+</html>
