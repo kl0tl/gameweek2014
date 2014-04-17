@@ -33,7 +33,6 @@ module.exports = {
       mapPositionY = Math.round(position.y/resolution);
 
       components.path.to(playerX, playerY).from(mapPositionX, mapPositionY);
-      components.attack.count--;
       
       if(components.path.nodes.length <= components.path.min){
         states.state('fight');

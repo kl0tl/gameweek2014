@@ -31,7 +31,8 @@ module.exports = function heroEntity(hero, options) {
   nuclear.component('collider').add(hero, {
     width: 64,
     height: 60,
-    offsetY : 20
+    offsetY : 20,
+    mask : 'hero'
   });
 
   nuclear.component('rigidbody').add(hero, {
@@ -54,7 +55,7 @@ module.exports = function heroEntity(hero, options) {
       }
     },
     UP: function onUpHeroHandler(e, input) {
-      velocity.y -= 5 * input;
+      velocity.y -= 2.5 * input;
       if (input){
         animations.play('walkback');
         direction.x = 0;
@@ -63,7 +64,7 @@ module.exports = function heroEntity(hero, options) {
       else if (animations.currentAnimation === 'walkback') animations.play('idleback');
     },
     DOWN: function onDownHeroHandler(e, input) {
-      velocity.y += 5 * input;
+      velocity.y += 2.5 * input;
       if (input){
         animations.play('walkface');
         direction.x = 0;
@@ -72,7 +73,7 @@ module.exports = function heroEntity(hero, options) {
       else if (animations.currentAnimation === 'walkface') animations.play('idleface');
     },
     LEFT: function onLeftHeroHandler(e, input) {
-      velocity.x -= 5 * input;
+      velocity.x -= 2.5 * input;
       if (input) {
         animations.play('walkleft');
         direction.x = -1;
@@ -81,7 +82,7 @@ module.exports = function heroEntity(hero, options) {
       else if (animations.currentAnimation === 'walkleft') animations.play('idleleft');
     },
     RIGHT: function onRightHeroHandler(e, input) {
-      velocity.x += 5 * input;
+      velocity.x += 2.5 * input;
       if (input){
         animations.play('walkright');
         direction.x = 1;
@@ -90,4 +91,24 @@ module.exports = function heroEntity(hero, options) {
       else if (animations.currentAnimation === 'walkright') animations.play('idleright');
     }
   });
+
+    console.log(hero);
+
+    console.log(nuclear.component('life').add(hero, 100, function(e){
+        console.log('Hero Died'+e);
+    }));
+    console.log(nuclear.component('attack').add(hero, {
+      w : 50,
+      h : 90,
+      offset : 30,
+      impulse : 10,
+      cooldown : 100,
+      mask : 'hero',
+      onEnter : function(other){
+        if(nuclear.component('states').of(other)){
+            nuclear.component('life').of(other).less(10);
+        }
+      },
+      onExit : function(){}
+    }));
 };

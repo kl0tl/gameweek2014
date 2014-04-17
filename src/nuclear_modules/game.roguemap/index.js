@@ -133,35 +133,47 @@ roguemap.entity('tile', function(entity, data){
         offsetY : frame.collider.y,
         mask : 'wall'
       });
-      nuclear.component('occluder').add(entity, [
-        -frame.collider.w/2, -frame.collider.h/2,
-         frame.collider.w/2, -frame.collider.h/2,
-         frame.collider.w/2,  frame.collider.h/2,
-        -frame.collider.w/2,  frame.collider.h/2
-      ]);
       nuclear.component('camera-sensor').add(entity, ['collider', 'rigidbody', 'velocity']);
+    }
+    if(frame.occluder){
+      nuclear.component('occluder').add(entity, [
+        frame.occluder.x || 0, frame.occluder.y || 0,
+        frame.occluder.w+(frame.occluder.x || 0), frame.occluder.y || 0,
+        frame.occluder.w+(frame.occluder.x || 0),  frame.occluder.h+(frame.occluder.y || 0),
+        frame.occluder.x || 0,  frame.occluder.h+(frame.occluder.y || 0)
+      ]);
     }
   }
 });
 
 roguemap.component('slot', function(entity, data){
   var i, component, configs;
-  nuclear.component('atlas').add(entity, data.data.atlas);
-  nuclear.component('sprite').add(entity, {
-    dest : data.data.sprite.dest,
-    frame : data.data.sprite.frame[Math.round(Math.random()*(data.data.sprite.frame.length-1))],
-    scale : data.data.sprite.scale,
-    width : data.data.sprite.width,
-    height : data.data.sprite.height,
-    dynamic : data.data.sprite.dynamic,
-  });
-  for(i = 0; i < data.components.length; i++){
-    component = data.components[i];
-    configs = data.data[component];
+  if(data.data && data.data.atlas){
+    nuclear.component('atlas').add(entity, data.data.atlas);
+    nuclear.component('sprite').add(entity, {
+      dest : data.data.sprite.dest,
+      frame : data.data.sprite.frame[Math.round(Math.random()*(data.data.sprite.frame.length-1))],
+      scale : data.data.sprite.scale,
+      width : data.data.sprite.width,
+      height : data.data.sprite.height,
+      dynamic : data.data.sprite.dynamic,
+    });
+  }
+  if(data.components){
+    for(i = 0; i < data.components.length; i++){
+      component = data.components[i];
+      configs = data.data[component];
 
-    component = nuclear.component(component);
-    configs[0] = entity;
-    component.add.apply(component, configs);
+      component = nuclear.component(component);
+      configs[0] = entity;
+      component.add.apply(component, configs);
+    }
+  }
+  console.log(data);
+  for(i in data.entities){
+    data.entities[i].x = nuclear.component('position').of(entity).x;
+    data.entities[i].y = nuclear.component('position').of(entity).y;
+    nuclear.entity(i).create(data.entities[i]);
   }
   return data;
 });
@@ -176,7 +188,8 @@ roguemap.entity('slot', function(entity, data){
     data : slot.data,
     position : data.position,
     bundle : data.bundle,
-    template : data.template
+    template : data.template,
+    entities : slot.entities
   };
 
   nuclear.component('position').add(entity, data.position.x*resolution, data.position.y*resolution);

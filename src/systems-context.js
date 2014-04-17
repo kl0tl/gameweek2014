@@ -4,7 +4,8 @@ var context;
 
 context = nuclear.system.context();
 context.buffers = [];
-
+context.difficulties = [0.1, 0.3, 0.5];
+context.difficulty = 2;
 context.dests = [
   document.getElementById('main').getContext('2d'),
 

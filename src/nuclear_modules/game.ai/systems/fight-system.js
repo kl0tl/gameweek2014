@@ -23,7 +23,6 @@ module.exports = {
 
       components.path.to(playerX, playerY).from(mapPositionX, mapPositionY);
       components.attack.to(components.position, states.playerPosition);
-      components.attack.count--;
       if(components.path.nodes.length > components.path.min){
         states.state('reaching');
       }

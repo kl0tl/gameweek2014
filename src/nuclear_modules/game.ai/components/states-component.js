@@ -5,7 +5,7 @@ function StateComponent(entity, player, states, current){
   this.last = current;
   this.states = states;
   this.entity = entity;
-  this.playerPosition = nuclear.component('position from game.transform').of(player);
+  this.playerPosition = nuclear.component('position from game.transform').of(nuclear.system.context().hero);
 }
 
 StateComponent.prototype.state = function stateChange(state){

@@ -35,7 +35,6 @@ module.exports = function (entity, components, context) {
     dest.arc(x1, y1, 50, 0, 2*Math.PI, true);
     dest.stroke();
     dest.restore();
-
     direction = goTo.computeNext(components.position);
     if(direction){
         components.velocity.x = direction.x;

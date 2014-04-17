@@ -59,7 +59,7 @@ loader.load([
     require('./systems-context');
 
     //require('./scenes/collisions-scene');
-    require('./scenes/hero-scene');
+    //require('./scenes/hero-scene');
     require('./scenes/roguemap-scene');
     require('./scenes/lighting-scene');
 
