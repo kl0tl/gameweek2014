@@ -1,8 +1,6 @@
 'use strict';
 
 function LightComponent(e, options) {
-  this.shape = [];
-
   this.color = options.color;
   this.radius = options.radius;
   this.intensity = options.intensity;

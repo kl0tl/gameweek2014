@@ -9,6 +9,7 @@ context.dests = [
   document.getElementById('main').getContext('2d'),
 
   document.getElementById('ambient-buffer').getContext('2d'),
+  //document.getElementById('shadows-buffer').getContext('2d'),
 
   document.getElementById('top-buffer').getContext('2d'),
   document.getElementById('dynamic-buffer').getContext('2d'),
@@ -41,4 +42,11 @@ context.colliders = nuclear.query([
   'position from game.transform'
 ].join(' '), {
   enabled : true
+}).entities;
+
+context.occluders = nuclear.query([
+  'occluder from game.lighting',
+  'position from game.transform'
+].join(' '), {
+  enabled: true
 }).entities;

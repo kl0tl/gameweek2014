@@ -1,25 +1,14 @@
 'use strict';
 
 nuclear.events.on('system:before:renderer from game.rendering', function onBeforeRendererSystem() {
-  var context, main2dContext, dynamics2dContext, ambient2dContext;
+  var context, main2dContext, dynamics2dContext;
 
   context = nuclear.system.context();
 
   main2dContext = context.dests[0];
-  ambient2dContext = context.dests[1];
   dynamics2dContext = context.dests[3];
 
   main2dContext.clearRect(0, 0, context.WIDTH, context.HEIGHT);
-
-  ambient2dContext.save();
-
-  ambient2dContext.fillStyle = '#0A0D0B';
-  ambient2dContext.globalAlpha = 0.95;
-
-  ambient2dContext.clearRect(0, 0, ambient2dContext.canvas.width, ambient2dContext.canvas.height);
-  ambient2dContext.fillRect(0, 0, ambient2dContext.canvas.width, ambient2dContext.canvas.height);
-
-  ambient2dContext.restore();
 
   dynamics2dContext.clearRect(0, 0, dynamics2dContext.canvas.width, dynamics2dContext.canvas.height);
 

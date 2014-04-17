@@ -1,28 +1,36 @@
 'use strict';
 
 module.exports = function debugOccludersSystem(e, components, context) {
-  var dest, shape, length, i;
+  var dest, position, vertices, length, i;
 
   dest = context.dests[0];
 
-  shape = components.occluder.shape;
-  length = shape.length;
+  position = components.position;
+
+  vertices = components.occluder.vertices;
+  length = vertices.length;
 
   dest.save();
 
-  dest.translate(components.position.x, components.position.y);
+  dest.translate(position.x, position.y);
 
-  dest.fillStyle = 'black';
+  if (context.cameraPosition) {
+    dest.translate(-context.cameraPosition.x, -context.cameraPosition.y);
+  }
 
-  dest.moveTo(shape[0], shape[1]);
+  dest.strokeStyle = 'blue';
+
+  dest.beginPath();
+
+  dest.moveTo(vertices[0], vertices[1]);
 
   for (i = 2; i < length; i += 2) {
-    dest.lineTo(shape[i], shape[i + 1]);
+    dest.lineTo(vertices[i], vertices[i + 1]);
   }
 
   dest.closePath();
 
-  dest.fill();
+  dest.stroke();
 
   dest.restore();
 };

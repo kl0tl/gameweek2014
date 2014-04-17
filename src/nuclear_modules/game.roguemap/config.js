@@ -39,7 +39,8 @@ module.exports = {
       components : [
         'collider',
         'velocity',
-        'rigidbody'
+        'rigidbody',
+        'occluder'
       ],
       data : {
         sprite : {
@@ -59,7 +60,13 @@ module.exports = {
             offsetY : 20,
             width : 90,
             height : 45
-        }]
+        }],
+        occluder: [0, [
+          -45, -22.5,
+           45, -22.5,
+           45,  22.5,
+          -45,  22.5
+        ]]
       }
     }
   },
