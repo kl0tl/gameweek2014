@@ -7,15 +7,15 @@ module.exports = {
     exit : function idleIAExit(){
 
     },
-    run : function idleIARun(){
-      // var playerLight, states;
+    run : function idleIARun(entity, components, context){
+      var playerLight, states;
 
-      // states = components.states;
+      states = components.states;
 
-      // playerLight = nuclear.component('light').of(context.mainLight);
-      // if(playerLight.contains(entity)){
-      //   console.log('TO REACHING');
-      //   states.state('reaching');
-      // }
+      playerLight = nuclear.component('dynamic-light').of(context.mainLight);
+      if(playerLight.contains(entity)){
+        console.log('TO REACHING');
+        states.state('reaching');
+      }
     }
 };

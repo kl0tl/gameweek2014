@@ -38,8 +38,8 @@ for(var i = 1; i < context.dests.length; i++){
   context.buffers.push(entity);
 }
 
-context.WIDTH = 500;
-context.HEIGHT = 500;
+context.WIDTH = 1280;
+context.HEIGHT = 768;
 
 context.colliders = nuclear.query([
   'collider from game.collisions',

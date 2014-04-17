@@ -32,7 +32,7 @@ PathComponent.prototype.from = function pathFrom(x, y){
   return this;
 };
 
-PathComponent.prototype.to = function pathFrom(x, y){
+PathComponent.prototype.to = function pathTo(x, y){
   this.path._toX = x;
   this.path._toY = y;
 

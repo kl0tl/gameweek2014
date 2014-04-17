@@ -4,7 +4,7 @@ var hero, camera, context;
 
 var ennemiQuery = nuclear.query('states from game.ai');
 
-var mapE = nuclear.entity('map').create({
+window.mapE = nuclear.entity('map').create({
   mapData : {
     width : 20,
     height : 20,
@@ -13,7 +13,7 @@ var mapE = nuclear.entity('map').create({
   }
 });
 
-var map = nuclear.component('map').of(mapE);
+var map = nuclear.component('map').of(window.mapE);
 
 
 
@@ -24,7 +24,7 @@ context = nuclear.system.context();
 ennemiQuery.listen(function(entity, state){
     console.log('ENNEMY IS : '+entity);
     if(!state && ennemiQuery.entities.length <= 0){
-        nuclear.entity.remove(mapE);
+        nuclear.entity.remove(window.mapE);
         context.dests[0].clearRect(0, 0, 1300, 800);
         context.dests[1].clearRect(0, 0, 1300, 800);
         context.dests[2].clearRect(0, 0, 1300, 800);
@@ -34,11 +34,11 @@ ennemiQuery.listen(function(entity, state){
         nuclear.component('sprite').of(context.buffers[1]).context.clearRect(0, 0, 1300, 800);
         nuclear.component('sprite').of(context.buffers[2]).context.clearRect(0, 0, 1300, 800);
         nuclear.component('sprite').of(context.buffers[3]).context.clearRect(0, 0, 1300, 800);
-        // var colliders = nuclear.system('collisions').entities;
-        // for(var i = 0; i < colliders.length; i++){
-        //   nuclear.entity.remove(colliders[i]);
-        // }
-        mapE = nuclear.entity('map').create({
+        var colliders = nuclear.system('collisions').entities;
+        for(var i = 0; i < colliders.length; i++){
+          nuclear.entity.remove(colliders[i]);
+        }
+        window.mapE = nuclear.entity('map').create({
           mapData : {
             width : 20,
             height : 20,

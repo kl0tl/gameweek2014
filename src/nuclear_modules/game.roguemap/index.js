@@ -134,10 +134,10 @@ roguemap.entity('tile', function(entity, data){
         mask : 'wall'
       });
       nuclear.component('occluder').add(entity, [
-        -frame.collider.w/2 + frame.collider.x, -frame.collider.h/2 + frame.collider.y,
-         frame.collider.w/2 + frame.collider.x, -frame.collider.h/2 + frame.collider.y,
-         frame.collider.w/2 + frame.collider.x,  frame.collider.h/2 + frame.collider.y,
-        -frame.collider.w/2 + frame.collider.x,  frame.collider.h/2 + frame.collider.y
+        -frame.collider.w/2, -frame.collider.h/2,
+         frame.collider.w/2, -frame.collider.h/2,
+         frame.collider.w/2,  frame.collider.h/2,
+        -frame.collider.w/2,  frame.collider.h/2
       ]);
       nuclear.component('camera-sensor').add(entity, ['collider', 'rigidbody', 'velocity']);
     }
@@ -155,7 +155,6 @@ roguemap.component('slot', function(entity, data){
     height : data.data.sprite.height,
     dynamic : data.data.sprite.dynamic,
   });
-  console.log(entity);
   for(i = 0; i < data.components.length; i++){
     component = data.components[i];
     configs = data.data[component];
