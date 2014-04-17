@@ -1,10 +1,12 @@
 'use strict';
 
-var renderables;
+var renderables, context;
+
+context = nuclear.system.context();
 
 renderables = nuclear.system('renderer').entities;
 
-nuclear.entity('light').create({
+context.mainLight = nuclear.entity('light').create({
   x: 250,
   y: 250,
   radius: 500,

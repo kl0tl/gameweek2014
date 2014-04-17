@@ -58,7 +58,7 @@
         'HOME' : ''
       },
       keyboard : {
-        'a' : 'A',
+        'a' : 'FIRE',
         'up' : 'UP',
         'down' : 'DOWN',
         'left' : 'LEFT',
@@ -67,6 +67,7 @@
         'q' : 'LEFT',
         's' : 'DOWN',
         'd' : 'RIGHT',
+        'space' : 'FIRE',
       }
     });
     var gamepad = new Gamepad();

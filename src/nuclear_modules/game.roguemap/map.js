@@ -55,7 +55,7 @@ function checkWalls(data, tiles, grounds, walls, height){
             y : wall.y,
             type : wall.type+'_top'
           }));
-        data[i] = 2;
+        data[i] = 3;
       }
       else if(testUpperRight(data, i, height)){
         wall.type = 'upperLeft';
@@ -66,7 +66,7 @@ function checkWalls(data, tiles, grounds, walls, height){
             y : wall.y,
             type : wall.type+'_top'
           }));
-        data[i] = 2;
+        data[i] = 3;
       }
       else if(testDownLeft(data, i, height)){
         wall.type = 'downRight';
@@ -77,7 +77,7 @@ function checkWalls(data, tiles, grounds, walls, height){
             y : wall.y,
             type : wall.type+'_top'
           }));
-        data[i] = 2;
+        data[i] = 3;
       }
       else if(testDownRight(data, i, height)){
         wall.type = 'downLeft';
@@ -88,31 +88,31 @@ function checkWalls(data, tiles, grounds, walls, height){
             y : wall.y,
             type : wall.type+'_top'
           }));
-        data[i] = 2;
+        data[i] = 3;
       }
       else if(testUpperExternalLeft(data, i, height)){
         wall.type = 'upperExternalLeft';
         walls.push(wall);
         tiles.push(nuclear.entity('tile').create(wall));
-        data[i] = 2;
+        data[i] = 3;
       }
       else if(testUpperExternalRight(data, i, height)){
         wall.type = 'upperExternalRight';
         walls.push(wall);
         tiles.push(nuclear.entity('tile').create(wall));
-        data[i] = 2;
+        data[i] = 3;
       }
       else if(testDownExternalLeft(data, i, height)){
         wall.type = 'downExternalLeft';
         walls.push(wall);
         tiles.push(nuclear.entity('tile').create(wall));
-        data[i] = 2;
+        data[i] = 3;
       }
       else if(testDownExternalRight(data, i, height)){
         wall.type = 'downExternalRight';
         walls.push(wall);
         tiles.push(nuclear.entity('tile').create(wall));
-        data[i] = 2;
+        data[i] = 3;
       }
       else if(testDoubleSides(data, i, height)){
         wall.type = 'doubleSides';

@@ -8,9 +8,11 @@ module.exports = function constraintsSystem(e, components) {
 
   target = nuclear.component('position').of(constraint.target);
 
-  targetX = target.x + constraint.offsetX;
-  targetY = target.y + constraint.offsetY;
+  if(target){
+    targetX = target.x + constraint.offsetX;
+    targetY = target.y + constraint.offsetY;
 
-  position.x += (targetX - position.x) * (1 - constraint.damping);
-  position.y += (targetY - position.y) * (1 - constraint.damping);
+    position.x += (targetX - position.x) * (1 - constraint.damping);
+    position.y += (targetY - position.y) * (1 - constraint.damping);
+  }
 };

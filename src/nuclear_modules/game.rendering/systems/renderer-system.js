@@ -64,7 +64,12 @@ module.exports = function rendererSystem(e, components, context) {
 
   dest.globalAlpha = sprite.alpha;
 
-  dest.drawImage(sprite.buffer, position.x - camX - offsetX, position.y - camY - offsetY);
+  if(!sprite.viewPort){
+    dest.drawImage(sprite.buffer, position.x - camX - offsetX, position.y - camY - offsetY);
+  } else {
+    var vw = sprite.viewPort;
+    dest.drawImage(sprite.buffer, position.x + camX + offsetX, position.y + camY + offsetY, vw.w, vw.h, 0, 0, vw.w, vw.h);
+  }
 
   dest.restore();
 };

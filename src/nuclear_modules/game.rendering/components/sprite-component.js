@@ -17,6 +17,7 @@ function SpriteComponent(e, options) {
     this.buffer.width = options.width;
     this.buffer.height = options.height;
   }
+  this.viewPort = options.viewPort;
   this.context = this.buffer.getContext('2d');
 
   this.index = options.index || 0;

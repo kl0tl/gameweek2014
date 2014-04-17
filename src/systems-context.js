@@ -27,7 +27,11 @@ for(var i = 1; i < context.dests.length; i++){
     anchorX: 0,
     anchorY: 0,
     index : 100000-i,
-    relativeCamera : true
+    relativeCamera : true,
+    viewPort : {
+        w : 1280,
+        h : 768
+    }
   });
 
   context.buffers.push(entity);

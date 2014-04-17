@@ -13,8 +13,8 @@ module.exports = nuclear.module('game.collisions', ['game.transform'])
     'position from game.transform',
     'velocity from game.transform',
     'rigidbody from game.transform'
-  ], require('./systems/collisions-system'))/*
+  ], require('./systems/collisions-system'))
   .system('debug-colliders', [
     'collider from game.collisions',
     'position from game.transform'
-  ], require('./systems/debug-colliders-system'))*/;
+  ], require('./systems/debug-colliders-system'));

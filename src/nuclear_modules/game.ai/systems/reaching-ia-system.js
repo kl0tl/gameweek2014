@@ -13,14 +13,33 @@ module.exports = {
       playerX = Math.round(playerPosition.x/resolution);
       playerY = Math.round(playerPosition.y/resolution);
 
-      components.path.to(playerX, playerY).from(mapPositionX, mapPositionY, function(x, y){
-        console.log(x, y);
-      });
+      components.path.to(playerX, playerY).from(mapPositionX, mapPositionY);
     },
     exit : function reachingIAExit(){
 
     },
-    run : function reachingIARun(){
+    run : function reachingIARun(entity, components){
+      var position, mapPositionX, mapPositionY, playerX, playerY, resolution, states;
+
+      resolution = nuclear.module('roguemap').config('resolution');
+      states = components.states;
+
+      playerX = Math.round(states.playerPosition.x/resolution);
+      playerY = Math.round(states.playerPosition.y/resolution);
+
+      position = components.position;
+
+      mapPositionX = Math.round(position.x/resolution);
+      mapPositionY = Math.round(position.y/resolution);
+
+      components.path.to(playerX, playerY).from(mapPositionX, mapPositionY);
+      components.attack.count--;
       
+      if(components.path.nodes.length <= components.path.min){
+        states.state('fight');
+      }
+      if(components.path.nodes.length >= components.path.max){
+        states.state('idle');
+      }
     }
 };
