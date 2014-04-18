@@ -77,7 +77,9 @@ module.exports = function skeletonEntity(skeleton, options) {
       onExit : function(){}
     });
     console.log(nuclear.component('life').add(skeleton, options.life || 50, options.life || 50, function(e){
-        //looting
+      if(Math.random() > 0.75) nuclear.entity('loot-axe').create(nuclear.component('position').of(e));
+    else if(Math.random() > 0.75) nuclear.entity('loot-sword').create(nuclear.component('position').of(e));
+
        nuclear.entity('monster-death').create(nuclear.component('position').of(e));
     }, function(){
 

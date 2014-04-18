@@ -145,6 +145,9 @@ loader.load([
     'atlases/stone.atlas.png',
     'atlases/stone.atlas.json',
 
+    'atlases/loots.atlas.png',
+    'atlases/loots.atlas.json',
+
     'atlases/props.atlas.png',
     'atlases/props.atlas.json',
 
