@@ -1,18 +1,94 @@
 <html>
 <head>
-  <title>dat game templates</title>
+  <title>Goth Simulator - EMO EDITION</title>
 
   <link rel="stylesheet" type="text/css" href="assets/css/game.css">
-
+  <style>
+    @font-face {
+      font-family: "Pixel";
+      src: url("assets/gui/Mister Pixel Regular.otf");
+    }
+    body{
+        background-color: #0A0D0B;
+    }
+    #menu{
+        background-image: url(assets/gui/gothsim_menugif.gif);
+        width : 101%;
+        height : 101%;
+        margin-left: -10px;
+        margin-top: -10px;
+        background-repeat: none;
+        position : absolute;
+        background-size: cover;
+    }
+    .button{
+        font-family: "Pixel";
+        background-size: cover;
+        background-image: url(assets/gui/button_off.png);
+        width : 365px;
+        height: 137px;
+        position: absolute;
+        text-align: center;
+        color: white;
+        font-size: 23px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 137px;
+    }
+    .button:active{
+        background-image: url(assets/gui/button_clicked.png);
+    }
+    .button:hover{
+        background-image: url(assets/gui/button_on.png);
+    }
+    #button-play{
+        left: 39%;
+        top: 45%;
+    }
+    #button-rank{
+        left: 14%;
+        top: 45%;
+    }
+    #button-quit{
+        left: 62%;
+        top: 45%;
+    }
+    #goth-head{
+        /*display:none;*/
+        position:absolute;
+        background-image: url(assets/gui/gothface1.png);
+        width: 76px;
+        height: 170px;
+        left : 92%;
+        top : 5%;
+        background-size: cover;
+    }
+    #main{
+        margin-left: -640px;
+        margin-top:-384px;
+        position:absolute;
+        background-color:#0A0D0B;
+        width : 1280px;
+        height : 768px;
+        image-rendering:optimizeSpeed;
+        top : 50%;
+        left : 50%;
+    }
+  </style>
 </head>
 <body>
-
-  <canvas id="main" width="1280" height="768" style="margin-left:-10px; margin-top:-10px;position:absolute;background-color:#0A0D0B;image-rendering:optimizeSpeed"></canvas>
+  <canvas id="main" width="1280" height="768" style=""></canvas>
 
   <canvas id="top-buffer" width="2500" height="2500" style="display:none;position:absolute;"></canvas>
   <canvas id="dynamic-buffer" width="2500" height="2500" style="display:none;position:absolute;"></canvas>
   <canvas id="bottom-buffer" width="2500" height="2500" style="display:none;position:absolute;"></canvas>
   <canvas id="ambient-buffer" width="2500" height="2500" style="display:none;position:absolute;width : 200px; height : 200px;background-color:white"></canvas>
+
+<div id='menu'>
+    <div class="button" id='button-rank'>Rankings</div>
+    <div class="button" id='button-play'>Play</div>
+    <div class="button" id='button-quit'>Quit</div>
+</div>
 
   <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 

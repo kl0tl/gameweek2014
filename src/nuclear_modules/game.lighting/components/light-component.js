@@ -16,7 +16,7 @@ LightComponent.prototype.contains = function lightComponentContains(e) {
   dx = position.x - this._position.x;
   dy = position.y - this._position.y;
 
-  return (dx * dx + dy * dy) < this.radius * this.radius;
+  return (dx * dx + dy * dy) < (this.radius/2) * (this.radius/2);
 };
 
 module.exports = LightComponent;

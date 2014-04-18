@@ -1,5 +1,9 @@
 'use strict';
 
+var context = nuclear.system.context();
+var loader = require('assets-loader');
+var path = require('path');
+
 module.exports = function heroEntity(hero, options) {
   var animations, velocity, direction, ATTACK_ANIMATIONS;
 
@@ -118,8 +122,8 @@ module.exports = function heroEntity(hero, options) {
 
   nuclear.component('collider').add(hero, {
     width: 64,
-    height: 60,
-    offsetY : 20,
+    height: 40,
+    offsetY : 30,
     mask : 'hero'
   });
 
@@ -138,7 +142,7 @@ module.exports = function heroEntity(hero, options) {
 
   nuclear.component('inputs').add(hero, {
     FIRE: function onFire(e, input) {
-      var /*position, */atkDirection, currentAtkAnimations, atkAnimation;
+      var position, atkDirection, currentAtkAnimations, atkAnimation;
 
       if (!input) return;
 
@@ -146,13 +150,12 @@ module.exports = function heroEntity(hero, options) {
 
       currentAtkAnimations = ATTACK_ANIMATIONS[window.CURRENT_WEAPON];
 
-      /*
       position = nuclear.component('position').of(e);
 
       nuclear.component('attack').of(e).to(position, {
         x : position.x + direction.x,
         y: position.y + direction.y
-      });*/
+      });
 
       if (direction.x === 0 && direction.y === -1) {
         atkDirection = 'TOP_DIRECTION';
@@ -218,6 +221,16 @@ module.exports = function heroEntity(hero, options) {
     }
   });
 
+    var head = nuclear.entity.create();
+    nuclear.component('position').add(head, 1150, 100);
+    nuclear.component('sprite').add(head, {
+      width: 76,
+      height: 170,
+      index : 1000000000000,
+      dest : 0
+    });
+    var sprite = nuclear.component('sprite').of(head);
+    sprite.context.drawImage(loader.get(path.join('gui', 'gothface1.png')), 0, 0, 76, 170);
     console.log(hero);
     console.log(options);
     console.log(nuclear.component('life').add(hero, 100, options.life || 100, function(){
@@ -225,21 +238,39 @@ module.exports = function heroEntity(hero, options) {
         //new level
         //new ghost
     }, function(){
-        //feedbacks
+        var life = nuclear.component('life').of(hero);
+        var sprite = nuclear.component('sprite').of(head);
+        if(life.current < 30){
+          sprite.context.drawImage(loader.get(path.join('gui', 'gothface3.png')), 0, 0, 76, 170);
+        }
+        else if(life.current < 60){
+          sprite.context.drawImage(loader.get(path.join('gui', 'gothface2.png')), 0, 0, 76, 170);
+        }
     }));
     var attack = nuclear.component('attack').add(hero, {
       w : 50,
       h : 90,
       offset : 30,
       impulse : 10,
-      damages : 100,
-      cooldown : 100,
+      damages : 10,
+      cooldown : 10,
       mask : 'hero',
       onEnter : function(other){
         if(nuclear.component('states').of(other)){
-            nuclear.component('life').of(other).less(attack.damages);
+          var position = nuclear.component('position').of(other);
+          position = {
+            x : position.x + Math.random()*100,
+            y : position.y + Math.random()*100
+          };
+          nuclear.component('life').of(other).less(attack.damages);
+          nuclear.entity('hit1').create(position);
         }
       },
       onExit : function(){}
     });
+
+    var weapon = nuclear.component('currentWeapon').add(hero, 'axe de la mor', context.loot('axe'));
+    weapon.applyStats();
+
+    console.log(attack);
 };

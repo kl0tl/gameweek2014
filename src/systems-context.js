@@ -10,9 +10,7 @@ module.exports = function defineContext(context){
     context.dests = [
       document.getElementById('main').getContext('2d'),
 
-      document.createElement('canvas').getContext('2d'),
-
-      //document.getElementById('ambient-buffer').getContext('2d'),
+      document.getElementById('ambient-buffer').getContext('2d'),
 
       document.getElementById('top-buffer').getContext('2d'),
       document.getElementById('dynamic-buffer').getContext('2d'),
@@ -93,9 +91,25 @@ module.exports = function defineContext(context){
 
     context.loot = function generateLoot(type){
       var weapons = this._loots[type];
-      var index = Math.round((Math.random()*weapons.length-1)+(this.difficulty-1));
+      var index = Math.round((Math.random()*(weapons.length-1))+(this.difficulty-1));
       if(index > weapons.length-1) index = weapons.length-1;
 
       return weapons[index];
     };
+
+    if(context.difficulty){
+        context.pastPlayers = {};
+
+        for(i in window.localStorage){
+            context.pastPlayers[i] = window.localStorage[i];
+        }
+
+        Object.defineProperty(context.pastPlayers, 'length', {
+            value : window.localStorage.length,
+            enumerable : false,
+            writable : true
+        });
+    }
+
+    console.log(context.pastPlayers);
 };

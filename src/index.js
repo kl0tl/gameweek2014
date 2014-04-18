@@ -29,7 +29,7 @@ loader.load([
     'atlases/hero.atlas.json',
 // end */
 
-//* HERO DEATH ANIMATIONS
+/* HERO DEATH ANIMATIONS
     'animations/hero/hero@death.json',
     'animations/hero/hero@deathcloth.json',
 // end */
@@ -148,6 +148,12 @@ loader.load([
     'atlases/props.atlas.png',
     'atlases/props.atlas.json',
 
+    'atlases/head.atlas.png',
+    'atlases/head.atlas.json',
+    'gui/gothface1.png',
+    'gui/gothface2.png',
+    'gui/gothface3.png',
+
     'atlases/fx.atlas.png',
     'atlases/fx.atlas.json',
     'animations/fx/fx@pentagram.json',
@@ -163,36 +169,35 @@ loader.load([
   .done(function () {
     console.log('assets loaded', this.assets);
 
-    nuclear.import([
-      transform,
-      rendering,
-      animations,
-      collisions,
-      inputs,
-      roguemap,
-      camera,
-      hero,
-      lighting,
-      ai,
-      fx
-    ]);
+    document.getElementById('button-play').addEventListener('click', function(){
+        nuclear.import([
+          transform,
+          rendering,
+          animations,
+          collisions,
+          inputs,
+          roguemap,
+          camera,
+          hero,
+          lighting,
+          ai,
+          fx
+        ]);
 
-    console.log('modules loaded!');
+        console.log('modules loaded!');
 
-    require('./systems-context');
+        //require('./scenes/hero-scene');
+        //require('./scenes/gears-scene');
 
-    //require('./scenes/hero-scene');
-    //require('./scenes/gears-scene');
-    //require('./scenes/animations-scene');
+        contextDefining();
+        playScenes();
 
-    nuclear.system.priority('dynamic-shadows', 1);
+        window.requestAnimationFrame(function loop() {
+          window.requestAnimationFrame(loop);
+          nuclear.system.run();
+        });
 
-    contextDefining();
-    playScenes();
-
-    window.requestAnimationFrame(function loop() {
-      window.requestAnimationFrame(loop);
-      nuclear.system.run();
+        document.getElementById('menu').style.display = 'none';
     });
   })
   .progress(console.log.bind(console, 'bundle progress'));

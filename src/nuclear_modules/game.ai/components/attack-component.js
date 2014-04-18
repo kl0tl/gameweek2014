@@ -57,5 +57,15 @@ Attack.prototype.to = function(position, target){
   }
 };
 
+Attack.prototype.change = function(stats){
+    this.impulse = stats.impulse;
+    this.damages = stats.damages;
+    this.cooldown = stats.cooldown;
+    this.offset = stats.offset;
+    this.w = stats.w;
+    this.h = stats.h;
+    nuclear.component('collider').of(this._attack).width = this.w;
+    nuclear.component('collider').of(this._attack).height = this.h;
+};
 
 module.exports = Attack;

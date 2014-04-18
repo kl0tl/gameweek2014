@@ -1,18 +1,22 @@
 'use strict';
 
-var height;
-function PathComponent(entity, map, x, y, min, max){
-  height = Math.sqrt(map.length);
-  this.path = new window.ROT.Path.AStar(x, y, function(x, y){
-    return (map[x * height + y] === 0 || map[x * height + y] === 3);
-  });
-
+var height, map;
+var context = nuclear.system.context();
+function PathComponent(entity, x, y, min, max){
   this.nodes = [];
   this.min = min || 0;
   this.max = max || 10;
 }
 
 PathComponent.prototype.from = function pathFrom(x, y){
+  if(!this.path){
+    height = Math.sqrt(map.length);
+    map = context.map.data;
+    this.path = new window.ROT.Path.AStar(x, y, function(x, y){
+      return (map[x * height + y] === 0 || map[x * height + y] === 3);
+    });
+  }
+  
   var self = this,
       resolution = nuclear.module('roguemap').config('resolution');
 
@@ -28,11 +32,17 @@ PathComponent.prototype.from = function pathFrom(x, y){
     }
   });
 
-
   return this;
 };
 
 PathComponent.prototype.to = function pathTo(x, y){
+  if(!this.path){
+    map = context.map.data;
+    height = Math.sqrt(map.length);
+    this.path = new window.ROT.Path.AStar(x, y, function(x, y){
+      return (map[x * height + y] === 0 || map[x * height + y] === 3);
+    });
+  }
   this.path._toX = x;
   this.path._toY = y;
 

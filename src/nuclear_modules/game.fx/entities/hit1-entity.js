@@ -14,6 +14,7 @@ module.exports = function hit1Entity(hit1, options) {
     width: 30 * 4,
     height: 30 * 4,
     dest: 3,
+    index : 10000,
     animable: true
   });
 

@@ -14,7 +14,6 @@ module.exports = {
 
       playerLight = nuclear.component('dynamic-light').of(context.mainLight);
       if(playerLight.contains(entity)){
-        console.log('TO REACHING');
         states.state('reaching');
       }
     }

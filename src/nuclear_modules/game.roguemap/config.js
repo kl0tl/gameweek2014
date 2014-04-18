@@ -55,13 +55,6 @@ module.exports = {
         {
           type : ['light'],
           position : {
-            x : 30,
-            y : 0
-          }
-        },
-        {
-          type : ['light'],
-          position : {
             x : 80,
             y : 0
           }
@@ -216,7 +209,8 @@ module.exports = {
         velocity : [0, 0, 0],
         collider : [0, {
             width : 45,
-            height : 45
+            height : 45,
+            mask : 'wall'
         }],
         occluder: [0, [
           -22.5, -22.5,
@@ -250,7 +244,8 @@ module.exports = {
         collider : [0, {
             offsetY : 20,
             width : 90,
-            height : 45
+            height : 45,
+            mask : 'wall'
         }],
         occluder: [0, [
           -45, -22.5,
@@ -284,7 +279,8 @@ module.exports = {
         collider : [0, {
             offsetY : 20,
             width : 90,
-            height : 45
+            height : 45,
+            mask : 'wall'
         }],
         occluder: [0, [
           -45, -22.5,
@@ -317,7 +313,8 @@ module.exports = {
         collider : [0, {
             offsetY : 20,
             width : 60,
-            height : 45
+            height : 45,
+            mask : 'wall'
         }]
       },
       entities : {
@@ -331,16 +328,16 @@ module.exports = {
     },
     ghost : {
       entities : {
-        // ghost : {
-        //   //options here
-        // }
+        skeleton : {
+
+        }
       }
     },
     bat : {
       entities : {
-        // bat : {
-        //   //options here
-        // }
+        bat : {
+
+        }
       }
     }
   },
