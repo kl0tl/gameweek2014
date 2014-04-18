@@ -13,19 +13,20 @@ module.exports = {
       resolution = nuclear.module('roguemap').config('resolution');
       states = components.states;
       playerPosition = nuclear.component('position').of(context.hero);
+      if(playerPosition){
+        playerX = Math.round(playerPosition.x/resolution);
+          playerY = Math.round(playerPosition.y/resolution);
 
-      playerX = Math.round(playerPosition.x/resolution);
-      playerY = Math.round(playerPosition.y/resolution);
+          position = components.position;
 
-      position = components.position;
+          mapPositionX = Math.round(position.x/resolution);
+          mapPositionY = Math.round(position.y/resolution);
 
-      mapPositionX = Math.round(position.x/resolution);
-      mapPositionY = Math.round(position.y/resolution);
-
-      components.path.to(playerX, playerY).from(mapPositionX, mapPositionY);
-      components.attack.to(components.position, playerPosition);
-      if(components.path.nodes.length > components.path.min){
-        states.state('reaching');
+          components.path.to(playerX, playerY).from(mapPositionX, mapPositionY);
+          components.attack.to(components.position, playerPosition);
+          if(components.path.nodes.length > components.path.min){
+            states.state('reaching');
+          }
       }
     }
 };

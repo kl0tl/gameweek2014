@@ -22,7 +22,7 @@ module.exports = function debugCollidersSystem(e, components, context) {
 
   dest.strokeStyle = '#f0f';
 
-  dest.strokeRect(x - w, y - h, w * 2, h * 2);
+  //dest.strokeRect(x - w, y - h, w * 2, h * 2);
 
   dest.restore();
 };

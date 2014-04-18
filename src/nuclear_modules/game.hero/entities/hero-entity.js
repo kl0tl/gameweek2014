@@ -208,14 +208,14 @@ module.exports = function heroEntity(hero, options) {
 
     var head = nuclear.entity.create();
     nuclear.component('position').add(head, 1150, 100);
-    nuclear.component('atlas').add(head, 'head');
-
     nuclear.component('sprite').add(head, {
       width: 76,
       height: 170,
       index : 1000000000000,
       dest : 0
     });
+    var sprite = nuclear.component('sprite').of(head);
+    sprite.context.drawImage(loader.get(path.join('gui', 'gothface1.png')), 0, 0, 76, 170);
     console.log(hero);
     console.log(options);
     console.log(nuclear.component('life').add(hero, 100, options.life || 100, function(){
@@ -242,7 +242,13 @@ module.exports = function heroEntity(hero, options) {
       mask : 'hero',
       onEnter : function(other){
         if(nuclear.component('states').of(other)){
-            nuclear.component('life').of(other).less(attack.damages);
+          var position = nuclear.component('position').of(other);
+          position = {
+            x : position.x + Math.random()*100,
+            y : position.y + Math.random()*100
+          };
+          nuclear.component('life').of(other).less(attack.damages);
+          nuclear.entity('hit1').create(position);
         }
       },
       onExit : function(){}

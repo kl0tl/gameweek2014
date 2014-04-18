@@ -98,4 +98,20 @@ module.exports = function defineContext(context){
 
       return weapons[index];
     };
+
+    if(context.difficulty){
+        context.pastPlayers = {};
+
+        for(i in window.localStorage){
+            context.pastPlayers[i] = window.localStorage[i];
+        }
+
+        Object.defineProperty(context.pastPlayers, 'length', {
+            value : window.localStorage.length,
+            enumerable : false,
+            writable : true
+        });
+    }
+
+    console.log(context.pastPlayers);
 };

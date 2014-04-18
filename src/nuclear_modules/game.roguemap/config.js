@@ -335,7 +335,7 @@ module.exports = {
     },
     bat : {
       entities : {
-        skeleton : {
+        bat : {
 
         }
       }

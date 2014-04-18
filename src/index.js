@@ -150,6 +150,7 @@ loader.load([
 
     'atlases/head.atlas.png',
     'atlases/head.atlas.json',
+    'gui/gothface1.png',
     'gui/gothface2.png',
     'gui/gothface3.png',
 
