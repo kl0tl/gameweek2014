@@ -70,7 +70,8 @@ module.exports = function heroEntity(hero, options) {
 
   console.log('new hero entity', hero);
 
-  animations = nuclear.component('animations').add(hero, 'idleface', [
+  animations = nuclear.component('animations').add(hero,
+    'idleface', [
     'idleback',
     'idleface',
     'idleleft',
@@ -82,21 +83,37 @@ module.exports = function heroEntity(hero, options) {
     'walkright',
 
     'death',
+    'deathcloth',
 
     'attackaxeback',
     'attackaxeface',
     'attackaxeleft',
     'attackaxeright',
 
+    'attackaxebackcloth',
+    'attackaxefacecloth',
+    'attackaxeleftcloth',
+    'attackaxerightcloth',
+
+    'attackswordback',
+    'attackswordface',
+    'attackswordleft',
+    'attackswordright',
+
+    'attackswordbackcloth',
+    'attackswordfacecloth',
+    'attackswordleftcloth',
+    'attackswordrightcloth',
+
     'attackbowback',
     'attackbowface',
     'attackbowleft',
     'attackbowright',
 
-    'attackswordback',
-    'attackswordface',
-    'attackswordleft',
-    'attackswordright'
+    'attackbowbackcloth',
+    'attackbowfacecloth',
+    'attackbowleftcloth',
+    'attackbowrightcloth'
   ]);
 
   nuclear.component('collider').add(hero, {
@@ -128,7 +145,6 @@ module.exports = function heroEntity(hero, options) {
       //if (true) return animations.play('death');
 
       currentAtkAnimations = ATTACK_ANIMATIONS[window.CURRENT_WEAPON];
-
 
       /*
       position = nuclear.component('position').of(e);

@@ -46,8 +46,8 @@ module.exports = function clothEntity(cloth, options) {
     height: 120,
     dest: 3,
     dynamic: true,
-    animable: true/*,
-    index: nuclear.component('sprite').of(options.owner).index + 1*/
+    animable: true,
+    index: nuclear.component('sprite').of(options.owner).index + 1//*/
   });
 
   console.log('new cloth entity', cloth);

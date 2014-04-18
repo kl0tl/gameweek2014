@@ -17,9 +17,4 @@ module.exports = function skeletonEntity(skeleton, options) {
   });
 
   nuclear.component('animations').add(skeleton, 'left', ['left', 'right', 'attack']);
-
-  nuclear.component('collider').add(skeleton, {
-    width: 50,
-    height: 50
-  });
 };

@@ -1,15 +1,22 @@
 'use strict';
 
-var lantern, sword, cloth;
+var lantern, weapon, cloth;
 
 lantern = nuclear.entity('lantern').create({
-  owner: 5
+  owner: 1
 });
 
-sword = nuclear.entity('sword').create({
-  owner: 5
-});
+/*
+weapon = nuclear.entity('sword').create({
+  owner: 1
+});//*/
 
+//*
+weapon = nuclear.entity('axe').create({
+  owner: 1
+});//*/
+
+//*
 cloth = nuclear.entity('cloth').create({
-  owner: 5
-});
+  owner: 1
+});//*/
