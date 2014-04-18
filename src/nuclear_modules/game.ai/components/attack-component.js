@@ -5,6 +5,7 @@ function Attack(data){
     this.w = data.w;
     this.h = data.h;
     this.mask = data.mask;
+    this.damages = data.damages || 1;
     this.cooldown = data.cooldown || 0;
     this.count = 0;
     this.offset = data.offset || 1;

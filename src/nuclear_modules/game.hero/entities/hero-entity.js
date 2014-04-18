@@ -39,6 +39,8 @@ module.exports = function heroEntity(hero, options) {
     mass: 1, friction: 0.75
   });
 
+  nuclear.component('name').add(hero, options.name);
+  
   velocity = nuclear.component('velocity').add(hero);
   direction = {
     x : 0,
@@ -93,22 +95,27 @@ module.exports = function heroEntity(hero, options) {
   });
 
     console.log(hero);
-
-    console.log(nuclear.component('life').add(hero, 100, function(e){
-        console.log('Hero Died'+e);
+    console.log(options);
+    console.log(nuclear.component('life').add(hero, 100, options.life || 100, function(){
+        //death anim
+        //new level
+        //new ghost
+    }, function(){
+        //feedbacks
     }));
-    console.log(nuclear.component('attack').add(hero, {
+    var attack = nuclear.component('attack').add(hero, {
       w : 50,
       h : 90,
       offset : 30,
       impulse : 10,
+      damages : 100,
       cooldown : 100,
       mask : 'hero',
       onEnter : function(other){
         if(nuclear.component('states').of(other)){
-            nuclear.component('life').of(other).less(10);
+            nuclear.component('life').of(other).less(attack.damages);
         }
       },
       onExit : function(){}
-    }));
+    });
 };

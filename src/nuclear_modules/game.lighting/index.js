@@ -24,8 +24,4 @@ module.exports = nuclear.module('game.lighting', [])
   .system('lighting', [
     'light from game.lighting',
     'sprite from game.rendering'
-  ], require('./systems/lighting-system'))
-  .system('debug-occluders', [
-    'occluder from game.lighting',
-    'position from game.transform'
-  ], require('./systems/debug-occluders-system'));
+  ], require('./systems/lighting-system'));

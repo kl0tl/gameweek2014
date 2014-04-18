@@ -56,19 +56,23 @@ module.exports = function monsterEntity(monster, options) {
 var path;
 console.log(path = nuclear.component('path').add(monster, options.map.data, 0, 0));
 console.log(nuclear.component('goTo').add(monster, path.nodes, 3));
-console.log(nuclear.component('attack').add(monster, {
+var attack = nuclear.component('attack').add(monster, {
   w : 50,
   h : 90,
+  damages : 1,
   offset : 30,
   cooldown : 20,
-  onEnter : function(){
-    // if(other === hero){
-    //     nuclear.component('life').of(hero).less(10);
-    // }
+  onEnter : function(other){
+    if(other === context.hero){
+        nuclear.component('life').of(context.hero).less(attack.damages);
+    }
   },
   onExit : function(){}
+});
+console.log(nuclear.component('life').add(monster, options.life || 100, options.life || 100, function(){
+    //looting
+    //feedbacks
+}, function(){
+    //feedbacks
 }));
-console.log(nuclear.component('life').add(monster, 100, function(e){
-        console.log('Hero Died'+e);
-    }));
 };

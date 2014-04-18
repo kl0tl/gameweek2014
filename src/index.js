@@ -4,6 +4,9 @@ var loader, transform, rendering, animations, collisions, inputs, roguemap, came
 
 loader = require('./assets-loader');
 
+var contextDefining = require('./systems-context');
+var playScenes = require('./scenes/scene-loader');
+
 transform = require('./nuclear_modules/game.transform');
 rendering = require('./nuclear_modules/game.rendering');
 animations = require('./nuclear_modules/game.animations');
@@ -56,13 +59,8 @@ loader.load([
 
     console.log('modules loaded!');
 
-    require('./systems-context');
-
-    //require('./scenes/collisions-scene');
-    //require('./scenes/hero-scene');
-    require('./scenes/roguemap-scene');
-    require('./scenes/lighting-scene');
-
+    contextDefining();
+    playScenes();
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);
       nuclear.system.run();

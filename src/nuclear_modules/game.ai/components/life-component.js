@@ -1,8 +1,8 @@
 'use strict';
 
-function Life(e, max, onDying, onLess){
+function Life(e, max, current, onDying, onLess){
     this.max = max;
-    this.current = max;
+    this.current = current;
     this.onDying = onDying;
     this.onLess = onLess;
     this.e = e;

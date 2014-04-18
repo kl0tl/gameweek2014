@@ -147,10 +147,10 @@ module.exports = {
     }
   },
   ranges : {
-    'death' : [4, 9],
     'little' : [0, 3],
+    'death' : [4, 9],
     'throne' : [10, 15],
-    'cimetery' : [16, 20],
+    'cimetery' : [16, 100],
   },
   slots : {
     crate : {
