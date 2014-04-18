@@ -60,28 +60,31 @@ module.exports = function defineContext(context){
 
     context._loots = {
       axe : [{
-        damages : 2,
+        damages : 20,
         impulse : 1,
         w : 20,
         h : 20,
         offset : 20,
-        cooldown : 10
+        cooldown : 10,
+        type: 'axe'
       }, {
-        damages : 4,
+        damages : 40,
         impulse : 1,
         w : 20,
         h : 20,
         offset : 20,
-        cooldown : 10
+        cooldown : 10,
+        type: 'axe'
       }],
 
       sword : [{
-        damages : 1,
+        damages : 10,
         impulse : 0.5,
         w : 20,
         h : 50,
         offset : 20,
-        cooldown : 5
+        cooldown : 5,
+        type: 'sword'
       }],
 
       life : [{

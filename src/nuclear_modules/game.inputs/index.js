@@ -68,6 +68,8 @@
         's' : 'DOWN',
         'd' : 'RIGHT',
         'space' : 'FIRE',
+        'o': 'DAMAGE',
+        'p': 'DIE'
       }
     });
     var gamepad = new Gamepad();

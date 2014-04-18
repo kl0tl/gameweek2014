@@ -7,10 +7,9 @@ var context = nuclear.system.context();
 
 var currentWeapon, heroLife;
 
-var roguemap, lighting;
+var roguemap;
 
 roguemap = require('./roguemap-scene');
-lighting = require('./lighting-scene');
 
 nuclear.events.on('system:after_running', function checkReload(){
     if(reload){
@@ -31,10 +30,7 @@ ennemiQuery.listen(function(entity, state){
 });
 
 function playScenes(options){
-    //require('./scenes/collisions-scene');
-    //require('./scenes/hero-scene');
     roguemap(options);
-    lighting();
 }
 
 function load(){

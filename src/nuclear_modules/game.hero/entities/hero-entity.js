@@ -5,12 +5,10 @@ var loader = require('assets-loader');
 var path = require('path');
 
 module.exports = function heroEntity(hero, options) {
-  var animations, velocity, direction, ATTACK_ANIMATIONS;
-
-  window.CURRENT_WEAPON = 'AXE';
+  var animations, velocity, direction, weapon, ATTACK_ANIMATIONS;
 
   ATTACK_ANIMATIONS = {
-    AXE: {
+    axe: {
       LEFT_DIRECTION: {
         animation: 'attackaxeleft', next: 'idleleft'
       },
@@ -26,7 +24,7 @@ module.exports = function heroEntity(hero, options) {
       ONE_DIRECTION: 'lul'
     },
 
-    BOW: {
+    bow: {
       LEFT_DIRECTION: {
         animation: 'attackbowleft', next: 'idleleft'
       },
@@ -42,7 +40,7 @@ module.exports = function heroEntity(hero, options) {
       ONE_DIRECTION: 'lul'
     },
 
-    SWORD: {
+    sword: {
       LEFT_DIRECTION: {
         animation: 'attackswordleft', next: 'idleleft'
       },
@@ -141,14 +139,18 @@ module.exports = function heroEntity(hero, options) {
   };
 
   nuclear.component('inputs').add(hero, {
+    DAMAGE: function onDamageHeroHandler(e, input) {
+      if (input) nuclear.component('life').of(e).less(1);
+    },
+
+    DIE: function onDieHeroHandler(e, input) {
+      if (input) nuclear.component('life').of(e).less(999999999999999999999999);
+    },
+
     FIRE: function onFire(e, input) {
-      var position, atkDirection, currentAtkAnimations, atkAnimation;
+      var position, currentWeapon, currentAtkAnimations, atkDirection, atkAnimation;
 
       if (!input) return;
-
-      //if (true) return animations.play('death');
-
-      currentAtkAnimations = ATTACK_ANIMATIONS[window.CURRENT_WEAPON];
 
       position = nuclear.component('position').of(e);
 
@@ -156,6 +158,9 @@ module.exports = function heroEntity(hero, options) {
         x : position.x + direction.x,
         y: position.y + direction.y
       });
+
+      currentWeapon = nuclear.component('currentWeapon').of(e).data.type;
+      currentAtkAnimations = ATTACK_ANIMATIONS[currentWeapon];
 
       if (direction.x === 0 && direction.y === -1) {
         atkDirection = 'TOP_DIRECTION';
@@ -229,12 +234,18 @@ module.exports = function heroEntity(hero, options) {
       index : 1000000000000,
       dest : 0
     });
+
     var sprite = nuclear.component('sprite').of(head);
+
     sprite.context.drawImage(loader.get(path.join('gui', 'gothface1.png')), 0, 0, 76, 170);
+
     console.log(hero);
+
     console.log(options);
+
     console.log(nuclear.component('life').add(hero, 100, options.life || 100, function(){
-        //death anim
+        animations.play('death');
+
         //new level
         //new ghost
     }, function(){
@@ -247,6 +258,7 @@ module.exports = function heroEntity(hero, options) {
           sprite.context.drawImage(loader.get(path.join('gui', 'gothface2.png')), 0, 0, 76, 170);
         }
     }));
+
     var attack = nuclear.component('attack').add(hero, {
       w : 50,
       h : 90,
@@ -258,10 +270,12 @@ module.exports = function heroEntity(hero, options) {
       onEnter : function(other){
         if(nuclear.component('states').of(other)){
           var position = nuclear.component('position').of(other);
+
           position = {
             x : position.x + Math.random()*100,
             y : position.y + Math.random()*100
           };
+
           nuclear.component('life').of(other).less(attack.damages);
           nuclear.entity('hit1').create(position);
         }
@@ -269,8 +283,13 @@ module.exports = function heroEntity(hero, options) {
       onExit : function(){}
     });
 
-    var weapon = nuclear.component('currentWeapon').add(hero, 'axe de la mor', context.loot('axe'));
+    weapon = nuclear.component('currentWeapon').add(hero, 'axe de la mor', context.loot('axe'));
+
     weapon.applyStats();
 
     console.log(attack);
+
+    nuclear.entity('lantern').create({
+      owner: hero
+    });
 };

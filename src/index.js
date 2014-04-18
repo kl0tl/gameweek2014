@@ -186,9 +186,6 @@ loader.load([
 
         console.log('modules loaded!');
 
-        //require('./scenes/hero-scene');
-        //require('./scenes/gears-scene');
-
         contextDefining();
         playScenes();
 
