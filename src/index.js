@@ -28,8 +28,9 @@ loader.load([
     'atlases/hero.atlas.json',
 // end */
 
-//* HERO DEATH ANIMATIONS
+/* HERO DEATH ANIMATIONS
     'animations/hero/hero@death.json',
+    'animations/hero/hero@deathcloth.json',
 // end */
 
 //* HERO IDLE ANIMATIONS
@@ -129,18 +130,34 @@ loader.load([
         'animations/hero/hero@attackswordrightcloth.json',
 // end */
 
+    'atlases/bat.atlas.png',
+    'atlases/bat.atlas.json',
+    'animations/bat/bat@left.json',
+    'animations/bat/bat@right.json',
+
+    'atlases/skeleton.atlas.png',
+    'atlases/skeleton.atlas.json',
+    'animations/skeleton/skeleton@left.json',
+    'animations/skeleton/skeleton@attack.json',
+    'animations/skeleton/skeleton@right.json',
+
     'atlases/stone.atlas.png',
     'atlases/stone.atlas.json',
 
     'atlases/props.atlas.png',
     'atlases/props.atlas.json',
 
+
     'atlases/head.atlas.png',
     'atlases/head.atlas.json',
     'gui/gothface2.png',
     'gui/gothface3.png',
+
+    'textures/fx/goule-filter.png'
   ])
-  .error(function (oO) { throw oO; })
+  .error(function (oO) {
+    throw oO;
+  })
   .done(function () {
     console.log('assets loaded', this.assets);
 
@@ -160,12 +177,8 @@ loader.load([
 
         console.log('modules loaded!');
 
-        require('./systems-context');
-
         //require('./scenes/hero-scene');
         //require('./scenes/gears-scene');
-
-        nuclear.system.priority('dynamic-shadows', 1);
 
         contextDefining();
         playScenes();

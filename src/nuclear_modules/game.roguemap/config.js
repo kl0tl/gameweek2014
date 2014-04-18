@@ -328,14 +328,14 @@ module.exports = {
     },
     ghost : {
       entities : {
-        monster : {
+        skeleton : {
 
         }
       }
     },
     bat : {
       entities : {
-        monster : {
+        skeleton : {
 
         }
       }

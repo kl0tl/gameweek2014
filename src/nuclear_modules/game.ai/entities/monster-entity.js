@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function monsterEntity(monster, options) {
-  var animations, velocity, context;
+  var animations, context;
 
   context = nuclear.system.context();
 
@@ -37,45 +37,4 @@ module.exports = function monsterEntity(monster, options) {
     height: 60,
     offsetY : 20
   });
-
-  nuclear.component('rigidbody').add(monster, {
-    mass: 1, friction: 0.75
-  });
-
-  velocity = nuclear.component('velocity').add(monster);
-  
-  console.log(nuclear.component('states').add(monster, context.hero, {
-    idle : {
-                run : 'idle-run'
-            },
-    reaching : {
-                run : 'reaching-run',
-                enter : 'reaching-enter'
-            },
-    fight : {
-                run : 'fight-run'
-            }
-}, 'idle'));
-var path;
-console.log(path = nuclear.component('path').add(monster, 0, 0));
-console.log(nuclear.component('goTo').add(monster, path.nodes, 2));
-var attack = nuclear.component('attack').add(monster, {
-  w : 50,
-  h : 90,
-  damages : 1,
-  offset : 30,
-  cooldown : 20,
-  onEnter : function(other){
-    if(other === context.hero){
-        nuclear.component('life').of(context.hero).less(attack.damages);
-    }
-  },
-  onExit : function(){}
-});
-console.log(nuclear.component('life').add(monster, options.life || 100, options.life || 100, function(){
-    //looting
-    //feedbacks
-}, function(){
-    //feedbacks
-}));
 };

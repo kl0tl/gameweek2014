@@ -1,6 +1,6 @@
 'use strict';
 
-var PathComponent, StateComponent, GoToComponent, AttackComponent, CurrentWeapon, LifeComponent, idles, reachings, fights;
+var PathComponent, StateComponent, GoToComponent, AttackComponent, CurrentWeapon, LifeComponent, GouleComponent, idles, reachings, fights;
 
 PathComponent = require('./components/path-component');
 StateComponent = require('./components/states-component');
@@ -8,6 +8,7 @@ GoToComponent = require('./components/goto-component');
 AttackComponent = require('./components/attack-component');
 LifeComponent = require('./components/life-component');
 CurrentWeapon = require('./components/current-weapon-component');
+GouleComponent = require('./components/goule-component');
 
 idles = require('./systems/idle-ia-system');
 reachings = require('./systems/reaching-ia-system');
@@ -31,6 +32,9 @@ module.exports = nuclear.module('game.ai', ['roguemap'])
   })
   .component('currentWeapon', function (e, name, data) {
     return new CurrentWeapon(e, name, data);
+  })
+  .component('goule', function (e) {
+    return new GouleComponent(e);
   })
   .system('idle-run', [
     'states from game.ai'
@@ -76,4 +80,6 @@ module.exports = nuclear.module('game.ai', ['roguemap'])
   .system('attack', [
     'attack from game.ai'
   ], require('./systems/attack-system'))
-  .entity('monster', require('./entities/monster-entity'));
+  .entity('monster', require('./entities/monster-entity'))
+  .entity('bat', require('./entities/bat-entity'))
+  .entity('skeleton', require('./entities/skeleton-entity'));
