@@ -24,6 +24,8 @@ function SpriteComponent(e, options) {
 
   this.dynamic = Boolean(options.dynamic);
 
+  this.animable = Boolean(options.animable);
+
   this.relativeCamera = Boolean(options.relativeCamera);
 
   this.dest = options.dest || 0;
@@ -55,15 +57,19 @@ function SpriteComponent(e, options) {
   }
 }
 
-SpriteComponent.prototype.redrawBuffer = function spriteComponentRedrawBuffer(source, sx, sy, sw, sh) {
+SpriteComponent.prototype.redrawBuffer = function spriteComponentRedrawBuffer(source, sx, sy, sw, sh, dx, dy, fw, fh) {
   var dw, dh, scaledSourceWidth, scaledSourceHeight;
+
+  if (this.animable) {
+    return this.redrawAnimableBuffer(source, sx, sy, sw, sh, dx, dy, fw, fh);
+  }
 
   if (arguments.length === 1) {
     sx = 0;
     sy = 0;
     sw = source.width;
     sh = source.height;
-  }
+   }
 
   dw = this.width();
   dh = this.height();
@@ -78,6 +84,31 @@ SpriteComponent.prototype.redrawBuffer = function spriteComponentRedrawBuffer(so
   } else {
     this.context.drawImage(source, sx, sy, sw, sh, 0.5 * (dw - scaledSourceWidth), 0.5 * (dh - scaledSourceHeight), scaledSourceWidth, scaledSourceHeight);
   }
+};
+
+SpriteComponent.prototype.redrawAnimableBuffer = function spriteComponentRedrawAnimableBuffer(source, sx, sy, sw, sh, dx, dy, fw, fh) {
+  var width, height;
+
+  width = this.width();
+  height = this.height();
+
+  if (arguments.length < 6) {
+    if (arguments.length < 2) {
+      sx = 0;
+      sy = 0;
+      sw = source.width;
+      sh = source.height;
+    }
+
+    dx = 0;
+    dy = 0;
+    fw = sw;
+    fh = sy;
+  }
+
+  this.context.clearRect(0, 0, width, height);
+
+  this.context.drawImage(source, sx, sy, sw, sh, (dx + 0.5 * (width / this.scale - fw)) * this.scale, (dy + 0.75 * (height / this.scale - fh)) * this.scale, sw * this.scale, sh * this.scale);
 };
 
 SpriteComponent.prototype.width = function spriteWidth(value) {

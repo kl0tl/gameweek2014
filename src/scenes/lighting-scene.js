@@ -58,6 +58,4 @@ module.exports = function lighting(){
       offsetY: 1,
       dynamic: true
     });
-
-    nuclear.system.priority('dynamic-shadows', 1);
 };

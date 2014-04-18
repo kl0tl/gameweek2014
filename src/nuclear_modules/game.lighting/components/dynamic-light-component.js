@@ -10,6 +10,10 @@ function DynamicLightComponent(e, options) {
 }
 
 DynamicLightComponent.prototype.contains = function dynamicLightComponentContains(e) {
+  return LightComponent.prototype.contains.call(this, e);
+
+  /* Cross product only work with convex polygons, post processing would be necessary in orider to break the visibility polygon of the light into only convex onex
+
   var position, x, y, i, length;
 
   position = nuclear.component('position').of(e);
@@ -26,7 +30,7 @@ DynamicLightComponent.prototype.contains = function dynamicLightComponentContain
     }
   }
 
-  return true;
+  return true;*/
 };
 
 module.exports = DynamicLightComponent;

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function defineContext(context){
-    context = context || {};
+    context = context || {};
 
     context = nuclear.system.context();
     context.buffers = [];
@@ -11,17 +11,20 @@ module.exports = function defineContext(context){
       document.getElementById('main').getContext('2d'),
 
       document.getElementById('ambient-buffer').getContext('2d'),
-      //document.getElementById('shadows-buffer').getContext('2d'),
+
+      //document.createElement('canvas').getContext('2d'),
+
+      document.getElementById('ambient-buffer').getContext('2d'),
 
       document.getElementById('top-buffer').getContext('2d'),
       document.getElementById('dynamic-buffer').getContext('2d'),
-      document.getElementById('bottom-buffer').getContext('2d'),
-    ];
+      document.getElementById('bottom-buffer').getContext('2d')
+      ];
 
     for(var i = 1; i < context.dests.length; i++){
-      context.dests[i].imageSmoothingEnabled = false;
-
       var entity = nuclear.entity.create();
+
+      context.dests[i].imageSmoothingEnabled = false;
 
       nuclear.component('position').add(entity, 0, 0);
 
