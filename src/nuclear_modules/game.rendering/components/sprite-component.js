@@ -17,6 +17,9 @@ function SpriteComponent(e, options) {
     this.buffer.width = options.width;
     this.buffer.height = options.height;
   }
+
+  this.filter = options.filter || null;
+
   this.viewPort = options.viewPort;
   this.context = this.buffer.getContext('2d');
 
@@ -84,6 +87,8 @@ SpriteComponent.prototype.redrawBuffer = function spriteComponentRedrawBuffer(so
   } else {
     this.context.drawImage(source, sx, sy, sw, sh, 0.5 * (dw - scaledSourceWidth), 0.5 * (dh - scaledSourceHeight), scaledSourceWidth, scaledSourceHeight);
   }
+
+  if (this.filter) this.applyFilter(this.filter);
 };
 
 SpriteComponent.prototype.redrawAnimableBuffer = function spriteComponentRedrawAnimableBuffer(source, sx, sy, sw, sh, dx, dy, fw, fh) {
@@ -109,6 +114,8 @@ SpriteComponent.prototype.redrawAnimableBuffer = function spriteComponentRedrawA
   this.context.clearRect(0, 0, width, height);
 
   this.context.drawImage(source, sx, sy, sw, sh, (dx + 0.5 * (width / this.scale - fw)) * this.scale, (dy + 0.75 * (height / this.scale - fh)) * this.scale, sw * this.scale, sh * this.scale);
+
+  if (this.filter) this.applyFilter(this.filter);
 };
 
 SpriteComponent.prototype.width = function spriteWidth(value) {
@@ -119,6 +126,16 @@ SpriteComponent.prototype.width = function spriteWidth(value) {
   this.buffer.width = value;
   this.context.imageSmoothingEnabled = false;
   return this;
+};
+
+SpriteComponent.prototype.applyFilter = function spriteComponentApplyFilter(filter) {
+  this.context.save();
+
+  this.context.globalCompositeOperation = 'source-atop';
+
+  this.context.drawImage(filter, 0, 0, this.width(), this.height());
+
+  this.context.restore();
 };
 
 SpriteComponent.prototype.height = function spriteHeight(value) {

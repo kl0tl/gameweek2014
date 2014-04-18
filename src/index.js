@@ -5,7 +5,7 @@ var loader, transform, rendering, animations, collisions, inputs, roguemap, came
 loader = require('./assets-loader');
 
 var contextDefining = require('./systems-context');
-var playScenes = require('./scenes/scene-loader');
+//var playScenes = require('./scenes/scene-loader');
 
 transform = require('./nuclear_modules/game.transform');
 rendering = require('./nuclear_modules/game.rendering');
@@ -30,6 +30,7 @@ loader.load([
 
 //* HERO DEATH ANIMATIONS
     'animations/hero/hero@death.json',
+    'animations/hero/hero@deathcloth.json',
 // end */
 
 //* HERO IDLE ANIMATIONS
@@ -129,13 +130,28 @@ loader.load([
         'animations/hero/hero@attackswordrightcloth.json',
 // end */
 
+    'atlases/bat.atlas.png',
+    'atlases/bat.atlas.json',
+    'animations/bat/bat@left.json',
+    'animations/bat/bat@right.json',
+
+    'atlases/skeleton.atlas.png',
+    'atlases/skeleton.atlas.json',
+    'animations/skeleton/skeleton@left.json',
+    'animations/skeleton/skeleton@attack.json',
+    'animations/skeleton/skeleton@right.json',
+
     'atlases/stone.atlas.png',
     'atlases/stone.atlas.json',
 
     'atlases/props.atlas.png',
-    'atlases/props.atlas.json'
+    'atlases/props.atlas.json',
+
+    'textures/fx/goule-filter.png'
   ])
-  .error(function (oO) { throw oO; })
+  .error(function (oO) {
+    throw oO;
+  })
   .done(function () {
     console.log('assets loaded', this.assets);
 
@@ -156,13 +172,13 @@ loader.load([
 
     require('./systems-context');
 
-    //require('./scenes/hero-scene');
-    //require('./scenes/gears-scene');
+    require('./scenes/hero-scene');
+    require('./scenes/gears-scene');
 
     nuclear.system.priority('dynamic-shadows', 1);
 
     contextDefining();
-    playScenes();
+    //playScenes();
 
     window.requestAnimationFrame(function loop() {
       window.requestAnimationFrame(loop);
