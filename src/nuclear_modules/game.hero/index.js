@@ -12,4 +12,7 @@ module.exports = nuclear.module('game.hero', [
   .entity('bow', require('./entities/bow-entity'))
   .entity('cloth', require('./entities/cloth-entity'))
   .entity('lantern', require('./entities/lantern-entity'))
-  .entity('sword', require('./entities/sword-entity'));
+  .entity('sword', require('./entities/sword-entity'))
+  .component('name', function(entity, name){
+    return name;
+  });

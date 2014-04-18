@@ -68,4 +68,8 @@ module.exports = nuclear.module('game.ai', ['roguemap'])
     'goTo from game.ai',
     'velocity from game.transform',
     'position from game.transform'
-  ], require('./systems/goto-system'));
+  ], require('./systems/goto-system'))
+  .system('attack', [
+    'attack from game.ai'
+  ], require('./systems/attack-system'))
+  .entity('monster', require('./entities/monster-entity'));

@@ -4,6 +4,8 @@ var maths = require('../lib/maths');
 function Attack(data){
     this.w = data.w;
     this.h = data.h;
+    this.mask = data.mask;
+    this.damages = data.damages || 1;
     this.cooldown = data.cooldown || 0;
     this.count = 0;
     this.offset = data.offset || 1;
@@ -11,7 +13,8 @@ function Attack(data){
     this._attack = nuclear.entity.create();
     var collider = nuclear.component('collider').add(this._attack, {
       width : this.w,
-      height : this.h
+      height : this.h,
+      mask : this.mask
     });
 
     if(data.onEnter) collider.onCollisionStay(data.onEnter);

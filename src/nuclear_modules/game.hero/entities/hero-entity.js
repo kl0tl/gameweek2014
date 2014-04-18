@@ -102,12 +102,15 @@ module.exports = function heroEntity(hero, options) {
   nuclear.component('collider').add(hero, {
     width: 64,
     height: 60,
-    offsetY : 20
+    offsetY : 20,
+    mask : 'hero'
   });
 
   nuclear.component('rigidbody').add(hero, {
     mass: 1, friction: 0.75
   });
+
+  nuclear.component('name').add(hero, options.name);
 
   velocity = nuclear.component('velocity').add(hero);
 
@@ -154,7 +157,7 @@ module.exports = function heroEntity(hero, options) {
       }
     },
     UP: function onUpHeroHandler(e, input) {
-      velocity.y -= 5 * input;
+      velocity.y -= 2.5 * input;
 
       if (input && animations.currentAnimation !== 'walkleft' && animations.currentAnimation !== 'walkright') {
         animations.play('walkback');
@@ -165,7 +168,7 @@ module.exports = function heroEntity(hero, options) {
       }
     },
     DOWN: function onDownHeroHandler(e, input) {
-      velocity.y += 5 * input;
+      velocity.y += 2.5 * input;
 
       if (input && animations.currentAnimation !== 'walkleft' && animations.currentAnimation !== 'walkright') {
         animations.play('walkface');
@@ -176,7 +179,7 @@ module.exports = function heroEntity(hero, options) {
       }
     },
     LEFT: function onLeftHeroHandler(e, input) {
-      velocity.x -= 5 * input;
+      velocity.x -= 2.5 * input;
 
       if (input && animations.currentAnimation !== 'walkface' && animations.currentAnimation !== 'walkback') {
         animations.play('walkleft');
@@ -187,7 +190,7 @@ module.exports = function heroEntity(hero, options) {
       }
     },
     RIGHT: function onRightHeroHandler(e, input) {
-      velocity.x += 5 * input;
+      velocity.x += 2.5 * input;
 
       if (input && animations.currentAnimation !== 'walkface' && animations.currentAnimation !== 'walkback') {
         animations.play('walkright');
@@ -198,4 +201,29 @@ module.exports = function heroEntity(hero, options) {
       }
     }
   });
+
+    console.log(hero);
+    console.log(options);
+    console.log(nuclear.component('life').add(hero, 100, options.life || 100, function(){
+        //death anim
+        //new level
+        //new ghost
+    }, function(){
+        //feedbacks
+    }));
+    var attack = nuclear.component('attack').add(hero, {
+      w : 50,
+      h : 90,
+      offset : 30,
+      impulse : 10,
+      damages : 100,
+      cooldown : 100,
+      mask : 'hero',
+      onEnter : function(other){
+        if(nuclear.component('states').of(other)){
+            nuclear.component('life').of(other).less(attack.damages);
+        }
+      },
+      onExit : function(){}
+    });
 };
