@@ -42,7 +42,7 @@ function load(){
     for(i in nuclear.registry.systems){
         entities = nuclear.registry.systems[i].entities;
         for(u = 0; u < entities.length; u++){
-            if(nuclear.component('inputs').in(entities[u])){
+            if(context.hero === entities[u]){
                 savePlayer(entities[u]);
             }
 
@@ -63,7 +63,7 @@ function load(){
 
 function savePlayer(player){
     heroLife = nuclear.component('life').of(player).current;
-    currentWeapon = nuclear.component('collider').of(player);
+    currentWeapon = nuclear.component('currentWeapon').of(player);
     var name = nuclear.component('name').of(player);
     window.localStorage.setItem(name, JSON.stringify(currentWeapon));
 }

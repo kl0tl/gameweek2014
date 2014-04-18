@@ -14,8 +14,6 @@ module.exports = function defineContext(context){
 
       //document.createElement('canvas').getContext('2d'),
 
-      document.getElementById('ambient-buffer').getContext('2d'),
-
       document.getElementById('top-buffer').getContext('2d'),
       document.getElementById('dynamic-buffer').getContext('2d'),
       document.getElementById('bottom-buffer').getContext('2d')
@@ -95,7 +93,7 @@ module.exports = function defineContext(context){
 
     context.loot = function generateLoot(type){
       var weapons = this._loots[type];
-      var index = Math.round((Math.random()*weapons.length-1)+(this.difficulty-1));
+      var index = Math.round((Math.random()*(weapons.length-1))+(this.difficulty-1));
       if(index > weapons.length-1) index = weapons.length-1;
 
       return weapons[index];

@@ -4,21 +4,21 @@ var chance = window.chance;
 
 module.exports = function rogueMap(options){
     options = options || {};
-    
+
     var hero, camera, context;
     
     context = nuclear.system.context();
 
-    window.mapE = nuclear.entity('map').create({
+    var mapE = nuclear.entity('map').create({
       mapData : {
         width : 10*context.difficulty | 0,
         height : 10*context.difficulty | 0,
-        roomWidth : [2*context.difficulty | 0, 5*context.difficulty | 0],
-        roomHeight : [2*context.difficulty | 0, 5*context.difficulty | 0]
+        roomWidth : [2*context.difficulty | 0, 2*context.difficulty | 0],
+        roomHeight : [2*context.difficulty | 0, 2*context.difficulty | 0]
       }
     });
 
-    var map = nuclear.component('map').of(window.mapE);
+    var map = context.map = nuclear.component('map').of(mapE);
 
     console.log(map);
 
@@ -33,28 +33,7 @@ module.exports = function rogueMap(options){
         name : chance.syllable()+chance.syllable()+chance.syllable(),
         life : options.heroLife || 100
     });
-
-    var monster = nuclear.entity('monster').create({
-        x : position.x + 100,
-        y : position.y + 100,
-        map : map
-    });
-    monster = nuclear.entity('monster').create({
-        x : position.x + 200,
-        y : position.y + 100,
-        map : map
-    });
-    monster = nuclear.entity('monster').create({
-        x : position.x + 300,
-        y : position.y + 100,
-        map : map
-    });
-    monster = nuclear.entity('monster').create({
-        x : position.x + 200,
-        y : position.y + 200,
-        map : map
-    });
-    console.log(monster);
+    
     var toDisable = ['idle-run','idle-enter','idle-exit','reaching-run',
                       'reaching-enter','reaching-exit','fight-run',
                       'fight-enter','fight-exit'];
@@ -79,4 +58,5 @@ module.exports = function rogueMap(options){
     nuclear.system.priority('kinematic', -3);
     nuclear.system.priority('collisions', -2);
     nuclear.system.priority('follow', -1);
+    nuclear.system.priority('debug-colliders', 1);
 };

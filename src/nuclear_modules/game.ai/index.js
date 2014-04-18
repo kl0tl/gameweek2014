@@ -1,12 +1,13 @@
 'use strict';
 
-var PathComponent, StateComponent, GoToComponent, AttackComponent, LifeComponent, idles, reachings, fights;
+var PathComponent, StateComponent, GoToComponent, AttackComponent, CurrentWeapon, LifeComponent, idles, reachings, fights;
 
 PathComponent = require('./components/path-component');
 StateComponent = require('./components/states-component');
 GoToComponent = require('./components/goto-component');
 AttackComponent = require('./components/attack-component');
 LifeComponent = require('./components/life-component');
+CurrentWeapon = require('./components/current-weapon-component');
 
 idles = require('./systems/idle-ia-system');
 reachings = require('./systems/reaching-ia-system');
@@ -25,8 +26,11 @@ module.exports = nuclear.module('game.ai', ['roguemap'])
   .component('attack', function (e, data) {
     return new AttackComponent(data);
   })
-  .component('life', function (e, max, onDying, onLess) {
-    return new LifeComponent(e, max, onDying, onLess);
+  .component('life', function (e, max, current, onDying, onLess) {
+    return new LifeComponent(e, max, current, onDying, onLess);
+  })
+  .component('currentWeapon', function (e, name, data) {
+    return new CurrentWeapon(e, name, data);
   })
   .system('idle-run', [
     'states from game.ai'

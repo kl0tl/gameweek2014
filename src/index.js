@@ -133,40 +133,49 @@ loader.load([
     'atlases/stone.atlas.json',
 
     'atlases/props.atlas.png',
-    'atlases/props.atlas.json'
+    'atlases/props.atlas.json',
+
+    'atlases/head.atlas.png',
+    'atlases/head.atlas.json',
+    'gui/gothface2.png',
+    'gui/gothface3.png',
   ])
   .error(function (oO) { throw oO; })
   .done(function () {
     console.log('assets loaded', this.assets);
 
-    nuclear.import([
-      transform,
-      rendering,
-      animations,
-      collisions,
-      inputs,
-      roguemap,
-      camera,
-      hero,
-      lighting,
-      ai
-    ]);
+    document.getElementById('button-play').addEventListener('click', function(){
+        nuclear.import([
+          transform,
+          rendering,
+          animations,
+          collisions,
+          inputs,
+          roguemap,
+          camera,
+          hero,
+          lighting,
+          ai
+        ]);
 
-    console.log('modules loaded!');
+        console.log('modules loaded!');
 
-    require('./systems-context');
+        require('./systems-context');
 
-    //require('./scenes/hero-scene');
-    //require('./scenes/gears-scene');
+        //require('./scenes/hero-scene');
+        //require('./scenes/gears-scene');
 
-    nuclear.system.priority('dynamic-shadows', 1);
+        nuclear.system.priority('dynamic-shadows', 1);
 
-    contextDefining();
-    playScenes();
+        contextDefining();
+        playScenes();
 
-    window.requestAnimationFrame(function loop() {
-      window.requestAnimationFrame(loop);
-      nuclear.system.run();
+        window.requestAnimationFrame(function loop() {
+          window.requestAnimationFrame(loop);
+          nuclear.system.run();
+        });
+
+        document.getElementById('menu').style.display = 'none';
     });
   })
   .progress(console.log.bind(console, 'bundle progress'));

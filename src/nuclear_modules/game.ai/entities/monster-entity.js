@@ -4,7 +4,10 @@ module.exports = function monsterEntity(monster, options) {
   var animations, velocity, context;
 
   context = nuclear.system.context();
-  nuclear.component('position').add(monster, options.x, options.y);
+
+  if(!nuclear.component('position').of(monster)){
+    nuclear.component('position').add(monster, options.x, options.y);
+  }
 
   nuclear.component('atlas').add(monster, 'hero');
 
@@ -36,7 +39,7 @@ module.exports = function monsterEntity(monster, options) {
   });
 
   nuclear.component('rigidbody').add(monster, {
-    mass: 1, friction: 0.1
+    mass: 1, friction: 0.75
   });
 
   velocity = nuclear.component('velocity').add(monster);
@@ -54,8 +57,8 @@ module.exports = function monsterEntity(monster, options) {
             }
 }, 'idle'));
 var path;
-console.log(path = nuclear.component('path').add(monster, options.map.data, 0, 0));
-console.log(nuclear.component('goTo').add(monster, path.nodes, 3));
+console.log(path = nuclear.component('path').add(monster, 0, 0));
+console.log(nuclear.component('goTo').add(monster, path.nodes, 2));
 var attack = nuclear.component('attack').add(monster, {
   w : 50,
   h : 90,

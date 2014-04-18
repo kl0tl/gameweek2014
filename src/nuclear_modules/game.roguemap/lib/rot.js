@@ -4948,8 +4948,10 @@ ROT.Path.AStar.prototype.compute = function(fromX, fromY, callback) {
 	this._fromX = fromX;
 	this._fromY = fromY;
 	this._add(this._toX, this._toY, null);
+    this.maxwhile = (this.maxwhile <= 0) ? 0 : 100000;
 
-	while (this._todo.length) {
+	while (this._todo.length && this.maxwhile >= 0) {
+        this.maxwhile--;
 		var item = this._todo.shift();
 		if (item.x == fromX && item.y == fromY) { break; }
 		var neighbors = this._getNeighbors(item.x, item.y);
