@@ -49,7 +49,7 @@ AnimationsComponent.prototype.play = function animationComponentPlay(key) {
   this.currentAnimation = key;
   this.currentFrame = 0;
 
-  this.timeElapsedSinceLastFrame = animation.interval;
+  this.timeElapsedSinceLastFrame = animation.interval || 0;
 
   return true;
 };

@@ -12,7 +12,7 @@ JsonLoader.prototype.load = function jsonLoaderLoad(url, callback, errback) {
 
     if (xhr.status === 200) {
       try {
-        callback.call(JSON.parse(xhr.responseText));
+        callback.call(xhr.responseText && JSON.parse(xhr.responseText) || {});
       } catch (oO) {
         errback(oO);
       }

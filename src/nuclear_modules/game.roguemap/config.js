@@ -1,5 +1,11 @@
 'use strict';
 
+var TOP_BUFFER, DYNAMIC_BUFFER, BOTTOM_BUFFER;
+
+TOP_BUFFER = 2;
+DYNAMIC_BUFFER = 3;
+BOTTOM_BUFFER = 4;
+
 module.exports = {
   templates : {
     'one' : {
@@ -47,7 +53,7 @@ module.exports = {
             width : 90,
             height : 90,
             scale : 3,
-            dest : 3,
+            dest : DYNAMIC_BUFFER,
             frame : [7,8,9],
             dynamic : true
         },
@@ -74,7 +80,7 @@ module.exports = {
     'stone' : {
       'upperLeft' : [{
         index : 1,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 200,
@@ -84,11 +90,11 @@ module.exports = {
       'upperLeft_top' : [{
         index : 0,
         y : -90,
-        dest : 2
+        dest : TOP_BUFFER
       }],
       'downLeft' : [{
         index : 3,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 200,
@@ -98,11 +104,11 @@ module.exports = {
       'downLeft_top' : [{
         index : 2,
         y : -90,
-        dest : 2
+        dest : TOP_BUFFER
       }],
       'upperRight' : [{
         index : 5,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 120,
@@ -113,11 +119,11 @@ module.exports = {
       'upperRight_top' : [{
         index : 4,
         y : -90,
-        dest : 2
+        dest : TOP_BUFFER
       }],
       'downRight' : [{
         index : 7,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 120,
@@ -128,45 +134,45 @@ module.exports = {
       'downRight_top' : [{
         index : 6,
         y : -90,
-        dest : 2
+        dest : TOP_BUFFER
       }],
       'ground' : [{
         index : 8,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 9,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 10,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 33,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 29,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 30,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 31,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 32,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 33,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 34,
-        dest : 4
+        dest : BOTTOM_BUFFER
       },{
         index : 35,
-        dest : 4
+        dest : BOTTOM_BUFFER
       }],
       'left' : [{
         index : 11,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 230,
@@ -175,7 +181,7 @@ module.exports = {
       }],
       'right' : [{
         index : 12,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 230,
@@ -184,7 +190,7 @@ module.exports = {
       }],
       'up' : [{
         index : 14,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 150,
@@ -193,7 +199,7 @@ module.exports = {
         }
       },{
         index : 16,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 150,
@@ -202,7 +208,7 @@ module.exports = {
         }
       },{
         index : 18,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 150,
@@ -213,20 +219,20 @@ module.exports = {
       'up_top' : [{
         index : 13,
         y : -95,
-        dest : 2
+        dest : TOP_BUFFER
       },{
         index : 15,
         y : -95,
-        dest : 2
+        dest : TOP_BUFFER
       },{
         index : 17,
         y : -95,
-        dest : 2
+        dest : TOP_BUFFER
       }],
       'down' : [{
         index : 19,
         y : -90,
-        dest : 2,
+        dest : TOP_BUFFER,
         collider : {
             w : 120,
             h : 120,
@@ -237,16 +243,16 @@ module.exports = {
       'upperExternalRight' : [{
         index : 22,
         aX : 0.3,
-        dest : 4
+        dest : BOTTOM_BUFFER
       }],
       'upperExternalLeft' : [{
         index : 21,
         aX : -0.3,
-        dest : 4
+        dest : BOTTOM_BUFFER
       }],
       'doubleSides' : [{
         index : 23,
-        dest : 4,
+        dest : BOTTOM_BUFFER,
         collider : {
             w : 120,
             h : 120,
@@ -257,7 +263,7 @@ module.exports = {
       'downExternalLeft' : [{
         index : 26,
         y : - 15,
-        dest : 2,
+        dest : TOP_BUFFER,
         collider : {
             w : 120,
             h : 120,
@@ -268,7 +274,7 @@ module.exports = {
       'downExternalRight' : [{
         index : 24,
         y : - 15,
-        dest : 2,
+        dest : TOP_BUFFER,
         collider : {
             w : 120,
             h : 120,

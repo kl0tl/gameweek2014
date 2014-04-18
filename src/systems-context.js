@@ -8,12 +8,13 @@ context.buffers = [];
 context.dests = [
   document.getElementById('main').getContext('2d'),
 
-  document.getElementById('ambient-buffer').getContext('2d'),
-  //document.getElementById('shadows-buffer').getContext('2d'),
+  document.createElement('canvas').getContext('2d'),
+
+  //document.getElementById('ambient-buffer').getContext('2d'),
 
   document.getElementById('top-buffer').getContext('2d'),
   document.getElementById('dynamic-buffer').getContext('2d'),
-  document.getElementById('bottom-buffer').getContext('2d'),
+  document.getElementById('bottom-buffer').getContext('2d')
 ];
 
 for(var i = 1; i < context.dests.length; i++){

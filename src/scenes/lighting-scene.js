@@ -58,5 +58,5 @@ nuclear.entity('light').create({
   dynamic: true
 });
 
-nuclear.system.priority('dynamic-shadows', 1);
+
 
