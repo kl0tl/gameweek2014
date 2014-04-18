@@ -1,6 +1,6 @@
 'use strict';
 
-var loader, transform, rendering, animations, collisions, inputs, roguemap, camera, hero, ai, lighting;
+var loader, transform, rendering, animations, collisions, inputs, roguemap, camera, hero, ai, lighting, fx;
 
 loader = require('./assets-loader');
 
@@ -17,6 +17,7 @@ camera = require('./nuclear_modules/game.camera');
 hero = require('./nuclear_modules/game.hero');
 ai = require('./nuclear_modules/game.ai');
 lighting = require('./nuclear_modules/game.lighting');
+fx = require('./nuclear_modules/game.fx');
 
 loader.load([
     'atlases/prinny.atlas.png',
@@ -147,6 +148,13 @@ loader.load([
     'atlases/props.atlas.png',
     'atlases/props.atlas.json',
 
+    'atlases/fx.atlas.png',
+    'atlases/fx.atlas.json',
+    'animations/fx/fx@pentagram.json',
+    'animations/fx/fx@monster-death.json',
+    'animations/fx/fx@hit1.json',
+    'animations/fx/fx@hit2.json',
+
     'textures/fx/goule-filter.png'
   ])
   .error(function (oO) {
@@ -165,7 +173,8 @@ loader.load([
       camera,
       hero,
       lighting,
-      ai
+      ai,
+      fx
     ]);
 
     console.log('modules loaded!');
@@ -173,7 +182,8 @@ loader.load([
     require('./systems-context');
 
     require('./scenes/hero-scene');
-    require('./scenes/gears-scene');
+    //require('./scenes/gears-scene');
+    require('./scenes/animations-scene');
 
     nuclear.system.priority('dynamic-shadows', 1);
 
