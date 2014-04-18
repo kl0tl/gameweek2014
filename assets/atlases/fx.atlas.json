@@ -1,0 +1,76 @@
+{"frames": [
+
+{
+	"filename": "0.png",
+	"frame": {"x":98,"y":30,"w":26,"h":28},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":26,"h":28},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "00.png",
+	"frame": {"x":98,"y":2,"w":28,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":2,"w":28,"h":26},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "01.png",
+	"frame": {"x":34,"y":2,"w":30,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "02.png",
+	"frame": {"x":2,"y":98,"w":30,"h":28},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":30,"h":28},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "03.png",
+	"frame": {"x":2,"y":66,"w":30,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "1.png",
+	"frame": {"x":2,"y":34,"w":30,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "2.png",
+	"frame": {"x":66,"y":2,"w":28,"h":30},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":28,"h":30},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "3.png",
+	"frame": {"x":2,"y":2,"w":30,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+	"sourceSize": {"w":30,"h":30}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "fx.atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":128,"h":128},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:29bc1dddfaa44053650739e07ac94009:236568b011794aee174ee9ee081613e6:48c9c32f437c7fef429ddc9076259c40$"
+}
+}
