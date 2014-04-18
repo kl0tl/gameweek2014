@@ -82,4 +82,6 @@ module.exports = nuclear.module('game.ai', ['roguemap'])
   ], require('./systems/attack-system'))
   .entity('monster', require('./entities/monster-entity'))
   .entity('bat', require('./entities/bat-entity'))
-  .entity('skeleton', require('./entities/skeleton-entity'));
+  .entity('skeleton', require('./entities/skeleton-entity'))
+  .entity('loot-axe', require('./entities/loot-axe-entity'))
+  .entity('loot-sword', require('./entities/loot-sword-entity'));

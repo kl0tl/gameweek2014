@@ -15,13 +15,16 @@ lighting = require('./lighting-scene');
 nuclear.events.on('system:after_running', function checkReload(){
     if(reload){
         reload = false;
-        load();
-        context.difficulty += context.difficulty * context.difficulties[Math.round(Math.random()*context.difficulties.length)];
-        contextDefining(context);
-        playScenes({
-            currentWeapon : currentWeapon,
-            heroLife : heroLife
-        });
+        nuclear.entity('pentagram').create(nuclear.component('position').of(context.hero));
+        setTimeout(function(){
+          load();
+            context.difficulty += context.difficulty * context.difficulties[Math.round(Math.random()*context.difficulties.length)];
+            contextDefining(context);
+            playScenes({
+                currentWeapon : currentWeapon,
+                heroLife : heroLife
+            });
+        }, 5000);
     }
 });
 ennemiQuery.listen(function(entity, state){
@@ -64,7 +67,5 @@ function load(){
 function savePlayer(player){
     heroLife = nuclear.component('life').of(player).current;
     currentWeapon = nuclear.component('currentWeapon').of(player);
-    var name = nuclear.component('name').of(player);
-    window.localStorage.setItem(name, JSON.stringify(currentWeapon));
 }
 module.exports = playScenes;

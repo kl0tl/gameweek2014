@@ -75,7 +75,9 @@ var attack = nuclear.component('attack').add(monster, {
   onExit : function(){}
 });
 console.log(nuclear.component('life').add(monster, options.life || 70, options.life || 70, function(e){
-    //looting
+    if(Math.random() > 0.75) nuclear.entity('loot-axe').create(nuclear.component('position').of(e));
+    else if(Math.random() > 0.75) nuclear.entity('loot-sword').create(nuclear.component('position').of(e));
+    
     nuclear.entity('monster-death').create(nuclear.component('position').of(e));
 }, function(){
     //feedbacks

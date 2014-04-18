@@ -74,7 +74,9 @@ module.exports = function batEntity(bat, options) {
       onExit : function(){}
     });
     console.log(nuclear.component('life').add(bat, options.life || 20, options.life || 20, function(e){
-        //looting
+       if(Math.random() > 0.75) nuclear.entity('loot-axe').create(nuclear.component('position').of(e));
+       else if(Math.random() > 0.75) nuclear.entity('loot-sword').create(nuclear.component('position').of(e));
+       
        nuclear.entity('monster-death').create(nuclear.component('position').of(e));
     }, function(){
         

@@ -220,8 +220,11 @@ module.exports = function heroEntity(hero, options) {
     console.log(options);
     console.log(nuclear.component('life').add(hero, 100, options.life || 100, function(){
         //death anim
-        //new level
-        //new ghost
+        setTimeout(function(){
+          var currentWeapon = nuclear.component('currentWeapon').of(hero);
+          var name = nuclear.component('name').of(hero);
+          window.localStorage.setItem(name, JSON.stringify(currentWeapon));
+        }, animations.death.frames.length*animations.death.interval+2000);
     }, function(){
         var life = nuclear.component('life').of(hero);
         var sprite = nuclear.component('sprite').of(head);
@@ -244,8 +247,8 @@ module.exports = function heroEntity(hero, options) {
         if(nuclear.component('states').of(other)){
           var position = nuclear.component('position').of(other);
           position = {
-            x : position.x + Math.random()*100,
-            y : position.y + Math.random()*100
+            x : position.x + Math.random()*30,
+            y : position.y + Math.random()*30
           };
           nuclear.component('life').of(other).less(attack.damages);
           nuclear.entity('hit1').create(position);
