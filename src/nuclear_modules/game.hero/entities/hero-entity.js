@@ -3,7 +3,8 @@
 var context = nuclear.system.context();
 var loader = require('assets-loader');
 var path = require('path');
-
+var playScenes = require('../../../scenes/scene-loader');
+var contextDefining = require('../../../systems-context');
 module.exports = function heroEntity(hero, options) {
   var animations, velocity, direction, ATTACK_ANIMATIONS;
 
@@ -224,6 +225,26 @@ module.exports = function heroEntity(hero, options) {
           var currentWeapon = nuclear.component('currentWeapon').of(hero);
           var name = nuclear.component('name').of(hero);
           window.localStorage.setItem(name, JSON.stringify(currentWeapon));
+          var i, u, x, entities, all;
+          for(i in nuclear.registry.systems){
+              entities = nuclear.registry.systems[i].entities;
+              for(u = 0; u < entities.length; u++){
+                  if(nuclear.component('collider').in(entities[u])){
+                      all = nuclear.component.all(entities[u]);
+                      for(x = 0; x < all.length; x++){
+                          nuclear.component(all[x]).disable(entities[u]);
+                      }
+                      continue;
+                  }
+                  nuclear.entity.remove(entities[u]);
+              }
+          }
+          for(i = 0; i < context.dests.length; i++){
+              context.dests[i].clearRect(0, 0, 6000, 6000);
+          }
+
+          contextDefining();
+          playScenes();
         }, animations.death.frames.length*animations.death.interval+2000);
     }, function(){
         var life = nuclear.component('life').of(hero);

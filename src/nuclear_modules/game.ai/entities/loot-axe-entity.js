@@ -6,8 +6,6 @@ module.exports = function lootEntity(loot, options) {
 
   nuclear.component('position').add(loot, options.x, options.y);
 
-  nuclear.component('atlas').add(loot, 'loots');
-
   nuclear.component('sprite').add(loot, {
     scale: 2,
     width: 60 * 4,

@@ -170,9 +170,8 @@ loader.load([
     throw oO;
   })
   .done(function () {
-    console.log('assets loaded', this.assets);
-
     document.getElementById('button-play').addEventListener('click', function(){
+        console.log = function(){};
         nuclear.import([
           transform,
           rendering,
@@ -186,8 +185,6 @@ loader.load([
           ai,
           fx
         ]);
-
-        console.log('modules loaded!');
 
         //require('./scenes/hero-scene');
         //require('./scenes/gears-scene');
@@ -203,4 +200,4 @@ loader.load([
         document.getElementById('menu').style.display = 'none';
     });
   })
-  .progress(console.log.bind(console, 'bundle progress'));
+  .progress();
