@@ -5,7 +5,7 @@ var loader = require('assets-loader');
 var path = require('path');
 
 module.exports = function heroEntity(hero, options) {
-  var animations, velocity, direction, weapon, ATTACK_ANIMATIONS;
+  var animations, velocity, direction, weapon, lantern, ATTACK_ANIMATIONS;
 
   ATTACK_ANIMATIONS = {
     axe: {
@@ -121,7 +121,7 @@ module.exports = function heroEntity(hero, options) {
   nuclear.component('collider').add(hero, {
     width: 64,
     height: 40,
-    offsetY : 30,
+    offsetY : 60,
     mask : 'hero'
   });
 
@@ -244,14 +244,26 @@ module.exports = function heroEntity(hero, options) {
 
     console.log(options);
 
-    console.log(nuclear.component('life').add(hero, 100, options.life || 100, function(){
+    console.log(nuclear.component('life').add(hero, 100, options.life || 100, function() {
+        var deathAnimation;
+
+        deathAnimation = animations.animations.death;
+
+        nuclear.component('sprite').remove(weapon.entity);
+        nuclear.entity.remove(lantern);
+
         animations.play('death');
 
         setTimeout(function(){
           var currentWeapon = nuclear.component('currentWeapon').of(hero);
           var name = nuclear.component('name').of(hero);
+
           window.localStorage.setItem(name, JSON.stringify(currentWeapon));
-        }, animations.death.frames.length*animations.death.interval+2000);
+
+          nuclear.entity.remove(hero);
+        }, deathAnimation.frames.length * deathAnimation.interval+1000);
+
+        return false;
     }, function(){
         var life = nuclear.component('life').of(hero);
         var sprite = nuclear.component('sprite').of(head);
@@ -293,7 +305,7 @@ module.exports = function heroEntity(hero, options) {
 
     console.log(attack);
 
-    nuclear.entity('lantern').create({
+    lantern = nuclear.entity('lantern').create({
       owner: hero
     });
 };

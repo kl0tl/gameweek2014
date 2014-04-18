@@ -23,7 +23,10 @@ module.exports = {
 
       resolution = nuclear.module('roguemap').config('resolution');
       states = components.states;
+
       playerPosition = nuclear.component('position').of(context.hero);
+
+      if (!playerPosition) return;
 
       playerX = Math.round(playerPosition.x/resolution);
       playerY = Math.round(playerPosition.y/resolution);
@@ -34,7 +37,7 @@ module.exports = {
       mapPositionY = Math.round(position.y/resolution);
 
       components.path.to(playerX, playerY).from(mapPositionX, mapPositionY);
-      
+
       if(components.path.nodes.length <= components.path.min){
         states.state('fight');
       }

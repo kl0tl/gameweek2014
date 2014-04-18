@@ -14,7 +14,8 @@ nuclear.events.on('system:after_running', function () {
 
 module.exports = function lifeSystem(entity, components) {
   if(components.life.current <= 0){
-    components.life.onDying(entity);
-    toDie.push(entity);
+    if (components.life.onDying(entity) !== false) {
+      toDie.push(entity);
+    }
   }
 };

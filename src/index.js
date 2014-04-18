@@ -29,7 +29,7 @@ loader.load([
     'atlases/hero.atlas.json',
 // end */
 
-/* HERO DEATH ANIMATIONS
+//* HERO DEATH ANIMATIONS
     'animations/hero/hero@death.json',
     'animations/hero/hero@deathcloth.json',
 // end */
