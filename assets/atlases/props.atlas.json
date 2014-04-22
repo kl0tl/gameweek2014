@@ -1,0 +1,116 @@
+{"frames": [
+
+{
+	"filename": "cercueil1.png",
+	"frame": {"x":2,"y":2,"w":40,"h":19},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":19},
+	"sourceSize": {"w":40,"h":19}
+},
+{
+	"filename": "coeur moitié.png",
+	"frame": {"x":34,"y":32,"w":4,"h":6},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":4,"h":6},
+	"sourceSize": {"w":4,"h":6}
+},
+{
+	"filename": "coeur props.png",
+	"frame": {"x":34,"y":23,"w":8,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":7,"w":8,"h":7},
+	"sourceSize": {"w":16,"h":23}
+},
+{
+	"filename": "handlight.png",
+	"frame": {"x":72,"y":34,"w":24,"h":30},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":24,"h":30},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "tombe fleur orange.png",
+	"frame": {"x":98,"y":62,"w":22,"h":25},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":11,"w":22,"h":25},
+	"sourceSize": {"w":22,"h":39}
+},
+{
+	"filename": "tombe fleur rouge.png",
+	"frame": {"x":98,"y":35,"w":22,"h":25},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":11,"w":22,"h":25},
+	"sourceSize": {"w":22,"h":39}
+},
+{
+	"filename": "tonneau.png",
+	"frame": {"x":108,"y":18,"w":10,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":3,"w":10,"h":15},
+	"sourceSize": {"w":16,"h":23}
+},
+{
+	"filename": "trone.png",
+	"frame": {"x":2,"y":89,"w":20,"h":35},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":2,"w":20,"h":35},
+	"sourceSize": {"w":22,"h":39}
+},
+{
+	"filename": "zzz_bloodcup.png",
+	"frame": {"x":108,"y":2,"w":18,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":13,"w":18,"h":14},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "zzz_crate1.png",
+	"frame": {"x":40,"y":34,"w":30,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "zzz_crate2.png",
+	"frame": {"x":76,"y":2,"w":30,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "zzz_crate3.png",
+	"frame": {"x":2,"y":23,"w":30,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+	"sourceSize": {"w":30,"h":30}
+},
+{
+	"filename": "zzz_crate4.png",
+	"frame": {"x":44,"y":2,"w":30,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+	"sourceSize": {"w":30,"h":30}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "props.atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":128,"h":128},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:255d3661b3fe5b95d148bf2243be6c00:3599e6658f017d7fa3e0b42ace72c114:7ba9799a4f7c56edecaea63bc2bc5e04$"
+}
+}

@@ -2309,7 +2309,7 @@ ROT.Map.Digger = function(width, height, options) {
 	this._options = {
 		roomWidth: [3, 9], /* room minimum and maximum width */
 		roomHeight: [3, 5], /* room minimum and maximum height */
-		corridorLength: [3, 10], /* corridor minimum and maximum length */
+		corridorLength: [3, 5], /* corridor minimum and maximum length */
 		dugPercentage: 0.2, /* we stop after this percentage of level area has been dug out */
 		timeLimit: 1000 /* we stop after this much time has passed (msec) */
 	}
@@ -4948,8 +4948,10 @@ ROT.Path.AStar.prototype.compute = function(fromX, fromY, callback) {
 	this._fromX = fromX;
 	this._fromY = fromY;
 	this._add(this._toX, this._toY, null);
+    this.maxwhile = (this.maxwhile <= 0) ? 0 : 100000;
 
-	while (this._todo.length) {
+	while (this._todo.length && this.maxwhile >= 0) {
+        this.maxwhile--;
 		var item = this._todo.shift();
 		if (item.x == fromX && item.y == fromY) { break; }
 		var neighbors = this._getNeighbors(item.x, item.y);

@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "00.png",
+	"frame": {"x":42,"y":2,"w":14,"h":28},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":15,"w":14,"h":28},
+	"sourceSize": {"w":46,"h":46}
+},
+{
+	"filename": "01.png",
+	"frame": {"x":2,"y":90,"w":22,"h":28},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":14,"w":22,"h":28},
+	"sourceSize": {"w":46,"h":46}
+},
+{
+	"filename": "02.png",
+	"frame": {"x":2,"y":2,"w":38,"h":42},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":38,"h":42},
+	"sourceSize": {"w":46,"h":46}
+},
+{
+	"filename": "03.png",
+	"frame": {"x":2,"y":46,"w":28,"h":42},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":28,"h":42},
+	"sourceSize": {"w":46,"h":46}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "hero.axe.png",
+	"format": "RGBA8888",
+	"size": {"w":64,"h":128},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cfc9b9df0a7e00ff42cafd1b4344cf86:5375997a5f443c2794a1f963f66e361a:16da1dab3a2073169a3605e188e56a04$"
+}
+}

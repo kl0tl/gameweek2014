@@ -7,7 +7,7 @@
     Gamepad = require('./lib/gamepad.min').Gamepad;
     Mousetrap = window.Mousetrap;
 
-    inputs = nuclear.module('inputs', []);
+    inputs = nuclear.module('game.inputs', []);
 
     inputs.component('inputs', function(entity, data){
       return data;
@@ -58,7 +58,7 @@
         'HOME' : ''
       },
       keyboard : {
-        'a' : 'A',
+        'a' : 'FIRE',
         'up' : 'UP',
         'down' : 'DOWN',
         'left' : 'LEFT',
@@ -67,6 +67,9 @@
         'q' : 'LEFT',
         's' : 'DOWN',
         'd' : 'RIGHT',
+        'space' : 'FIRE',
+        'o': 'DAMAGE',
+        'p': 'DIE'
       }
     });
     var gamepad = new Gamepad();
@@ -109,5 +112,5 @@
       Mousetrap.bind(key, onKeyUp, 'keyup');
       /*jshint ignore:end */
     }
-    nuclear.import([inputs]);
+    module.exports = inputs;
 })(window.nuclear, window.console);

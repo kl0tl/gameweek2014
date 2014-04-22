@@ -7,9 +7,9 @@ module.exports = {
   'lint': ['concurrent:lint'],
 
   'build:assets': [],
-  'build:scripts': ['lint:scripts', 'clean:dist', 'browserify', 'uglify'],
+  'build:scripts': ['lint:scripts', 'clean:dist', 'browserify'/*, 'uglify'*/],
 
   'build': ['concurrent:build'],
 
-  'default': ['build', 'open', 'watch']
+  'default': ['build', 'connect', 'open', 'watch']
 };
