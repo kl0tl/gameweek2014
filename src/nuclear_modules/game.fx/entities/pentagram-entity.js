@@ -11,7 +11,7 @@ module.exports = function pentagramEntity(pentagram, options) {
     scale: 4,
     width: 60 * 4,
     height: 60 * 4,
-    dest: 3,
+    dest: 4,
     animable: true
   });
 

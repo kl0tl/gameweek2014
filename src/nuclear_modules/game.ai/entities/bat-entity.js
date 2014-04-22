@@ -21,7 +21,7 @@ module.exports = function batEntity(bat, options) {
     scale: 2,
     width: 82 * 4,
     height: 58 * 4,
-    dest: 3,
+    dest: 5,
     dynamic: true,
     animable: true
   });
@@ -38,7 +38,7 @@ module.exports = function batEntity(bat, options) {
   });
 
   nuclear.component('velocity').add(bat);
-  
+
   console.log(nuclear.component('states').add(bat, context.hero, {
         idle : {
                     run : 'idle-run'
@@ -76,10 +76,10 @@ module.exports = function batEntity(bat, options) {
     console.log(nuclear.component('life').add(bat, options.life || 20, options.life || 20, function(e){
        if(Math.random() > 0.75) nuclear.entity('loot-axe').create(nuclear.component('position').of(e));
        else if(Math.random() > 0.75) nuclear.entity('loot-sword').create(nuclear.component('position').of(e));
-       
+
        nuclear.entity('monster-death').create(nuclear.component('position').of(e));
     }, function(){
-        
+
     }));
 
     if(Math.random() > 0.7) {

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function debugCollidersSystem(e, components, context) {
+module.exports = function debugCollidersSystem(/*e, components, context*/) {/*
   var dest, position, collider, x, y, w, h;
 
   dest = context.dests[0];
@@ -24,5 +24,5 @@ module.exports = function debugCollidersSystem(e, components, context) {
 
   dest.strokeRect(x - w, y - h, w * 2, h * 2);
 
-  dest.restore();
+  dest.restore();*/
 };

@@ -170,9 +170,9 @@ loader.load([
     throw oO;
   })
   .done(function () {
-    console.log('assets loaded', this.assets);
-
     document.getElementById('button-play').addEventListener('click', function(){
+        console.log = function(){};
+
         nuclear.import([
           transform,
           rendering,
@@ -187,8 +187,6 @@ loader.load([
           fx
         ]);
 
-        console.log('modules loaded!');
-
         contextDefining();
         playScenes();
 
@@ -200,4 +198,4 @@ loader.load([
         document.getElementById('menu').style.display = 'none';
     });
   })
-  .progress(console.log.bind(console, 'bundle progress'));
+  .progress();

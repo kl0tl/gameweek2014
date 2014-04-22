@@ -25,7 +25,7 @@ module.exports = nuclear.module('game.ai', ['roguemap'])
     return new GoToComponent(target, speed);
   })
   .component('attack', function (e, data) {
-    return new AttackComponent(data);
+    return new AttackComponent(e, data);
   })
   .component('life', function (e, max, current, onDying, onLess) {
     return new LifeComponent(e, max, current, onDying, onLess);

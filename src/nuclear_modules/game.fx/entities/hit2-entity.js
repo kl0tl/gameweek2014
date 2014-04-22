@@ -13,7 +13,7 @@ module.exports = function hit2Entity(hit2, options) {
     scale: 4,
     width: 30 * 4,
     height: 30 * 4,
-    dest: 3,
+    dest: 4,
     index : 10000,
     animable: true
   });

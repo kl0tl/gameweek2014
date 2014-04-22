@@ -1,7 +1,7 @@
 'use strict';
 var maths = require('../lib/maths');
 
-function Attack(data){
+function Attack(e, data){
     this.w = data.w;
     this.h = data.h;
     this.mask = data.mask;

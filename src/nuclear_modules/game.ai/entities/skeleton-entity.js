@@ -23,7 +23,7 @@ module.exports = function skeletonEntity(skeleton, options) {
     scale: 4,
     width: 120 * 4,
     height: 120 * 4,
-    dest: 3,
+    dest: 5,
     dynamic: true,
     animable: true
   });

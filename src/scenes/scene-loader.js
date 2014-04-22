@@ -23,7 +23,7 @@ nuclear.events.on('system:after_running', function checkReload(){
                 currentWeapon : currentWeapon,
                 heroLife : heroLife
             });
-        }, 5000);
+        }, 3000);
     }
 });
 ennemiQuery.listen(function(entity, state){

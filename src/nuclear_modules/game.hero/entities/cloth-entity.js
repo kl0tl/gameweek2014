@@ -44,7 +44,7 @@ module.exports = function clothEntity(cloth, options) {
     scale: 4,
     width: 120,
     height: 120,
-    dest: 3,
+    dest: 5,
     dynamic: true,
     animable: true,
     index: nuclear.component('sprite').of(options.owner).index + 1//*/

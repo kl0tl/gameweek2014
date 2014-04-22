@@ -3,7 +3,6 @@
 var context = nuclear.system.context();
 var loader = require('assets-loader');
 var path = require('path');
-
 module.exports = function heroEntity(hero, options) {
   var animations, velocity, direction, weapon, lantern, ATTACK_ANIMATIONS;
 
@@ -65,7 +64,7 @@ module.exports = function heroEntity(hero, options) {
     scale: 4,
     width: 360,
     height: 276,
-    dest : 3,
+    dest : 5,
     dynamic : true,
     animable: true
   });
@@ -245,25 +244,25 @@ module.exports = function heroEntity(hero, options) {
     console.log(options);
 
     console.log(nuclear.component('life').add(hero, 100, options.life || 100, function() {
-        var deathAnimation;
+      var deathAnimation;
 
-        deathAnimation = animations.animations.death;
+      deathAnimation = animations.animations.death;
 
-        nuclear.component('sprite').remove(weapon.entity);
-        nuclear.entity.remove(lantern);
+      nuclear.component('sprite').remove(weapon.entity);
+      nuclear.entity.remove(lantern);
 
-        animations.play('death');
+      animations.play('death');
 
-        setTimeout(function(){
-          var currentWeapon = nuclear.component('currentWeapon').of(hero);
-          var name = nuclear.component('name').of(hero);
+      setTimeout(function(){
+        var currentWeapon = nuclear.component('currentWeapon').of(hero);
+        var name = nuclear.component('name').of(hero);
 
-          window.localStorage.setItem(name, JSON.stringify(currentWeapon));
+        window.localStorage.setItem(name, JSON.stringify(currentWeapon));
 
-          nuclear.entity.remove(hero);
-        }, deathAnimation.frames.length * deathAnimation.interval+1000);
+        window.location.reload();
+      }, deathAnimation.frames.length*deathAnimation.interval+1000);
 
-        return false;
+      return false;
     }, function(){
         var life = nuclear.component('life').of(hero);
         var sprite = nuclear.component('sprite').of(head);

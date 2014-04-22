@@ -6,7 +6,7 @@ module.exports = function rogueMap(options){
     options = options || {};
 
     var hero, camera, context;
-    
+
     context = nuclear.system.context();
 
     var mapE = nuclear.entity('map').create({
@@ -33,7 +33,7 @@ module.exports = function rogueMap(options){
         name : chance.syllable()+chance.syllable()+chance.syllable(),
         life : options.heroLife || 100
     });
-    
+
     var toDisable = ['idle-run','idle-enter','idle-exit','reaching-run',
                       'reaching-enter','reaching-exit','fight-run',
                       'fight-enter','fight-exit'];
@@ -55,8 +55,9 @@ module.exports = function rogueMap(options){
 
     context.cameraPosition = nuclear.component('position').of(camera);
 
-    nuclear.system.priority('kinematic', -3);
-    nuclear.system.priority('collisions', -2);
-    nuclear.system.priority('follow', -1);
+    nuclear.system.priority('kinematic', -4);
+    nuclear.system.priority('collisions', -3);
+    nuclear.system.priority('follow', -2);
+    nuclear.system.priority('dynamic-shadows', -1);
     nuclear.system.priority('debug-colliders', 1);
 };

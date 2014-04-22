@@ -10,7 +10,11 @@ module.exports = function defineContext(context){
     context.dests = [
       document.getElementById('main').getContext('2d'),
 
+      document.getElementById('lights-buffer').getContext('2d'),
+
       document.getElementById('ambient-buffer').getContext('2d'),
+
+      document.getElementById('lights-buffer').getContext('2d'),
 
       document.getElementById('top-buffer').getContext('2d'),
       document.getElementById('dynamic-buffer').getContext('2d'),
@@ -38,6 +42,14 @@ module.exports = function defineContext(context){
 
       context.buffers.push(entity);
     }
+
+    nuclear.component('sprite').of(context.buffers[0]).blending = 'multiply';
+
+    nuclear.component('sprite').of(context.buffers[1]).blending = 'multiply';
+    nuclear.component('sprite').of(context.buffers[1]).relativeCamera = false;
+
+    nuclear.component('sprite').of(context.buffers[2]).dest = 2;
+    nuclear.component('sprite').of(context.buffers[2]).blending = 'destination-out';
 
     context.WIDTH = 1280;
     context.HEIGHT = 768;

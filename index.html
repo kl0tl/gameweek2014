@@ -10,6 +10,12 @@
     }
     body{
         background-color: #0A0D0B;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     #menu{
         background-image: url(assets/gui/gothsim_menugif.gif);
@@ -79,18 +85,18 @@
 <body>
   <canvas id="main" width="1280" height="768" style=""></canvas>
 
+  <canvas id="ambient-buffer" width="2500" height="2500" style="display:none;position:absolute;"></canvas>
+  <canvas id="lights-buffer" width="2500" height="2500" style="display:none;position:absolute;"></canvas>
+
   <canvas id="top-buffer" width="2500" height="2500" style="display:none;position:absolute;"></canvas>
   <canvas id="dynamic-buffer" width="2500" height="2500" style="display:none;position:absolute;"></canvas>
   <canvas id="bottom-buffer" width="2500" height="2500" style="display:none;position:absolute;"></canvas>
-  <canvas id="ambient-buffer" width="2500" height="2500" style="display:none;position:absolute;width : 200px; height : 200px;background-color:white"></canvas>
 
 <div id='menu'>
     <div class="button" id='button-rank'>Rankings</div>
     <div class="button" id='button-play'>Play</div>
     <div class="button" id='button-quit'>Quit</div>
 </div>
-
-  <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 
   <script type="text/javascript" src="lib/nuclear.js"></script>
   <script type="text/javascript" src="dist/gameweek2014.js"></script>

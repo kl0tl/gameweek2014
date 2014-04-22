@@ -12,8 +12,8 @@ module.exports = function lightEntity(e, options) {
   sprite = nuclear.component('sprite').add(e, {
     width: options.radius * 2,
     height: options.radius * 2,
-    dest: 1,
-    blending: 'destination-out'
+    dest: 3,
+    blending: 'lighten'
   });
 
   gradient = sprite.context.createRadialGradient(

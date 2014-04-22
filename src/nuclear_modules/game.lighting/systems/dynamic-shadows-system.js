@@ -1,19 +1,11 @@
 'use strict';
 
 nuclear.events.on('system:before:dynamic-shadows from game.lighting', function () {
-var ambient2dContext;
+  var lights2dContext;
 
-  ambient2dContext = nuclear.system.context().dests[1];
+  lights2dContext = nuclear.system.context().dests[3];
 
-  ambient2dContext.save();
-
-  ambient2dContext.fillStyle = '#0A0D0B';
-  ambient2dContext.globalAlpha = 0.8;
-
-  ambient2dContext.clearRect(0, 0, ambient2dContext.canvas.width, ambient2dContext.canvas.height);
-  ambient2dContext.fillRect(0, 0, ambient2dContext.canvas.width, ambient2dContext.canvas.height);
-
-  ambient2dContext.restore();
+  lights2dContext.clearRect(0, 0, lights2dContext.canvas.width, lights2dContext.canvas.height);
 });
 
 module.exports = dynamicShadowsSystem;
@@ -144,7 +136,7 @@ function dynamicShadowsSystem(e, components, context) {
   length = lightVertices.length;
 
   if (length > 0) {
-    dest = context.dests[1];
+    dest = context.dests[3];
 
     dest.save();
 
@@ -173,7 +165,7 @@ function dynamicShadowsSystem(e, components, context) {
 
     //dest.fill();
 
-    dest.globalCompositeOperation = 'destination-out';
+    dest.globalCompositeOperation = 'lighten';
 
     dest.drawImage(nuclear.component('sprite').of(e).buffer, rsx - radius, rsy - radius);
 

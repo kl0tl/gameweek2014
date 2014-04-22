@@ -15,7 +15,7 @@ module.exports = function monsterEntity(monster, options) {
     scale: 4,
     width: 64,
     height: 120,
-    dest : 3,
+    dest : 5,
     dynamic : true
   });
 
@@ -26,6 +26,7 @@ module.exports = function monsterEntity(monster, options) {
     'idleface',
     'idleleft',
     'idleright',
+
     'walkback',
     'walkface',
     'walkleft',
@@ -45,7 +46,7 @@ module.exports = function monsterEntity(monster, options) {
   velocity = nuclear.component('velocity').add(monster);
 
   //nuclear.component('watcher').add(monster).watch('')
-  
+
   console.log(nuclear.component('states').add(monster, context.hero, {
     idle : {
                 run : 'idle-run'
@@ -77,11 +78,13 @@ var attack = nuclear.component('attack').add(monster, {
 console.log(nuclear.component('life').add(monster, options.life || 70, options.life || 70, function(e){
     if(Math.random() > 0.75) nuclear.entity('loot-axe').create(nuclear.component('position').of(e));
     else if(Math.random() > 0.75) nuclear.entity('loot-sword').create(nuclear.component('position').of(e));
-    
+
     nuclear.entity('monster-death').create(nuclear.component('position').of(e));
 }, function(){
     //feedbacks
 }));
 
 nuclear.component('goule').add(monster);
+
+nuclear.component('name').add(monster);
 };

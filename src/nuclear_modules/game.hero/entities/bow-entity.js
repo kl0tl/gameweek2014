@@ -13,7 +13,7 @@ module.exports = function bowEntity(bow, options) {
     scale: 4,
     width: 0,
     height: 0,
-    dest: 3,
+    dest: 5,
     dynamic: true,
     animable: true/*,
     index: nuclear.component('sprite').of(options.owner).index + 1*/

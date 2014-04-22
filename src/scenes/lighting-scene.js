@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = function lighting(){
-    var renderables, context;
+    var context;
 
     context = nuclear.system.context();
 
-    renderables = nuclear.system('renderer').entities;
+    nuclear.system.priority('dynamic-shadows', -1);
 
     context.mainLight = nuclear.entity('light').create({
       x: 250,
@@ -52,7 +52,7 @@ module.exports = function lighting(){
       radius: 500,
       color: [222, 218, 152],
       intensity: 1,
-      constraint: renderables[renderables.length - 1],
+      constraint: context.hero,
       damping: 0.75,
       offsetX: -1,
       offsetY: 1,

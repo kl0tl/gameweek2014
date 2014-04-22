@@ -6,13 +6,11 @@ module.exports = function lootEntity(loot, options) {
 
   nuclear.component('position').add(loot, options.x, options.y);
 
-  nuclear.component('atlas').add(loot, 'loots');
-
   nuclear.component('sprite').add(loot, {
     scale: 2,
     width: 60 * 4,
     height: 60 * 4,
-    dest: 3,
+    dest: 5,
     dynamic: true,
     frame : 0
   });
@@ -36,7 +34,7 @@ module.exports = function lootEntity(loot, options) {
     console.log(nuclear.component('life').add(loot, options.life || 1, options.life || 1, function(){
 
     }, function(){
-        
+
     }));
 
 };
