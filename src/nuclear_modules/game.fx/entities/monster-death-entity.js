@@ -13,7 +13,7 @@ module.exports = function monsterDeathEntity(death, options) {
     scale: 4,
     width: 79 * 4,
     height: 92 * 4,
-    dest: 4,
+    dest: 5,
     index : 10000,
     animable: true
   });
